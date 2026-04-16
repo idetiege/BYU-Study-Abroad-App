@@ -17,7 +17,7 @@ export default function DayTabBar({ selectedDay, onSelect }) {
 
   return (
     <div ref={scrollRef} className="flex overflow-x-auto hide-scrollbar"
-         style={{ background: '#0A1931', borderBottom: '1px solid rgba(201,168,76,0.2)', padding: '0 8px' }}>
+         style={{ background: '#0A1931', borderTop: 'none', borderBottom: '1px solid rgba(201,168,76,0.15)', padding: '0 8px', flexShrink: 0 }}>
       {DAYS.map(day => {
         const isToday = todayDay === day.day;
         const isSelected = selectedDay === day.day;
