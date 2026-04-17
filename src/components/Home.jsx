@@ -138,8 +138,12 @@ function WeatherClock({ city, timezone }) {
   }, [timezone]);
 
   useEffect(() => {
-    fetch(`https://wttr.in/${encodeURIComponent(city)}?format=3`)
-      .then(r => r.text()).then(t => setWeather(t.trim()))
+    fetch(`https://wttr.in/${encodeURIComponent(city)}?format=%C+%t`)
+      .then(r => r.text())
+      .then(t => {
+        const clean = t.trim();
+        setWeather(clean && !clean.startsWith('<') ? clean : 'Weather unavailable');
+      })
       .catch(() => setWeather('Weather unavailable'));
   }, [city]);
 
