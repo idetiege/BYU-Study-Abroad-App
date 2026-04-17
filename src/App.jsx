@@ -16,7 +16,7 @@ function AppShell() {
   const hideNav = location.pathname.startsWith('/activity/');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100dvh', background: '#0F0F0F', overflow: 'hidden', position: 'relative' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100dvh', background: '#0F0F0F', overflow: 'hidden', position: 'relative', overscrollBehaviorY: 'contain' }}>
       <Routes>
         <Route path="/"             element={<Home />} />
         <Route path="/itinerary"    element={<Itinerary />} />
