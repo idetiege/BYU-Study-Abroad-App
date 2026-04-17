@@ -118,20 +118,20 @@ export default function Itinerary() {
   const activities = getActivitiesForDay(selectedDay);
 
   return (
-    <div
-      onTouchStart={handleTouchStart}
-      onTouchEnd={handleTouchEnd}
-      style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}
-    >
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
 
       {/* 1. Hero image — fixed 220px, safe area baked in */}
       {dayData && <ItineraryHero selectedDay={selectedDay} dayData={dayData} />}
 
-      {/* 2. Day tab bar — flush below the hero, zero gap */}
+      {/* 2. Day tab bar — free horizontal scroll, no swipe gesture */}
       <DayTabBar selectedDay={selectedDay} onSelect={handleSelectDay} />
 
-      {/* 3. Activity list — flex-1 so it takes all remaining space, scrolls independently */}
-      <div style={{ flex: 1, overflowY: 'auto', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}>
+      {/* 3. Activity list — swipe here to change day */}
+      <div
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        style={{ flex: 1, overflowY: 'auto', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}
+      >
         {activities.length === 0 ? (
           <p style={{ color: '#8A8A9A', textAlign: 'center', marginTop: '40px', fontSize: '14px' }}>
             No activities scheduled.
