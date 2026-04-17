@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { CATEGORY_COLORS, formatTime } from '../data/tripData';
+import { CATEGORY_COLORS } from '../data/tripData';
 
 export default function ActivityCard({ activity, compact = false }) {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ export default function ActivityCard({ activity, compact = false }) {
         className="w-full text-left flex items-center gap-3 py-2"
         style={{ borderBottom: '1px solid rgba(255,255,255,0.06)' }}
       >
-        <span style={{ color: '#C9A84C', fontSize: '13px', fontWeight: 700, minWidth: '60px', fontVariantNumeric: 'tabular-nums' }}>
-          {formatTime(activity.startTime)}
+        <span style={{ color: '#C9A84C', fontSize: '13px', fontWeight: 700, minWidth: '68px', fontVariantNumeric: 'tabular-nums' }}>
+          {activity.time}
         </span>
         <span style={{ background: color, borderRadius: '4px', padding: '2px 8px', fontSize: '10px', fontWeight: 700, color: '#fff', whiteSpace: 'nowrap', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
           {activity.category}
@@ -34,7 +34,7 @@ export default function ActivityCard({ activity, compact = false }) {
     >
       <div className="flex-1 p-3">
         <div className="flex items-center gap-2 mb-1">
-          <span style={{ color: '#C9A84C', fontSize: '12px', fontWeight: 700 }}>{formatTime(activity.startTime)}</span>
+          <span style={{ color: '#C9A84C', fontSize: '12px', fontWeight: 700 }}>{activity.time}</span>
           <span style={{ background: color, borderRadius: '4px', padding: '1px 6px', fontSize: '10px', fontWeight: 700, color: '#fff', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
             {activity.category}
           </span>

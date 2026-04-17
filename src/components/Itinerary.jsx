@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import DayTabBar from './DayTabBar';
 import ActivityCard from './ActivityCard';
-import { DAYS, getTodayDayNumber, getDayData, getActivitiesForDay } from '../data/tripData';
+import { getTodayDayNumber, getDayData, getActivitiesForDay } from '../data/tripData';
 
 function ItineraryHero({ selectedDay, dayData }) {
   const date = new Date(dayData.date + 'T12:00:00');
