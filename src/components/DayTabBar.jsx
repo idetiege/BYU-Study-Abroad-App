@@ -5,13 +5,19 @@ export default function DayTabBar({ selectedDay, onSelect }) {
   const todayDay = getTodayDayNumber();
   const scrollRef = useRef(null);
   const activeRef = useRef(null);
+  const mounted = useRef(false);
 
   useEffect(() => {
     if (activeRef.current && scrollRef.current) {
       const container = scrollRef.current;
       const el = activeRef.current;
       const center = el.offsetLeft - container.clientWidth / 2 + el.clientWidth / 2;
-      container.scrollTo({ left: center, behavior: 'smooth' });
+      if (!mounted.current) {
+        container.scrollLeft = center;
+        mounted.current = true;
+      } else {
+        container.scrollTo({ left: center, behavior: 'smooth' });
+      }
     }
   }, [selectedDay]);
 
