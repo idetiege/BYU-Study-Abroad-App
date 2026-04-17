@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import DayTabBar from './DayTabBar';
 import ActivityCard from './ActivityCard';
-import { getTodayDayNumber, getDayData, getActivitiesForDay } from '../data/tripData';
+import { getTodayDayNumber, getDayData, getActivitiesForDay, days } from '../data/tripData';
 
 function ItineraryHero({ selectedDay, dayData }) {
   const date = new Date(dayData.date + 'T12:00:00');
@@ -87,20 +87,48 @@ function ItineraryHero({ selectedDay, dayData }) {
 
 export default function Itinerary() {
   const todayDay = getTodayDayNumber();
-  const [selectedDay, setSelectedDay] = useState(todayDay || 6);
+  const [selectedDay, setSelectedDay] = useState(() => {
+    const saved = sessionStorage.getItem('itinerary_selected_day');
+    return saved ? parseInt(saved) : (todayDay || 6);
+  });
+  const touchStart = useRef(null);
+
+  const handleSelectDay = (day) => {
+    sessionStorage.setItem('itinerary_selected_day', String(day));
+    setSelectedDay(day);
+  };
+
+  const handleTouchStart = (e) => {
+    touchStart.current = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+  };
+
+  const handleTouchEnd = (e) => {
+    if (!touchStart.current) return;
+    const dx = e.changedTouches[0].clientX - touchStart.current.x;
+    const dy = e.changedTouches[0].clientY - touchStart.current.y;
+    touchStart.current = null;
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      const idx = days.findIndex(d => d.id === selectedDay);
+      if (dx < 0 && idx < days.length - 1) handleSelectDay(days[idx + 1].id);
+      if (dx > 0 && idx > 0) handleSelectDay(days[idx - 1].id);
+    }
+  };
 
   const dayData = getDayData(selectedDay);
   const activities = getActivitiesForDay(selectedDay);
 
   return (
-    // Full-height flex column — nothing scrolls except the activity list
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+    <div
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+      style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}
+    >
 
       {/* 1. Hero image — fixed 220px, safe area baked in */}
       {dayData && <ItineraryHero selectedDay={selectedDay} dayData={dayData} />}
 
       {/* 2. Day tab bar — flush below the hero, zero gap */}
-      <DayTabBar selectedDay={selectedDay} onSelect={setSelectedDay} />
+      <DayTabBar selectedDay={selectedDay} onSelect={handleSelectDay} />
 
       {/* 3. Activity list — flex-1 so it takes all remaining space, scrolls independently */}
       <div style={{ flex: 1, overflowY: 'auto', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}>

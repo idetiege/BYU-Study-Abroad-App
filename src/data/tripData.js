@@ -6,6 +6,7 @@ export const TRIP_END = '2026-05-19';
 export const TOTAL_DAYS = 23;
 
 export const PROFESSOR_EMAILS = ['isaacjdet@gmail.com'];
+export const PROFESSOR_PASSWORD = 'BYUEUROPE26';
 
 export const CATEGORY_COLORS = {
   'Company Visit': '#1E3A5F',
