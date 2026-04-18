@@ -68,18 +68,18 @@ export default function MapView() {
     <div className="flex flex-col h-full overflow-hidden">
       {/* Toggle */}
       <div className="flex justify-center gap-2 p-3"
-           style={{ background: '#0A1931', borderBottom: '1px solid rgba(201,168,76,0.2)', paddingTop: 'calc(env(safe-area-inset-top) + 12px)' }}>
+           style={{ background: '#073C77', borderBottom: '1px solid rgba(233,183,83,0.2)', paddingTop: 'calc(env(safe-area-inset-top) + 12px)' }}>
         {['today', 'full'].map(m => (
           <button key={m} onClick={() => setMode(m)}
                   className="px-5 py-2 rounded-full transition-all"
-                  style={{ background: mode === m ? '#C9A84C' : 'rgba(255,255,255,0.08)', color: mode === m ? '#0A1931' : '#8A8A9A', fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  style={{ background: mode === m ? '#E9B753' : 'rgba(255,255,255,0.08)', color: mode === m ? '#073C77' : '#D2AF7D', fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
             {m === 'today' ? 'Today' : 'Full Trip'}
           </button>
         ))}
       </div>
 
       {(!todayDay && mode === 'today') && (
-        <div className="flex-1 flex items-center justify-center" style={{ color: '#8A8A9A' }}>
+        <div className="flex-1 flex items-center justify-center" style={{ color: '#D2AF7D' }}>
           <div className="text-center px-8">
             <p style={{ fontSize: '40px', marginBottom: '8px' }}>🗺️</p>
             <p>Trip hasn't started yet. Switch to Full Trip to see all locations.</p>
@@ -105,7 +105,7 @@ export default function MapView() {
             {mode === 'full' && (
               <Polyline
                 positions={ROUTE_COORDS}
-                pathOptions={{ color: '#C9A84C', weight: 3, opacity: 0.75 }}
+                pathOptions={{ color: '#E9B753', weight: 3, opacity: 0.75 }}
               />
             )}
 
@@ -113,7 +113,7 @@ export default function MapView() {
             {mode === 'today' && todayPath && (
               <Polyline
                 positions={todayPath}
-                pathOptions={{ color: '#C9A84C', weight: 2, opacity: 0.7, dashArray: '6 8' }}
+                pathOptions={{ color: '#E9B753', weight: 2, opacity: 0.7, dashArray: '6 8' }}
               />
             )}
 
@@ -124,16 +124,16 @@ export default function MapView() {
                 radius={8}
                 pathOptions={{
                   fillColor: CATEGORY_COLORS[activity.category] || '#3A3A4A',
-                  color: '#C9A84C',
+                  color: '#E9B753',
                   weight: 1.5,
                   fillOpacity: 0.9,
                 }}
               >
                 <Popup>
                   <div style={{ background: '#1A1A2E', color: '#fff', borderRadius: '8px', padding: '8px 12px', minWidth: '160px', fontSize: '13px' }}>
-                    <p style={{ fontWeight: 700, margin: '0 0 4px', color: '#C9A84C' }}>{activity.time}</p>
+                    <p style={{ fontWeight: 700, margin: '0 0 4px', color: '#E9B753' }}>{activity.time}</p>
                     <p style={{ fontWeight: 600, margin: '0 0 2px' }}>{activity.title}</p>
-                    {activity.location && <p style={{ color: '#8A8A9A', margin: 0, fontSize: '11px' }}>{activity.location}</p>}
+                    {activity.location && <p style={{ color: '#D2AF7D', margin: 0, fontSize: '11px' }}>{activity.location}</p>}
                   </div>
                 </Popup>
               </CircleMarker>
@@ -142,7 +142,7 @@ export default function MapView() {
 
           {/* Legend */}
           <div className="absolute bottom-4 left-4 z-[1000] rounded-xl p-3 flex flex-col gap-1"
-               style={{ background: 'rgba(10,25,49,0.92)', backdropFilter: 'blur(8px)' }}>
+               style={{ background: 'rgba(7,60,119,0.92)', backdropFilter: 'blur(8px)' }}>
             {Object.entries(CATEGORY_COLORS).map(([cat, color]) => (
               <div key={cat} className="flex items-center gap-2">
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: color, flexShrink: 0 }} />

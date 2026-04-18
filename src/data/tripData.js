@@ -343,3 +343,35 @@ export function formatShortDate(dateStr) {
   const d = new Date(dateStr + 'T12:00:00');
   return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 }
+
+// ─── Per-day fun facts ────────────────────────────────────────────────────────
+export const funFacts = [
+  { dayId: 1,  fact: 'BYU\'s Marriott School of Business consistently ranks among the top U.S. business schools for return on investment — and this trip is a living example of that experiential learning tradition.' },
+  { dayId: 2,  fact: 'Provo has been nicknamed "Silicon Slopes" and is one of America\'s fastest-growing tech economies, with more tech startups per capita than almost any other U.S. city.' },
+  { dayId: 3,  fact: 'Vanderhall, based right here in Provo, hand-assembles open-cockpit autocycles in Utah — street-legal vehicles that blend the thrill of a motorcycle with the comfort of a sports car.' },
+  { dayId: 4,  fact: 'Blendtec\'s "Will It Blend?" YouTube series, filmed in nearby Orem, went viral in 2006 and is widely credited as one of the first successful viral marketing campaigns in internet history.' },
+  { dayId: 5,  fact: 'Your Delta flight today crosses over 8,000 miles. At cruising altitude of 35,000 feet you\'ll travel at roughly 550 mph — the equivalent of crossing the continental U.S. twice in a single flight.' },
+  { dayId: 6,  fact: 'Venice is built on 118 small islands connected by over 400 bridges. The city has no roads — only canals. Every building rests on millions of wooden piles driven into the lagoon floor.' },
+  { dayId: 7,  fact: 'Venetian composer Antonio Vivaldi wrote "The Four Seasons" while working as a music teacher here. His violin concertos were so revolutionary they directly influenced Johann Sebastian Bach.' },
+  { dayId: 8,  fact: 'The route from Venice to Ljubljana passes through Trieste, once the main seaport of the Austro-Hungarian Empire — an empire that controlled much of central Europe for over 600 years.' },
+  { dayId: 9,  fact: 'ELAN, which you\'re visiting today, pioneered the shaped ski revolution in the 1990s — a design breakthrough so significant it permanently transformed how the entire world skis.' },
+  { dayId: 10, fact: 'Croatia has 1,246 islands along its Adriatic coast — more than any other Mediterranean country. Its coastline is actually longer than Portugal\'s entire Atlantic coast.' },
+  { dayId: 11, fact: 'Rimac Automobili, which you\'re visiting today, built the Nevera — the world\'s fastest production electric car, holding 23 world records and hitting 0–60 mph in just 1.85 seconds.' },
+  { dayId: 12, fact: 'Diocletian\'s Palace in Split, which you\'ll walk through today, is one of the best-preserved Roman palaces on Earth. Over 3,000 people still live and work inside its ancient walls.' },
+  { dayId: 13, fact: 'Sarajevo hosted the 1984 Winter Olympics. Just ten years later it endured the longest siege of a capital city in modern warfare — 1,425 days during the Bosnian War.' },
+  { dayId: 14, fact: 'The Sarajevo Tunnel of Hope was dug by hand in 1993 and stretched 800 meters under the airport runway — the only supply line keeping the besieged city alive for nearly four years.' },
+  { dayId: 15, fact: 'Bosnia and Herzegovina gets its name from two regions — Bosnia from the river Bosna, and Herzegovina from a medieval duke title. The country officially recognizes three languages and two alphabets.' },
+  { dayId: 16, fact: 'Stari Most in Mostar was built in 1566 by Ottoman architect Mimar Hayruddin. Destroyed in 1993 during the war, it was rebuilt using the same 16th-century stone-cutting techniques and reopened in 2004.' },
+  { dayId: 17, fact: 'Albania was one of the world\'s most isolated countries until 1991 — it was once illegal to own a private car or practice religion. Today Tirana is one of Europe\'s fastest-growing capital cities.' },
+  { dayId: 18, fact: 'Albania built over 173,000 concrete bunkers during communist rule — more per square kilometer than any country on Earth. They\'re now being repurposed as cafes, museums, and art installations.' },
+  { dayId: 19, fact: 'Athens is one of the world\'s oldest continuously inhabited cities — over 3,500 years. It gave humanity democracy, philosophy, theater, the Olympic Games, and the foundations of Western civilization.' },
+  { dayId: 20, fact: 'The Parthenon was built without mortar — its 70,000 stone blocks were cut so precisely they locked together by their own weight alone. It has survived wars, earthquakes, and explosions for 2,500 years.' },
+  { dayId: 21, fact: 'Greece has more archaeological museums than any country in the world. Athens alone has over 100 museums — nearly one per square kilometer of the ancient city.' },
+  { dayId: 22, fact: 'The word "economy" comes from ancient Greek "oikonomia," meaning household management. Many business concepts you\'ve studied this semester trace directly to ancient Greek philosophy.' },
+  { dayId: 23, fact: 'The Olympic flame tradition — carried from Olympia to the host city — began at the 1936 Berlin Games, inspired by the ancient Greek practice of keeping a sacred fire burning at the sanctuary of Olympia.' },
+];
+
+export function getFunFactForDay(dayId) {
+  const entry = funFacts.find(f => f.dayId === dayId);
+  return entry ? entry.fact : funFacts[0].fact;
+}

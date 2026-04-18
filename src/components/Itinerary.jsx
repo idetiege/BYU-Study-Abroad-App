@@ -24,7 +24,7 @@ function ItineraryHero({ selectedDay, dayData }) {
       {/* Navy gradient placeholder — always rendered behind the image */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(160deg, #0A1931 0%, #1A1A4E 60%, #0A1931 100%)',
+        background: 'linear-gradient(160deg, #073C77 0%, #1A1A4E 60%, #073C77 100%)',
         zIndex: 0,
       }} />
 
@@ -44,7 +44,7 @@ function ItineraryHero({ selectedDay, dayData }) {
       {/* Dark gradient overlay — stronger at bottom where text lives */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(10,25,49,0.15) 0%, rgba(10,25,49,0.55) 50%, rgba(10,25,49,0.96) 100%)',
+        background: 'linear-gradient(to bottom, rgba(10,31,61,0.15) 0%, rgba(10,31,61,0.55) 50%, rgba(10,31,61,0.96) 100%)',
         zIndex: 2,
       }} />
 
@@ -55,7 +55,7 @@ function ItineraryHero({ selectedDay, dayData }) {
         zIndex: 3,
       }}>
         <p style={{
-          color: '#C9A84C',
+          color: '#E9B753',
           fontSize: '10px',
           fontWeight: 700,
           letterSpacing: '2px',
@@ -135,8 +135,26 @@ export default function Itinerary() {
         onTouchEnd={handleTouchEnd}
         style={{ flex: 1, overflowY: 'auto', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}
       >
+        {/* Packed lunch banners */}
+        {dayData?.packedLunch && (
+          <div style={{ margin: '12px 16px 0', borderRadius: '12px', padding: '12px 14px', background: '#E9B753', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+            <span style={{ fontSize: '20px', lineHeight: 1 }}>🥪</span>
+            <p style={{ margin: 0, color: '#1A0E00', fontSize: '14px', fontWeight: 600, lineHeight: 1.4 }}>
+              Bring a packed lunch today — you will be eating on the bus.
+            </p>
+          </div>
+        )}
+        {dayData?.buyLunchTonight && (
+          <div style={{ margin: '12px 16px 0', borderRadius: '12px', padding: '12px 14px', background: '#E9B753', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
+            <span style={{ fontSize: '20px', lineHeight: 1 }}>🛒</span>
+            <p style={{ margin: 0, color: '#1A0E00', fontSize: '14px', fontWeight: 600, lineHeight: 1.4 }}>
+              Buy tomorrow's packed lunch tonight before bed.
+            </p>
+          </div>
+        )}
+
         {activities.length === 0 ? (
-          <p style={{ color: '#8A8A9A', textAlign: 'center', marginTop: '40px', fontSize: '14px' }}>
+          <p style={{ color: '#D2AF7D', textAlign: 'center', marginTop: '40px', fontSize: '14px' }}>
             No activities scheduled.
           </p>
         ) : (

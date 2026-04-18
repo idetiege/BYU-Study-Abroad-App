@@ -16,7 +16,7 @@ body {
   margin: 0;
   padding: 0;
   height: 100%;
-  background: #0A1931;
+  background: #0A1F3D;
   font-family: 'Inter', system-ui, sans-serif;
   color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
@@ -39,7 +39,7 @@ body {
 
 /* Leaflet map fix */
 .leaflet-container {
-  background: #1A1A2E;
+  background: #0F2B52;
 }
 
 /* Hide scrollbar but allow scroll */
@@ -53,7 +53,7 @@ body {
 }
 
 .gold-shimmer {
-  background: linear-gradient(90deg, #C9A84C 0%, #F0D080 50%, #C9A84C 100%);
+  background: linear-gradient(90deg, #E9B753 0%, #D2AF7D 50%, #E9B753 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

@@ -46,20 +46,20 @@ export default function Login({ onLogin }) {
       <div style={{ textAlign: 'center', marginBottom: '40px' }}>
         <div style={{
           width: '72px', height: '72px', borderRadius: '20px',
-          background: 'linear-gradient(135deg, #0A1931, #1A1A4E)',
-          border: '2px solid rgba(201,168,76,0.4)',
+          background: 'linear-gradient(135deg, #073C77, #0F2B52)',
+          border: '2px solid rgba(233,183,83,0.4)',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
           margin: '0 auto 16px',
         }}>
           <span style={{ fontSize: '32px' }}>✈️</span>
         </div>
         <h1 style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 800, margin: '0 0 4px' }}>BYU Europe Trip</h1>
-        <p style={{ color: '#C9A84C', fontSize: '12px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', margin: 0 }}>2026 Study Abroad</p>
+        <p style={{ color: '#E9B753', fontSize: '12px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', margin: 0 }}>2026 Study Abroad</p>
       </div>
 
       {screen === 'main' ? (
         <div style={{ width: '100%', maxWidth: '360px' }}>
-          <label style={{ display: 'block', color: '#8A8A9A', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px' }}>
+          <label style={{ display: 'block', color: '#D2AF7D', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px' }}>
             Your BYU Email
           </label>
           <input
@@ -74,9 +74,9 @@ export default function Login({ onLogin }) {
               width: '100%', boxSizing: 'border-box',
               padding: '14px 16px',
               borderRadius: '14px',
-              background: '#1A1A2E',
+              background: '#0F2B52',
               border: `1px solid ${emailError ? '#DC2626' : 'rgba(255,255,255,0.1)'}`,
-              color: '#FFFFFF', fontSize: '16px', caretColor: '#C9A84C',
+              color: '#FFFFFF', fontSize: '16px', caretColor: '#E9B753',
               outline: 'none', marginBottom: '6px',
             }}
           />
@@ -86,8 +86,8 @@ export default function Login({ onLogin }) {
             onClick={handleStudentLogin}
             style={{
               width: '100%', padding: '14px', borderRadius: '14px',
-              background: 'linear-gradient(135deg, #C9A84C, #F0D080)',
-              color: '#0A1931', fontSize: '15px', fontWeight: 700,
+              background: 'linear-gradient(135deg, #E9B753, #F0D080)',
+              color: '#073C77', fontSize: '15px', fontWeight: 700,
               border: 'none', cursor: 'pointer',
               marginTop: '10px', marginBottom: '20px',
             }}
@@ -98,7 +98,7 @@ export default function Login({ onLogin }) {
           {/* Divider */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
             <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
-            <span style={{ color: '#8A8A9A', fontSize: '11px' }}>or</span>
+            <span style={{ color: '#D2AF7D', fontSize: '11px' }}>or</span>
             <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
           </div>
 
@@ -107,8 +107,8 @@ export default function Login({ onLogin }) {
             style={{
               width: '100%', padding: '14px', borderRadius: '14px',
               background: 'transparent',
-              border: '1px solid rgba(201,168,76,0.35)',
-              color: '#C9A84C', fontSize: '15px', fontWeight: 600,
+              border: '1px solid rgba(233,183,83,0.35)',
+              color: '#E9B753', fontSize: '15px', fontWeight: 600,
               cursor: 'pointer',
               display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
             }}
@@ -120,7 +120,7 @@ export default function Login({ onLogin }) {
             Professor Access
           </button>
 
-          <p style={{ color: '#8A8A9A', fontSize: '11px', textAlign: 'center', marginTop: '24px', lineHeight: 1.6 }}>
+          <p style={{ color: '#D2AF7D', fontSize: '11px', textAlign: 'center', marginTop: '24px', lineHeight: 1.6 }}>
             Your email is saved on this device only. You won't need to enter it again.
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function Login({ onLogin }) {
         <div style={{ width: '100%', maxWidth: '360px' }}>
           <button
             onClick={() => { setScreen('main'); setPwError(''); setProfPw(''); }}
-            style={{ background: 'none', border: 'none', color: '#8A8A9A', fontSize: '13px', cursor: 'pointer', padding: '0 0 20px', display: 'flex', alignItems: 'center', gap: '6px' }}
+            style={{ background: 'none', border: 'none', color: '#D2AF7D', fontSize: '13px', cursor: 'pointer', padding: '0 0 20px', display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>
             Back
@@ -137,18 +137,18 @@ export default function Login({ onLogin }) {
           <div style={{ textAlign: 'center', marginBottom: '28px' }}>
             <div style={{
               width: '56px', height: '56px', borderRadius: '16px',
-              background: 'rgba(201,168,76,0.12)',
-              border: '1px solid rgba(201,168,76,0.3)',
+              background: 'rgba(233,183,83,0.12)',
+              border: '1px solid rgba(233,183,83,0.3)',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
               margin: '0 auto 14px',
             }}>
-              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#E9B753" strokeWidth="2">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
             </div>
             <p style={{ color: '#FFFFFF', fontSize: '18px', fontWeight: 700, margin: '0 0 4px' }}>Professor Access</p>
-            <p style={{ color: '#8A8A9A', fontSize: '13px', margin: 0 }}>Enter your professor password</p>
+            <p style={{ color: '#D2AF7D', fontSize: '13px', margin: 0 }}>Enter your professor password</p>
           </div>
 
           <input
@@ -161,9 +161,9 @@ export default function Login({ onLogin }) {
             style={{
               width: '100%', boxSizing: 'border-box',
               padding: '14px 16px', borderRadius: '14px',
-              background: '#1A1A2E',
+              background: '#0F2B52',
               border: `1px solid ${pwError ? '#DC2626' : 'rgba(255,255,255,0.1)'}`,
-              color: '#FFFFFF', fontSize: '16px', caretColor: '#C9A84C',
+              color: '#FFFFFF', fontSize: '16px', caretColor: '#E9B753',
               outline: 'none', marginBottom: '6px',
             }}
           />
@@ -173,7 +173,7 @@ export default function Login({ onLogin }) {
             onClick={handleProfPassword}
             style={{
               width: '100%', padding: '14px', borderRadius: '14px',
-              background: '#C9A84C', color: '#0A1931',
+              background: '#E9B753', color: '#073C77',
               fontSize: '15px', fontWeight: 700,
               border: 'none', cursor: 'pointer', marginTop: '10px',
             }}

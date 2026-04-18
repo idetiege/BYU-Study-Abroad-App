@@ -23,7 +23,7 @@ export default function DayTabBar({ selectedDay, onSelect }) {
 
   return (
     <div ref={scrollRef} className="flex overflow-x-auto hide-scrollbar"
-         style={{ background: '#0A1931', borderTop: 'none', borderBottom: '1px solid rgba(201,168,76,0.15)', padding: '0 8px', flexShrink: 0 }}>
+         style={{ background: '#073C77', borderTop: 'none', borderBottom: '1px solid rgba(233,183,83,0.15)', padding: '0 8px', flexShrink: 0 }}>
       {days.map(day => {
         const isToday = todayDay === day.id;
         const isSelected = selectedDay === day.id;
@@ -37,20 +37,20 @@ export default function DayTabBar({ selectedDay, onSelect }) {
             className="flex flex-col items-center flex-shrink-0 px-3 py-2 relative"
             style={{ minWidth: '64px', opacity: isPast && !isSelected ? 0.4 : 1 }}
           >
-            <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: isSelected ? '#C9A84C' : '#8A8A9A' }}>
+            <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: isSelected ? '#E9B753' : '#D2AF7D' }}>
               DAY {day.id}
             </span>
-            <span style={{ fontSize: '12px', fontWeight: 600, color: isSelected ? '#FFFFFF' : '#8A8A9A', margin: '1px 0' }}>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: isSelected ? '#FFFFFF' : '#D2AF7D', margin: '1px 0' }}>
               {day.city.split(' ')[0]}
             </span>
-            <span style={{ fontSize: '10px', color: isSelected ? '#C9A84C' : '#8A8A9A' }}>
+            <span style={{ fontSize: '10px', color: isSelected ? '#E9B753' : '#D2AF7D' }}>
               {formatShortDate(day.date)}
             </span>
             {isSelected && (
-              <div style={{ position: 'absolute', bottom: 0, left: '12px', right: '12px', height: '2px', background: '#C9A84C', borderRadius: '1px 1px 0 0' }} />
+              <div style={{ position: 'absolute', bottom: 0, left: '12px', right: '12px', height: '2px', background: '#E9B753', borderRadius: '1px 1px 0 0' }} />
             )}
             {isToday && !isSelected && (
-              <div style={{ position: 'absolute', bottom: 0, left: '12px', right: '12px', height: '2px', background: 'rgba(201,168,76,0.4)', borderRadius: '1px 1px 0 0' }} />
+              <div style={{ position: 'absolute', bottom: 0, left: '12px', right: '12px', height: '2px', background: 'rgba(233,183,83,0.4)', borderRadius: '1px 1px 0 0' }} />
             )}
           </button>
         );

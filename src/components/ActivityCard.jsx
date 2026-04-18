@@ -34,24 +34,22 @@ export default function ActivityCard({ activity, compact = false }) {
         className="w-full text-left flex items-center gap-3 py-2"
         style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', opacity: professorMode && !visible ? 0.45 : 1 }}
       >
-        <span style={{ color: '#C9A84C', fontSize: '13px', fontWeight: 700, minWidth: '68px', fontVariantNumeric: 'tabular-nums' }}>
+        <span style={{ color: '#E9B753', fontSize: '13px', fontWeight: 700, minWidth: '68px', fontVariantNumeric: 'tabular-nums' }}>
           {activity.time}
         </span>
-        <span style={{ background: color, borderRadius: '4px', padding: '2px 8px', fontSize: '10px', fontWeight: 700, color: '#fff', whiteSpace: 'nowrap', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-          {activity.category}
-        </span>
+        <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: color, flexShrink: 0 }} />
         <span style={{ color: '#FFFFFF', fontSize: '14px', fontWeight: 500, flex: 1, textAlign: 'left' }}>
           {activity.title}
         </span>
         {professorMode ? (
           <button
             onClick={handleToggle}
-            style={{ color: visible ? '#C9A84C' : '#8A8A9A', flexShrink: 0, padding: '4px', background: 'none', border: 'none', cursor: 'pointer' }}
+            style={{ color: visible ? '#E9B753' : '#D2AF7D', flexShrink: 0, padding: '4px', background: 'none', border: 'none', cursor: 'pointer' }}
           >
             <EyeIcon open={visible} />
           </button>
         ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8A9A" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D2AF7D" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
         )}
       </button>
     );
@@ -61,11 +59,11 @@ export default function ActivityCard({ activity, compact = false }) {
     <button
       onClick={() => navigate(`/activity/${activity.id}`)}
       className="w-full text-left rounded-xl overflow-hidden flex"
-      style={{ background: '#1A1A2E', borderLeft: `4px solid ${color}`, marginBottom: '10px', opacity: professorMode && !visible ? 0.45 : 1 }}
+      style={{ background: '#0F2B52', borderLeft: `4px solid ${color}`, marginBottom: '10px', opacity: professorMode && !visible ? 0.45 : 1 }}
     >
       <div className="flex-1 p-3">
         <div className="flex items-center gap-2 mb-1">
-          <span style={{ color: '#C9A84C', fontSize: '12px', fontWeight: 700 }}>{activity.time}</span>
+          <span style={{ color: '#E9B753', fontSize: '12px', fontWeight: 700 }}>{activity.time}</span>
           <span style={{ background: color, borderRadius: '4px', padding: '1px 6px', fontSize: '10px', fontWeight: 700, color: '#fff', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
             {activity.category}
           </span>
@@ -77,19 +75,19 @@ export default function ActivityCard({ activity, compact = false }) {
         </div>
         <p style={{ color: '#FFFFFF', fontSize: '15px', fontWeight: 600, margin: 0 }}>{activity.title}</p>
         {activity.location && (
-          <p style={{ color: '#8A8A9A', fontSize: '12px', margin: '2px 0 0' }}>{activity.location}</p>
+          <p style={{ color: '#D2AF7D', fontSize: '12px', margin: '2px 0 0' }}>{activity.location}</p>
         )}
       </div>
       <div className="flex flex-col items-center justify-center pr-3 gap-2">
         {professorMode ? (
           <button
             onClick={handleToggle}
-            style={{ color: visible ? '#C9A84C' : '#8A8A9A', padding: '6px', background: 'none', border: 'none', cursor: 'pointer' }}
+            style={{ color: visible ? '#E9B753' : '#D2AF7D', padding: '6px', background: 'none', border: 'none', cursor: 'pointer' }}
           >
             <EyeIcon open={visible} />
           </button>
         ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8A8A9A" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D2AF7D" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
         )}
       </div>
     </button>

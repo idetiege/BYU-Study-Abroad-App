@@ -15,7 +15,7 @@ const sections = [
 
 export default function Emergency() {
   return (
-    <div className="overflow-y-auto" style={{ background: '#0F0F0F', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}>
+    <div className="overflow-y-auto" style={{ background: '#0A1F3D', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}>
       {/* Header */}
       <div className="px-4 pb-3"
            style={{ background: '#1A0000', borderBottom: '1px solid rgba(220,38,38,0.3)', paddingTop: 'calc(env(safe-area-inset-top) + 16px)' }}>
@@ -28,7 +28,7 @@ export default function Emergency() {
           </div>
           <div>
             <h1 style={{ color: '#FFFFFF', fontSize: '20px', fontWeight: 800, margin: 0 }}>Emergency Contacts</h1>
-            <p style={{ color: '#8A8A9A', fontSize: '12px', margin: 0 }}>Tap any number to call</p>
+            <p style={{ color: '#D2AF7D', fontSize: '12px', margin: 0 }}>Tap any number to call</p>
           </div>
         </div>
       </div>
@@ -55,18 +55,18 @@ export default function Emergency() {
         if (contacts.length === 0) return null;
         return (
           <div key={section.title} className="px-4 mt-5">
-            <p style={{ color: '#8A8A9A', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '10px' }}>
+            <p style={{ color: '#D2AF7D', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '10px' }}>
               {section.title}
             </p>
             <div className="flex flex-col gap-2">
               {contacts.map(contact => (
                 <div key={contact.label}
                      className="rounded-xl p-4 flex items-center justify-between"
-                     style={{ background: '#1A1A2E', border: '1px solid rgba(255,255,255,0.06)' }}>
+                     style={{ background: '#0F2B52', border: '1px solid rgba(255,255,255,0.06)' }}>
                   <div className="flex-1 mr-3">
                     <p style={{ color: '#FFFFFF', fontSize: '15px', fontWeight: 600, margin: '0 0 2px' }}>{contact.label}</p>
-                    <p style={{ color: '#8A8A9A', fontSize: '12px', margin: '0 0 4px' }}>{contact.notes}</p>
-                    <p style={{ color: '#C9A84C', fontSize: '13px', fontWeight: 700, fontVariantNumeric: 'tabular-nums', margin: 0 }}>{contact.phone}</p>
+                    <p style={{ color: '#D2AF7D', fontSize: '12px', margin: '0 0 4px' }}>{contact.notes}</p>
+                    <p style={{ color: '#E9B753', fontSize: '13px', fontWeight: 700, fontVariantNumeric: 'tabular-nums', margin: 0 }}>{contact.phone}</p>
                   </div>
                   <a href={`tel:${contact.phone.replace(/\s/g, '')}`}
                      className="flex items-center justify-center w-12 h-12 rounded-full flex-shrink-0"
