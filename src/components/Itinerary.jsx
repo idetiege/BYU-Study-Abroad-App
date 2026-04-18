@@ -19,10 +19,10 @@ function ItineraryHero({ selectedDay, dayData }) {
         paddingTop: 'env(safe-area-inset-top)',
       }}
     >
-      {/* Warm off-white gradient placeholder */}
+      {/* Navy gradient placeholder — shown when photo fails to load */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(160deg, #F5F0E8 0%, #E8E0D0 60%, #F5F0E8 100%)',
+        background: 'linear-gradient(160deg, #073C77 0%, #0F2B52 60%, #073C77 100%)',
         zIndex: 0,
       }} />
 
@@ -39,10 +39,10 @@ function ItineraryHero({ selectedDay, dayData }) {
         }}
       />
 
-      {/* Light gradient overlay — fades to white at bottom */}
+      {/* Gradient overlay — fades to navy at bottom, matching the tab bar */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.97) 100%)',
+        background: 'linear-gradient(to bottom, rgba(7,60,119,0) 0%, rgba(7,60,119,0.6) 55%, rgba(7,60,119,1) 100%)',
         zIndex: 2,
       }} />
 
@@ -63,7 +63,7 @@ function ItineraryHero({ selectedDay, dayData }) {
           {dayOfWeek} · {shortDate}
         </p>
         <h2 style={{
-          color: '#073C77',
+          color: '#FFFFFF',
           fontSize: '26px',
           fontWeight: 800,
           lineHeight: 1.1,
@@ -72,7 +72,7 @@ function ItineraryHero({ selectedDay, dayData }) {
           {dayData.city}
         </h2>
         <p style={{
-          color: 'rgba(7,60,119,0.65)',
+          color: 'rgba(255,255,255,0.72)',
           fontSize: '14px',
           fontWeight: 400,
           margin: 0,
