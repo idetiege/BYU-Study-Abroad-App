@@ -86,8 +86,8 @@ export default function Login({ onLogin }) {
             onClick={handleStudentLogin}
             style={{
               width: '100%', padding: '14px', borderRadius: '14px',
-              background: 'linear-gradient(135deg, #E9B753, #F0D080)',
-              color: '#073C77', fontSize: '15px', fontWeight: 700,
+              background: '#073C77',
+              color: '#FFFFFF', fontSize: '15px', fontWeight: 700,
               border: 'none', cursor: 'pointer',
               marginTop: '10px', marginBottom: '20px',
             }}

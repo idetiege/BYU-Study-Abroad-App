@@ -32,13 +32,13 @@ export default function ActivityCard({ activity, compact = false }) {
       <button
         onClick={() => navigate(`/activity/${activity.id}`)}
         className="w-full text-left flex items-center gap-3 py-2"
-        style={{ borderBottom: '1px solid rgba(7,60,119,0.08)', opacity: professorMode && !visible ? 0.45 : 1 }}
+        style={{ borderBottom: '1px solid rgba(0,0,0,0.06)', opacity: professorMode && !visible ? 0.45 : 1 }}
       >
-        <span style={{ color: '#E9B753', fontSize: '13px', fontWeight: 700, minWidth: '68px', fontVariantNumeric: 'tabular-nums' }}>
+        <span style={{ color: '#073C77', fontSize: '13px', fontWeight: 700, minWidth: '68px', fontVariantNumeric: 'tabular-nums' }}>
           {activity.time}
         </span>
         <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: color, flexShrink: 0 }} />
-        <span style={{ color: '#073C77', fontSize: '14px', fontWeight: 500, flex: 1, textAlign: 'left' }}>
+        <span style={{ color: '#1B1B1B', fontSize: '14px', fontWeight: 500, flex: 1, textAlign: 'left' }}>
           {activity.title}
         </span>
         {professorMode ? (
@@ -59,11 +59,11 @@ export default function ActivityCard({ activity, compact = false }) {
     <button
       onClick={() => navigate(`/activity/${activity.id}`)}
       className="w-full text-left rounded-xl overflow-hidden flex"
-      style={{ background: '#FFFFFF', borderLeft: `4px solid ${color}`, marginBottom: '10px', opacity: professorMode && !visible ? 0.45 : 1, boxShadow: '0 1px 4px rgba(7,60,119,0.10)' }}
+      style={{ background: '#FFFFFF', borderLeft: `4px solid ${color}`, marginBottom: '10px', opacity: professorMode && !visible ? 0.45 : 1, boxShadow: '0 1px 8px rgba(0,0,0,0.08)' }}
     >
       <div className="flex-1 p-3">
         <div className="flex items-center gap-2 mb-1">
-          <span style={{ color: '#E9B753', fontSize: '12px', fontWeight: 700 }}>{activity.time}</span>
+          <span style={{ color: '#073C77', fontSize: '12px', fontWeight: 700 }}>{activity.time}</span>
           <span style={{ background: color, borderRadius: '4px', padding: '1px 6px', fontSize: '10px', fontWeight: 700, color: '#fff', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
             {activity.category}
           </span>
@@ -73,7 +73,7 @@ export default function ActivityCard({ activity, compact = false }) {
             </span>
           )}
         </div>
-        <p style={{ color: '#073C77', fontSize: '15px', fontWeight: 600, margin: 0 }}>{activity.title}</p>
+        <p style={{ color: '#1B1B1B', fontSize: '15px', fontWeight: 600, margin: 0 }}>{activity.title}</p>
         {activity.location && (
           <p style={{ color: '#A3876F', fontSize: '12px', margin: '2px 0 0' }}>{activity.location}</p>
         )}

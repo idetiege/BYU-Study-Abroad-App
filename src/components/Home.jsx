@@ -113,8 +113,8 @@ function DayProgressCard({ dayNumber }) {
   return (
     <div className="flex-1 rounded-2xl p-4" style={{ background: '#F5F0E8', border: '1px solid rgba(233,183,83,0.2)' }}>
       <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>Trip Progress</p>
-      <p style={{ color: '#073C77', fontSize: '28px', fontWeight: 800, lineHeight: 1, margin: 0 }}>
-        Day <span style={{ color: '#E9B753' }}>{dayNumber}</span>
+      <p style={{ color: '#1B1B1B', fontSize: '28px', fontWeight: 800, lineHeight: 1, margin: 0 }}>
+        Day <span style={{ color: '#073C77' }}>{dayNumber}</span>
         <span style={{ color: '#A3876F', fontSize: '16px' }}> / {TOTAL_DAYS}</span>
       </p>
       <div style={{ background: 'rgba(7,60,119,0.1)', borderRadius: '4px', height: '4px', marginTop: '10px', overflow: 'hidden' }}>
@@ -155,7 +155,7 @@ function WeatherClock({ city, timezone }) {
       </div>
       <div className="flex-1 p-4 flex flex-col items-end">
         <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>Local Time</p>
-        <p style={{ color: '#E9B753', fontSize: '18px', fontWeight: 700, fontVariantNumeric: 'tabular-nums', margin: 0 }}>{time}</p>
+        <p style={{ color: '#073C77', fontSize: '18px', fontWeight: 700, fontVariantNumeric: 'tabular-nums', margin: 0 }}>{time}</p>
       </div>
     </div>
   );
@@ -165,15 +165,15 @@ function NextUpCard({ activity }) {
   if (!activity) return null;
   return (
     <div className="mx-4 mb-4 rounded-2xl p-4" style={{ background: '#F5F0E8', border: '2px solid #E9B753' }}>
-      <p style={{ color: '#E9B753', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px' }}>Next Up</p>
-      <p style={{ color: '#073C77', fontSize: '20px', fontWeight: 700, margin: '0 0 4px' }}>{activity.title}</p>
+      <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px' }}>Next Up</p>
+      <p style={{ color: '#1B1B1B', fontSize: '20px', fontWeight: 700, margin: '0 0 4px' }}>{activity.title}</p>
       <p style={{ color: '#A3876F', fontSize: '13px', margin: '0 0 12px' }}>
         {activity.time}{activity.location ? ` · ${activity.location}` : ''}
       </p>
       {activity.mapsUrl && (
         <a href={activity.mapsUrl} target="_blank" rel="noopener noreferrer"
            className="flex items-center gap-2 justify-center rounded-xl py-2"
-           style={{ background: 'rgba(233,183,83,0.15)', color: '#E9B753', fontSize: '13px', fontWeight: 600, textDecoration: 'none' }}>
+           style={{ background: 'rgba(7,60,119,0.08)', color: '#073C77', fontSize: '13px', fontWeight: 600, textDecoration: 'none' }}>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
           Open in Maps
         </a>
@@ -329,7 +329,7 @@ export default function Home() {
 
         {dayActivities.length > 0 && (
           <div className="mx-4 mb-4 rounded-2xl p-4" style={{ background: '#F5F0E8', border: '1px solid rgba(7,60,119,0.06)' }}>
-            <p style={{ color: '#E9B753', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '12px' }}>Today's Full Schedule</p>
+            <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '12px' }}>Today's Full Schedule</p>
             {dayActivities.map(a => <ActivityCard key={a.id} activity={a} compact />)}
           </div>
         )}
