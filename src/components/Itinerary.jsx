@@ -2,6 +2,7 @@ import { useState, useRef } from 'react';
 import DayTabBar from './DayTabBar';
 import ActivityCard from './ActivityCard';
 import { getTodayDayNumber, getDayData, getActivitiesForDay, days } from '../data/tripData';
+import { useAppContext } from '../App';
 
 function ItineraryHero({ selectedDay, dayData }) {
   const date = new Date(dayData.date + 'T12:00:00');
@@ -114,8 +115,10 @@ export default function Itinerary() {
     }
   };
 
+  const { professorMode, isActivityVisible } = useAppContext();
   const dayData = getDayData(selectedDay);
-  const activities = getActivitiesForDay(selectedDay);
+  const allActivities = getActivitiesForDay(selectedDay);
+  const activities = professorMode ? allActivities : allActivities.filter(isActivityVisible);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>

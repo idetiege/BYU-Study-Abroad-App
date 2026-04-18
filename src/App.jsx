@@ -8,7 +8,13 @@ import Emergency from './components/Emergency';
 import BottomNav from './components/BottomNav';
 import Login from './components/Login';
 
-export const AppContext = createContext({ professorMode: false, setProfessorMode: () => {} });
+export const AppContext = createContext({
+  professorMode: false,
+  setProfessorMode: () => {},
+  visibilityOverrides: {},
+  setVisibilityOverride: () => {},
+  isActivityVisible: () => true,
+});
 export const useAppContext = () => useContext(AppContext);
 
 function AppShell() {
@@ -40,10 +46,25 @@ export default function App() {
     () => localStorage.getItem('byu_professor') === 'true'
   );
 
+  const [visibilityOverrides, setVisibilityOverridesState] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('byu_visibility') || '{}'); }
+    catch { return {}; }
+  });
+
   const setProfessorMode = (val) => {
     localStorage.setItem('byu_professor', val ? 'true' : 'false');
     setProfessorModeState(val);
   };
+
+  const setVisibilityOverride = (activityId, visible) => {
+    const next = { ...visibilityOverrides, [activityId]: visible };
+    localStorage.setItem('byu_visibility', JSON.stringify(next));
+    setVisibilityOverridesState(next);
+  };
+
+  // Effective visibility: override wins, then showStudents default
+  const isActivityVisible = (activity) =>
+    visibilityOverrides[activity.id] ?? activity.showStudents;
 
   const handleLogin = (userData) => {
     localStorage.setItem('byu_trip_email', userData.email);
@@ -58,7 +79,7 @@ export default function App() {
   if (!user) return <Login onLogin={handleLogin} />;
 
   return (
-    <AppContext.Provider value={{ professorMode, setProfessorMode }}>
+    <AppContext.Provider value={{ professorMode, setProfessorMode, visibilityOverrides, setVisibilityOverride, isActivityVisible }}>
       <BrowserRouter>
         <AppShell />
       </BrowserRouter>

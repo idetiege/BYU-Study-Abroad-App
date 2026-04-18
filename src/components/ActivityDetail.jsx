@@ -60,14 +60,6 @@ export default function ActivityDetail() {
             </div>
           )}
 
-          {activity.cost > 0 && (
-            <div className="flex items-center gap-3">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" strokeWidth="2">
-                <circle cx="12" cy="12" r="10"/><path d="M14.5 9a3.5 3.5 0 0 0-5 0v6a3.5 3.5 0 0 0 5 0"/><line x1="9" y1="12" x2="15" y2="12"/>
-              </svg>
-              <span style={{ color: '#FFFFFF', fontSize: '15px', fontWeight: 600 }}>€{activity.cost} per person</span>
-            </div>
-          )}
         </div>
 
         {/* Divider */}

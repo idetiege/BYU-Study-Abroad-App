@@ -196,14 +196,15 @@ function FunFactCard({ fact }) {
 
 // ─── Main screen ──────────────────────────────────────────────────────────────
 export default function Home() {
-  const { professorMode } = useAppContext();
+  const { professorMode, isActivityVisible } = useAppContext();
   const [profModalOpen, setProfModalOpen] = useState(false);
 
   const dayNumber = getTodayDayNumber();
   const preTrip = dayNumber === null && new Date() < new Date(TRIP_START);
   const displayDay = dayNumber || (preTrip ? 1 : TOTAL_DAYS);
   const dayData = getDayData(displayDay);
-  const dayActivities = getActivitiesForDay(displayDay);
+  const allDayActivities = getActivitiesForDay(displayDay);
+  const dayActivities = professorMode ? allDayActivities : allDayActivities.filter(isActivityVisible);
   const nextActivity = dayNumber ? getNextActivity(dayNumber) : null;
   const quote = getQuoteForDay(displayDay);
   const fact = FUN_FACTS[(displayDay - 1) % FUN_FACTS.length];

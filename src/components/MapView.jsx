@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { activities, days, CATEGORY_COLORS, getTodayDayNumber } from '../data/tripData';
 
@@ -16,7 +16,16 @@ const CITY_COORDS = {
   'Athens':         [37.9838,  23.7275],
 };
 
+// Ordered journey for the full-trip route line
+const ROUTE_COORDS = [
+  'Provo', 'Salt Lake City', 'Venice', 'Ljubljana', 'Zagreb',
+  'Sarajevo', 'Mostar', 'Kotor', 'Tirana', 'Athens',
+].map(c => CITY_COORDS[c]);
+
 function getActivityCoords(activity) {
+  if (activity.lat != null && activity.lng != null) {
+    return [activity.lat, activity.lng];
+  }
   const day = days.find(d => d.id === activity.dayId);
   return day ? (CITY_COORDS[day.city] || null) : null;
 }
@@ -35,9 +44,19 @@ export default function MapView() {
     : activities;
 
   const mappable = rawActivities
-    .map((a, i) => ({ ...a, coords: getActivityCoords(a) }))
-    .filter(a => a.coords)
-    .map((a, i) => ({ ...a, coords: addJitter(a.coords, i) }));
+    .map((a, i) => {
+      const baseCoords = getActivityCoords(a);
+      if (!baseCoords) return null;
+      // Only jitter activities that are falling back to city center
+      const coords = (a.lat != null) ? baseCoords : addJitter(baseCoords, i);
+      return { ...a, coords };
+    })
+    .filter(Boolean);
+
+  // Dashed route connecting today's activities in time order
+  const todayPath = (mode === 'today' && todayDay && mappable.length > 1)
+    ? mappable.map(a => a.coords)
+    : null;
 
   const centerDay = todayDay
     ? days.find(d => d.id === todayDay)
@@ -81,12 +100,34 @@ export default function MapView() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
             />
+
+            {/* Full trip: gold route polyline */}
+            {mode === 'full' && (
+              <Polyline
+                positions={ROUTE_COORDS}
+                pathOptions={{ color: '#C9A84C', weight: 3, opacity: 0.75 }}
+              />
+            )}
+
+            {/* Today: dashed gold path connecting activities in time order */}
+            {mode === 'today' && todayPath && (
+              <Polyline
+                positions={todayPath}
+                pathOptions={{ color: '#C9A84C', weight: 2, opacity: 0.7, dashArray: '6 8' }}
+              />
+            )}
+
             {mappable.map(activity => (
               <CircleMarker
                 key={activity.id}
                 center={activity.coords}
                 radius={8}
-                pathOptions={{ fillColor: CATEGORY_COLORS[activity.category] || '#3A3A4A', color: '#C9A84C', weight: 1.5, fillOpacity: 0.9 }}
+                pathOptions={{
+                  fillColor: CATEGORY_COLORS[activity.category] || '#3A3A4A',
+                  color: '#C9A84C',
+                  weight: 1.5,
+                  fillOpacity: 0.9,
+                }}
               >
                 <Popup>
                   <div style={{ background: '#1A1A2E', color: '#fff', borderRadius: '8px', padding: '8px 12px', minWidth: '160px', fontSize: '13px' }}>
