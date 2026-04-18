@@ -47,13 +47,11 @@ export default function MapView() {
     .map((a, i) => {
       const baseCoords = getActivityCoords(a);
       if (!baseCoords) return null;
-      // Only jitter activities that are falling back to city center
       const coords = (a.lat != null) ? baseCoords : addJitter(baseCoords, i);
       return { ...a, coords };
     })
     .filter(Boolean);
 
-  // Dashed route connecting today's activities in time order
   const todayPath = (mode === 'today' && todayDay && mappable.length > 1)
     ? mappable.map(a => a.coords)
     : null;
@@ -68,18 +66,18 @@ export default function MapView() {
     <div className="flex flex-col h-full overflow-hidden">
       {/* Toggle */}
       <div className="flex justify-center gap-2 p-3"
-           style={{ background: '#073C77', borderBottom: '1px solid rgba(233,183,83,0.2)', paddingTop: 'calc(env(safe-area-inset-top) + 12px)' }}>
+           style={{ background: '#FFFFFF', borderBottom: '1px solid rgba(7,60,119,0.1)', paddingTop: 'calc(env(safe-area-inset-top) + 12px)' }}>
         {['today', 'full'].map(m => (
           <button key={m} onClick={() => setMode(m)}
                   className="px-5 py-2 rounded-full transition-all"
-                  style={{ background: mode === m ? '#E9B753' : 'rgba(255,255,255,0.08)', color: mode === m ? '#073C77' : '#D2AF7D', fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  style={{ background: mode === m ? '#E9B753' : 'rgba(7,60,119,0.08)', color: mode === m ? '#073C77' : '#A3876F', fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
             {m === 'today' ? 'Today' : 'Full Trip'}
           </button>
         ))}
       </div>
 
       {(!todayDay && mode === 'today') && (
-        <div className="flex-1 flex items-center justify-center" style={{ color: '#D2AF7D' }}>
+        <div className="flex-1 flex items-center justify-center" style={{ color: '#A3876F' }}>
           <div className="text-center px-8">
             <p style={{ fontSize: '40px', marginBottom: '8px' }}>🗺️</p>
             <p>Trip hasn't started yet. Switch to Full Trip to see all locations.</p>
@@ -130,10 +128,10 @@ export default function MapView() {
                 }}
               >
                 <Popup>
-                  <div style={{ background: '#1A1A2E', color: '#fff', borderRadius: '8px', padding: '8px 12px', minWidth: '160px', fontSize: '13px' }}>
+                  <div style={{ background: '#FFFFFF', color: '#073C77', borderRadius: '8px', padding: '8px 12px', minWidth: '160px', fontSize: '13px', boxShadow: '0 2px 8px rgba(7,60,119,0.12)' }}>
                     <p style={{ fontWeight: 700, margin: '0 0 4px', color: '#E9B753' }}>{activity.time}</p>
                     <p style={{ fontWeight: 600, margin: '0 0 2px' }}>{activity.title}</p>
-                    {activity.location && <p style={{ color: '#D2AF7D', margin: 0, fontSize: '11px' }}>{activity.location}</p>}
+                    {activity.location && <p style={{ color: '#A3876F', margin: 0, fontSize: '11px' }}>{activity.location}</p>}
                   </div>
                 </Popup>
               </CircleMarker>

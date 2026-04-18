@@ -32,7 +32,7 @@ export default function Login({ onLogin }) {
   return (
     <div style={{
       height: '100dvh',
-      background: '#0F0F0F',
+      background: '#FFFFFF',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
@@ -53,13 +53,13 @@ export default function Login({ onLogin }) {
         }}>
           <span style={{ fontSize: '32px' }}>✈️</span>
         </div>
-        <h1 style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 800, margin: '0 0 4px' }}>BYU Europe Trip</h1>
+        <h1 style={{ color: '#073C77', fontSize: '24px', fontWeight: 800, margin: '0 0 4px' }}>BYU Europe Trip</h1>
         <p style={{ color: '#E9B753', fontSize: '12px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase', margin: 0 }}>2026 Study Abroad</p>
       </div>
 
       {screen === 'main' ? (
         <div style={{ width: '100%', maxWidth: '360px' }}>
-          <label style={{ display: 'block', color: '#D2AF7D', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px' }}>
+          <label style={{ display: 'block', color: '#A3876F', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px' }}>
             Your BYU Email
           </label>
           <input
@@ -74,9 +74,9 @@ export default function Login({ onLogin }) {
               width: '100%', boxSizing: 'border-box',
               padding: '14px 16px',
               borderRadius: '14px',
-              background: '#0F2B52',
-              border: `1px solid ${emailError ? '#DC2626' : 'rgba(255,255,255,0.1)'}`,
-              color: '#FFFFFF', fontSize: '16px', caretColor: '#E9B753',
+              background: '#F5F0E8',
+              border: `1px solid ${emailError ? '#DC2626' : 'rgba(7,60,119,0.15)'}`,
+              color: '#073C77', fontSize: '16px', caretColor: '#E9B753',
               outline: 'none', marginBottom: '6px',
             }}
           />
@@ -97,9 +97,9 @@ export default function Login({ onLogin }) {
 
           {/* Divider */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '20px' }}>
-            <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
-            <span style={{ color: '#D2AF7D', fontSize: '11px' }}>or</span>
-            <div style={{ flex: 1, height: '1px', background: 'rgba(255,255,255,0.08)' }} />
+            <div style={{ flex: 1, height: '1px', background: 'rgba(7,60,119,0.08)' }} />
+            <span style={{ color: '#A3876F', fontSize: '11px' }}>or</span>
+            <div style={{ flex: 1, height: '1px', background: 'rgba(7,60,119,0.08)' }} />
           </div>
 
           <button
@@ -120,7 +120,7 @@ export default function Login({ onLogin }) {
             Professor Access
           </button>
 
-          <p style={{ color: '#D2AF7D', fontSize: '11px', textAlign: 'center', marginTop: '24px', lineHeight: 1.6 }}>
+          <p style={{ color: '#A3876F', fontSize: '11px', textAlign: 'center', marginTop: '24px', lineHeight: 1.6 }}>
             Your email is saved on this device only. You won't need to enter it again.
           </p>
         </div>
@@ -128,7 +128,7 @@ export default function Login({ onLogin }) {
         <div style={{ width: '100%', maxWidth: '360px' }}>
           <button
             onClick={() => { setScreen('main'); setPwError(''); setProfPw(''); }}
-            style={{ background: 'none', border: 'none', color: '#D2AF7D', fontSize: '13px', cursor: 'pointer', padding: '0 0 20px', display: 'flex', alignItems: 'center', gap: '6px' }}
+            style={{ background: 'none', border: 'none', color: '#A3876F', fontSize: '13px', cursor: 'pointer', padding: '0 0 20px', display: 'flex', alignItems: 'center', gap: '6px' }}
           >
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="15 18 9 12 15 6"/></svg>
             Back
@@ -147,8 +147,8 @@ export default function Login({ onLogin }) {
                 <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
               </svg>
             </div>
-            <p style={{ color: '#FFFFFF', fontSize: '18px', fontWeight: 700, margin: '0 0 4px' }}>Professor Access</p>
-            <p style={{ color: '#D2AF7D', fontSize: '13px', margin: 0 }}>Enter your professor password</p>
+            <p style={{ color: '#073C77', fontSize: '18px', fontWeight: 700, margin: '0 0 4px' }}>Professor Access</p>
+            <p style={{ color: '#A3876F', fontSize: '13px', margin: 0 }}>Enter your professor password</p>
           </div>
 
           <input
@@ -161,9 +161,9 @@ export default function Login({ onLogin }) {
             style={{
               width: '100%', boxSizing: 'border-box',
               padding: '14px 16px', borderRadius: '14px',
-              background: '#0F2B52',
-              border: `1px solid ${pwError ? '#DC2626' : 'rgba(255,255,255,0.1)'}`,
-              color: '#FFFFFF', fontSize: '16px', caretColor: '#E9B753',
+              background: '#F5F0E8',
+              border: `1px solid ${pwError ? '#DC2626' : 'rgba(7,60,119,0.15)'}`,
+              color: '#073C77', fontSize: '16px', caretColor: '#E9B753',
               outline: 'none', marginBottom: '6px',
             }}
           />

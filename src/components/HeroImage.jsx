@@ -9,16 +9,16 @@ export default function HeroImage({ dayNumber, city, country, date, height = '56
         className="w-full h-full object-cover"
         onError={e => { e.target.style.display = 'none'; }}
       />
-      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(10,31,61,0.1) 0%, rgba(10,31,61,0.7) 70%, rgba(10,31,61,0.95) 100%)' }} />
-      <div className="absolute inset-0 -z-10" style={{ background: 'linear-gradient(135deg, #073C77 0%, #0F2B52 100%)' }} />
+      <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(255,255,255,0) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0.97) 100%)' }} />
+      <div className="absolute inset-0 -z-10" style={{ background: 'linear-gradient(135deg, #F5F0E8 0%, #E8E0D0 100%)' }} />
 
       {showText && (
         <div className="absolute bottom-0 left-0 right-0 p-4">
           <p style={{ color: '#E9B753', fontSize: '11px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '2px' }}>
             {date}
           </p>
-          <h1 style={{ color: '#FFFFFF', fontSize: '28px', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>{city}</h1>
-          <p style={{ color: 'rgba(255,255,255,0.75)', fontSize: '14px', fontWeight: 400, margin: '2px 0 0' }}>{country}</p>
+          <h1 style={{ color: '#073C77', fontSize: '28px', fontWeight: 800, lineHeight: 1.1, margin: 0 }}>{city}</h1>
+          <p style={{ color: 'rgba(7,60,119,0.65)', fontSize: '14px', fontWeight: 400, margin: '2px 0 0' }}>{country}</p>
         </div>
       )}
     </div>

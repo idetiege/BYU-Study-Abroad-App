@@ -23,7 +23,7 @@ export default function DayTabBar({ selectedDay, onSelect }) {
 
   return (
     <div ref={scrollRef} className="flex overflow-x-auto hide-scrollbar"
-         style={{ background: '#073C77', borderTop: 'none', borderBottom: '1px solid rgba(233,183,83,0.15)', padding: '0 8px', flexShrink: 0 }}>
+         style={{ background: '#FFFFFF', borderTop: 'none', borderBottom: '1px solid rgba(7,60,119,0.1)', padding: '0 8px', flexShrink: 0 }}>
       {days.map(day => {
         const isToday = todayDay === day.id;
         const isSelected = selectedDay === day.id;
@@ -37,13 +37,13 @@ export default function DayTabBar({ selectedDay, onSelect }) {
             className="flex flex-col items-center flex-shrink-0 px-3 py-2 relative"
             style={{ minWidth: '64px', opacity: isPast && !isSelected ? 0.4 : 1 }}
           >
-            <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: isSelected ? '#E9B753' : '#D2AF7D' }}>
+            <span style={{ fontSize: '10px', fontWeight: 800, letterSpacing: '1px', textTransform: 'uppercase', color: isSelected ? '#E9B753' : '#A3876F' }}>
               DAY {day.id}
             </span>
-            <span style={{ fontSize: '12px', fontWeight: 600, color: isSelected ? '#FFFFFF' : '#D2AF7D', margin: '1px 0' }}>
+            <span style={{ fontSize: '12px', fontWeight: 600, color: isSelected ? '#073C77' : '#A3876F', margin: '1px 0' }}>
               {day.city.split(' ')[0]}
             </span>
-            <span style={{ fontSize: '10px', color: isSelected ? '#E9B753' : '#D2AF7D' }}>
+            <span style={{ fontSize: '10px', color: isSelected ? '#E9B753' : '#A3876F' }}>
               {formatShortDate(day.date)}
             </span>
             {isSelected && (

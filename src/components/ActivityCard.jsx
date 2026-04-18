@@ -32,24 +32,24 @@ export default function ActivityCard({ activity, compact = false }) {
       <button
         onClick={() => navigate(`/activity/${activity.id}`)}
         className="w-full text-left flex items-center gap-3 py-2"
-        style={{ borderBottom: '1px solid rgba(255,255,255,0.06)', opacity: professorMode && !visible ? 0.45 : 1 }}
+        style={{ borderBottom: '1px solid rgba(7,60,119,0.08)', opacity: professorMode && !visible ? 0.45 : 1 }}
       >
         <span style={{ color: '#E9B753', fontSize: '13px', fontWeight: 700, minWidth: '68px', fontVariantNumeric: 'tabular-nums' }}>
           {activity.time}
         </span>
         <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: color, flexShrink: 0 }} />
-        <span style={{ color: '#FFFFFF', fontSize: '14px', fontWeight: 500, flex: 1, textAlign: 'left' }}>
+        <span style={{ color: '#073C77', fontSize: '14px', fontWeight: 500, flex: 1, textAlign: 'left' }}>
           {activity.title}
         </span>
         {professorMode ? (
           <button
             onClick={handleToggle}
-            style={{ color: visible ? '#E9B753' : '#D2AF7D', flexShrink: 0, padding: '4px', background: 'none', border: 'none', cursor: 'pointer' }}
+            style={{ color: visible ? '#E9B753' : '#A3876F', flexShrink: 0, padding: '4px', background: 'none', border: 'none', cursor: 'pointer' }}
           >
             <EyeIcon open={visible} />
           </button>
         ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D2AF7D" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A3876F" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
         )}
       </button>
     );
@@ -59,7 +59,7 @@ export default function ActivityCard({ activity, compact = false }) {
     <button
       onClick={() => navigate(`/activity/${activity.id}`)}
       className="w-full text-left rounded-xl overflow-hidden flex"
-      style={{ background: '#0F2B52', borderLeft: `4px solid ${color}`, marginBottom: '10px', opacity: professorMode && !visible ? 0.45 : 1 }}
+      style={{ background: '#FFFFFF', borderLeft: `4px solid ${color}`, marginBottom: '10px', opacity: professorMode && !visible ? 0.45 : 1, boxShadow: '0 1px 4px rgba(7,60,119,0.10)' }}
     >
       <div className="flex-1 p-3">
         <div className="flex items-center gap-2 mb-1">
@@ -68,26 +68,26 @@ export default function ActivityCard({ activity, compact = false }) {
             {activity.category}
           </span>
           {professorMode && !visible && (
-            <span style={{ background: 'rgba(220,38,38,0.15)', border: '1px solid rgba(220,38,38,0.3)', borderRadius: '4px', padding: '1px 6px', fontSize: '10px', fontWeight: 700, color: '#DC2626', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+            <span style={{ background: 'rgba(220,38,38,0.10)', border: '1px solid rgba(220,38,38,0.3)', borderRadius: '4px', padding: '1px 6px', fontSize: '10px', fontWeight: 700, color: '#DC2626', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
               Hidden
             </span>
           )}
         </div>
-        <p style={{ color: '#FFFFFF', fontSize: '15px', fontWeight: 600, margin: 0 }}>{activity.title}</p>
+        <p style={{ color: '#073C77', fontSize: '15px', fontWeight: 600, margin: 0 }}>{activity.title}</p>
         {activity.location && (
-          <p style={{ color: '#D2AF7D', fontSize: '12px', margin: '2px 0 0' }}>{activity.location}</p>
+          <p style={{ color: '#A3876F', fontSize: '12px', margin: '2px 0 0' }}>{activity.location}</p>
         )}
       </div>
       <div className="flex flex-col items-center justify-center pr-3 gap-2">
         {professorMode ? (
           <button
             onClick={handleToggle}
-            style={{ color: visible ? '#E9B753' : '#D2AF7D', padding: '6px', background: 'none', border: 'none', cursor: 'pointer' }}
+            style={{ color: visible ? '#E9B753' : '#A3876F', padding: '6px', background: 'none', border: 'none', cursor: 'pointer' }}
           >
             <EyeIcon open={visible} />
           </button>
         ) : (
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#D2AF7D" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#A3876F" strokeWidth="2"><polyline points="9 18 15 12 9 6"/></svg>
         )}
       </div>
     </button>

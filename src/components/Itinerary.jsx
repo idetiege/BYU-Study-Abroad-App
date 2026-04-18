@@ -16,19 +16,17 @@ function ItineraryHero({ selectedDay, dayData }) {
         height: '220px',
         flexShrink: 0,
         overflow: 'hidden',
-        // The image extends behind the Dynamic Island cutout.
-        // padding-top pushes our overlay text content below it.
         paddingTop: 'env(safe-area-inset-top)',
       }}
     >
-      {/* Navy gradient placeholder — always rendered behind the image */}
+      {/* Warm off-white gradient placeholder */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(160deg, #073C77 0%, #1A1A4E 60%, #073C77 100%)',
+        background: 'linear-gradient(160deg, #F5F0E8 0%, #E8E0D0 60%, #F5F0E8 100%)',
         zIndex: 0,
       }} />
 
-      {/* Hero photo — fills the entire 220px container including behind the notch */}
+      {/* Hero photo */}
       <img
         src={`/images/day-${selectedDay}.jpg`}
         alt={dayData.city}
@@ -41,10 +39,10 @@ function ItineraryHero({ selectedDay, dayData }) {
         }}
       />
 
-      {/* Dark gradient overlay — stronger at bottom where text lives */}
+      {/* Light gradient overlay — fades to white at bottom */}
       <div style={{
         position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(10,31,61,0.15) 0%, rgba(10,31,61,0.55) 50%, rgba(10,31,61,0.96) 100%)',
+        background: 'linear-gradient(to bottom, rgba(255,255,255,0.0) 0%, rgba(255,255,255,0.55) 50%, rgba(255,255,255,0.97) 100%)',
         zIndex: 2,
       }} />
 
@@ -65,7 +63,7 @@ function ItineraryHero({ selectedDay, dayData }) {
           {dayOfWeek} · {shortDate}
         </p>
         <h2 style={{
-          color: '#FFFFFF',
+          color: '#073C77',
           fontSize: '26px',
           fontWeight: 800,
           lineHeight: 1.1,
@@ -74,7 +72,7 @@ function ItineraryHero({ selectedDay, dayData }) {
           {dayData.city}
         </h2>
         <p style={{
-          color: 'rgba(255,255,255,0.72)',
+          color: 'rgba(7,60,119,0.65)',
           fontSize: '14px',
           fontWeight: 400,
           margin: 0,
@@ -123,17 +121,17 @@ export default function Itinerary() {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
 
-      {/* 1. Hero image — fixed 220px, safe area baked in */}
+      {/* 1. Hero image */}
       {dayData && <ItineraryHero selectedDay={selectedDay} dayData={dayData} />}
 
-      {/* 2. Day tab bar — free horizontal scroll, no swipe gesture */}
+      {/* 2. Day tab bar */}
       <DayTabBar selectedDay={selectedDay} onSelect={handleSelectDay} />
 
       {/* 3. Activity list — swipe here to change day */}
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        style={{ flex: 1, overflowY: 'auto', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}
+        style={{ flex: 1, overflowY: 'auto', background: '#FFFFFF', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}
       >
         {/* Packed lunch banners */}
         {dayData?.packedLunch && (
@@ -154,7 +152,7 @@ export default function Itinerary() {
         )}
 
         {activities.length === 0 ? (
-          <p style={{ color: '#D2AF7D', textAlign: 'center', marginTop: '40px', fontSize: '14px' }}>
+          <p style={{ color: '#A3876F', textAlign: 'center', marginTop: '40px', fontSize: '14px' }}>
             No activities scheduled.
           </p>
         ) : (

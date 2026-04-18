@@ -33,22 +33,22 @@ function ProfessorModal({ onClose }) {
   return (
     <div
       onClick={onClose}
-      style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.6)', display: 'flex', alignItems: 'flex-end' }}
+      style={{ position: 'fixed', inset: 0, zIndex: 200, background: 'rgba(0,0,0,0.5)', display: 'flex', alignItems: 'flex-end' }}
     >
       <div
         onClick={e => e.stopPropagation()}
-        style={{ background: '#0F2B52', width: '100%', borderRadius: '20px 20px 0 0', padding: '24px 20px', paddingBottom: 'calc(24px + env(safe-area-inset-bottom))', border: '1px solid rgba(233,183,83,0.2)' }}
+        style={{ background: '#FFFFFF', width: '100%', borderRadius: '20px 20px 0 0', padding: '24px 20px', paddingBottom: 'calc(24px + env(safe-area-inset-bottom))', border: '1px solid rgba(7,60,119,0.1)' }}
       >
         <div className="flex items-center gap-3 mb-5">
-          <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: professorMode ? 'rgba(233,183,83,0.15)' : 'rgba(255,255,255,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={professorMode ? '#E9B753' : '#D2AF7D'} strokeWidth="2">
+          <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: professorMode ? 'rgba(233,183,83,0.15)' : 'rgba(7,60,119,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={professorMode ? '#E9B753' : '#A3876F'} strokeWidth="2">
               <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
               <path d={professorMode ? 'M7 11V7a5 5 0 0 1 10 0v4' : 'M7 11V7a5 5 0 0 1 9.9-1'}/>
             </svg>
           </div>
           <div>
-            <p style={{ color: '#FFFFFF', fontSize: '16px', fontWeight: 700, margin: 0 }}>Professor Mode</p>
-            <p style={{ color: '#D2AF7D', fontSize: '12px', margin: 0 }}>{professorMode ? 'Currently enabled' : 'Password required'}</p>
+            <p style={{ color: '#073C77', fontSize: '16px', fontWeight: 700, margin: 0 }}>Professor Mode</p>
+            <p style={{ color: '#A3876F', fontSize: '12px', margin: 0 }}>{professorMode ? 'Currently enabled' : 'Password required'}</p>
           </div>
         </div>
 
@@ -61,14 +61,14 @@ function ProfessorModal({ onClose }) {
             <button
               onClick={handleDisable}
               className="w-full py-3 rounded-xl font-bold"
-              style={{ background: 'rgba(220,38,38,0.15)', color: '#DC2626', fontSize: '15px', border: '1px solid rgba(220,38,38,0.3)' }}
+              style={{ background: 'rgba(220,38,38,0.10)', color: '#DC2626', fontSize: '15px', border: '1px solid rgba(220,38,38,0.3)' }}
             >
               Disable Professor Mode
             </button>
           </>
         ) : (
           <>
-            <label style={{ display: 'block', color: '#D2AF7D', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px' }}>
+            <label style={{ display: 'block', color: '#A3876F', fontSize: '11px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '8px' }}>
               Enter Password
             </label>
             <input
@@ -79,7 +79,7 @@ function ProfessorModal({ onClose }) {
               placeholder="••••••••••"
               autoFocus
               className="w-full px-4 py-3 rounded-xl outline-none mb-3"
-              style={{ background: '#0A1F3D', border: `1px solid ${error ? '#DC2626' : 'rgba(255,255,255,0.1)'}`, color: '#FFFFFF', fontSize: '16px', caretColor: '#E9B753' }}
+              style={{ background: '#F5F0E8', border: `1px solid ${error ? '#DC2626' : 'rgba(7,60,119,0.15)'}`, color: '#073C77', fontSize: '16px', caretColor: '#E9B753' }}
             />
             {error && <p style={{ color: '#DC2626', fontSize: '12px', marginBottom: '8px' }}>{error}</p>}
             <button
@@ -101,23 +101,23 @@ function DaysUntilCard() {
   const diff = Math.ceil((new Date('2026-04-27T00:00:00') - new Date()) / (1000 * 60 * 60 * 24));
   if (diff <= 0) return null;
   return (
-    <div className="flex-1 rounded-2xl p-4 flex flex-col items-center justify-center" style={{ background: '#0F2B52', border: '1px solid rgba(233,183,83,0.2)' }}>
-      <p style={{ color: '#D2AF7D', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>Days Until Trip</p>
+    <div className="flex-1 rounded-2xl p-4 flex flex-col items-center justify-center" style={{ background: '#F5F0E8', border: '1px solid rgba(233,183,83,0.2)' }}>
+      <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>Days Until Trip</p>
       <p style={{ color: '#E9B753', fontSize: '42px', fontWeight: 800, lineHeight: 1, margin: 0 }}>{diff}</p>
-      <p style={{ color: '#D2AF7D', fontSize: '11px', marginTop: '4px' }}>Apr 27, 2026</p>
+      <p style={{ color: '#A3876F', fontSize: '11px', marginTop: '4px' }}>Apr 27, 2026</p>
     </div>
   );
 }
 
 function DayProgressCard({ dayNumber }) {
   return (
-    <div className="flex-1 rounded-2xl p-4" style={{ background: '#0F2B52', border: '1px solid rgba(233,183,83,0.2)' }}>
-      <p style={{ color: '#D2AF7D', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>Trip Progress</p>
-      <p style={{ color: '#FFFFFF', fontSize: '28px', fontWeight: 800, lineHeight: 1, margin: 0 }}>
+    <div className="flex-1 rounded-2xl p-4" style={{ background: '#F5F0E8', border: '1px solid rgba(233,183,83,0.2)' }}>
+      <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>Trip Progress</p>
+      <p style={{ color: '#073C77', fontSize: '28px', fontWeight: 800, lineHeight: 1, margin: 0 }}>
         Day <span style={{ color: '#E9B753' }}>{dayNumber}</span>
-        <span style={{ color: '#D2AF7D', fontSize: '16px' }}> / {TOTAL_DAYS}</span>
+        <span style={{ color: '#A3876F', fontSize: '16px' }}> / {TOTAL_DAYS}</span>
       </p>
-      <div style={{ background: 'rgba(255,255,255,0.1)', borderRadius: '4px', height: '4px', marginTop: '10px', overflow: 'hidden' }}>
+      <div style={{ background: 'rgba(7,60,119,0.1)', borderRadius: '4px', height: '4px', marginTop: '10px', overflow: 'hidden' }}>
         <div style={{ background: 'linear-gradient(90deg, #E9B753, #F0D080)', height: '100%', width: `${(dayNumber / TOTAL_DAYS) * 100}%`, borderRadius: '4px', transition: 'width 0.5s' }} />
       </div>
     </div>
@@ -148,13 +148,13 @@ function WeatherClock({ city, timezone }) {
   }, [city]);
 
   return (
-    <div className="mx-4 mb-4 rounded-2xl overflow-hidden flex" style={{ background: '#0F2B52', border: '1px solid rgba(255,255,255,0.06)' }}>
-      <div className="flex-1 p-4" style={{ borderRight: '1px solid rgba(255,255,255,0.08)' }}>
-        <p style={{ color: '#D2AF7D', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>Weather</p>
-        <p style={{ color: '#FFFFFF', fontSize: '14px', fontWeight: 500, margin: 0 }}>{weather || '...'}</p>
+    <div className="mx-4 mb-4 rounded-2xl overflow-hidden flex" style={{ background: '#F5F0E8', border: '1px solid rgba(7,60,119,0.08)' }}>
+      <div className="flex-1 p-4" style={{ borderRight: '1px solid rgba(7,60,119,0.08)' }}>
+        <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>Weather</p>
+        <p style={{ color: '#073C77', fontSize: '14px', fontWeight: 500, margin: 0 }}>{weather || '...'}</p>
       </div>
       <div className="flex-1 p-4 flex flex-col items-end">
-        <p style={{ color: '#D2AF7D', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>Local Time</p>
+        <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '6px' }}>Local Time</p>
         <p style={{ color: '#E9B753', fontSize: '18px', fontWeight: 700, fontVariantNumeric: 'tabular-nums', margin: 0 }}>{time}</p>
       </div>
     </div>
@@ -164,10 +164,10 @@ function WeatherClock({ city, timezone }) {
 function NextUpCard({ activity }) {
   if (!activity) return null;
   return (
-    <div className="mx-4 mb-4 rounded-2xl p-4" style={{ background: '#0F2B52', border: '2px solid #E9B753' }}>
+    <div className="mx-4 mb-4 rounded-2xl p-4" style={{ background: '#F5F0E8', border: '2px solid #E9B753' }}>
       <p style={{ color: '#E9B753', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: '8px' }}>Next Up</p>
-      <p style={{ color: '#FFFFFF', fontSize: '20px', fontWeight: 700, margin: '0 0 4px' }}>{activity.title}</p>
-      <p style={{ color: '#D2AF7D', fontSize: '13px', margin: '0 0 12px' }}>
+      <p style={{ color: '#073C77', fontSize: '20px', fontWeight: 700, margin: '0 0 4px' }}>{activity.title}</p>
+      <p style={{ color: '#A3876F', fontSize: '13px', margin: '0 0 12px' }}>
         {activity.time}{activity.location ? ` · ${activity.location}` : ''}
       </p>
       {activity.mapsUrl && (
@@ -191,11 +191,11 @@ function FunFactCard({ fact, dayId, onSave }) {
   const handleCancel = () => { setDraft(fact); setEditing(false); };
 
   return (
-    <div className="mx-4 mb-4 rounded-2xl p-4 flex gap-3" style={{ background: '#0F2B52', border: '1px solid rgba(255,255,255,0.06)' }}>
+    <div className="mx-4 mb-4 rounded-2xl p-4 flex gap-3" style={{ background: '#F5F0E8', border: '1px solid rgba(7,60,119,0.08)' }}>
       <span style={{ fontSize: '24px', lineHeight: '1.4' }}>💡</span>
       <div style={{ flex: 1 }}>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '6px' }}>
-          <p style={{ color: '#D2AF7D', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', margin: 0 }}>Fun Fact</p>
+          <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', margin: 0 }}>Fun Fact</p>
           {professorMode && !editing && (
             <button onClick={() => { setDraft(fact); setEditing(true); }}
                     style={{ color: '#E9B753', background: 'none', border: 'none', cursor: 'pointer', padding: '2px', display: 'flex' }}>
@@ -212,15 +212,15 @@ function FunFactCard({ fact, dayId, onSave }) {
               value={draft}
               onChange={e => setDraft(e.target.value)}
               autoFocus
-              style={{ width: '100%', boxSizing: 'border-box', background: '#0A1F3D', border: '1px solid rgba(233,183,83,0.4)', borderRadius: '8px', color: '#FFFFFF', fontSize: '14px', lineHeight: 1.6, padding: '8px', resize: 'vertical', minHeight: '80px', outline: 'none', caretColor: '#E9B753', fontFamily: 'inherit' }}
+              style={{ width: '100%', boxSizing: 'border-box', background: '#FFFFFF', border: '1px solid rgba(7,60,119,0.2)', borderRadius: '8px', color: '#073C77', fontSize: '14px', lineHeight: 1.6, padding: '8px', resize: 'vertical', minHeight: '80px', outline: 'none', caretColor: '#E9B753', fontFamily: 'inherit' }}
             />
             <div style={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
               <button onClick={handleSave} style={{ flex: 1, padding: '8px', borderRadius: '8px', background: '#E9B753', color: '#073C77', fontWeight: 700, fontSize: '13px', border: 'none', cursor: 'pointer' }}>Save</button>
-              <button onClick={handleCancel} style={{ flex: 1, padding: '8px', borderRadius: '8px', background: 'rgba(255,255,255,0.08)', color: '#D2AF7D', fontSize: '13px', border: 'none', cursor: 'pointer' }}>Cancel</button>
+              <button onClick={handleCancel} style={{ flex: 1, padding: '8px', borderRadius: '8px', background: 'rgba(7,60,119,0.08)', color: '#A3876F', fontSize: '13px', border: 'none', cursor: 'pointer' }}>Cancel</button>
             </div>
           </>
         ) : (
-          <p style={{ color: '#FFFFFF', fontSize: '14px', lineHeight: 1.6, margin: 0 }}>{fact}</p>
+          <p style={{ color: '#073C77', fontSize: '14px', lineHeight: 1.6, margin: 0 }}>{fact}</p>
         )}
       </div>
     </div>
@@ -272,8 +272,8 @@ export default function Home() {
         </div>
       )}
 
-      {/* Scroll container — no padding-bottom (iOS Safari bug); spacer at bottom instead */}
-      <div className="overflow-y-auto h-full">
+      {/* Scroll container */}
+      <div className="overflow-y-auto h-full" style={{ background: '#FFFFFF' }}>
 
         {/* Hero + professor toggle button overlaid */}
         <div style={{ position: 'relative' }}>
@@ -314,11 +314,11 @@ export default function Home() {
           {preTrip && daysUntil > 0 && <DaysUntilCard />}
           {dayNumber && <DayProgressCard dayNumber={dayNumber} />}
           {(preTrip || dayNumber) && dayData && (
-            <div className="flex-1 rounded-2xl p-4 flex flex-col justify-between" style={{ background: '#0F2B52', border: '1px solid rgba(255,255,255,0.06)' }}>
-              <p style={{ color: '#D2AF7D', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>Today</p>
+            <div className="flex-1 rounded-2xl p-4 flex flex-col justify-between" style={{ background: '#F5F0E8', border: '1px solid rgba(7,60,119,0.06)' }}>
+              <p style={{ color: '#A3876F', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '4px' }}>Today</p>
               <div>
-                <p style={{ color: '#FFFFFF', fontSize: '16px', fontWeight: 700, margin: 0 }}>{dayData.city}</p>
-                <p style={{ color: '#D2AF7D', fontSize: '12px', margin: '2px 0 0' }}>{dayData.country}</p>
+                <p style={{ color: '#073C77', fontSize: '16px', fontWeight: 700, margin: 0 }}>{dayData.city}</p>
+                <p style={{ color: '#A3876F', fontSize: '12px', margin: '2px 0 0' }}>{dayData.country}</p>
               </div>
             </div>
           )}
@@ -328,7 +328,7 @@ export default function Home() {
         {nextActivity && <NextUpCard activity={nextActivity} />}
 
         {dayActivities.length > 0 && (
-          <div className="mx-4 mb-4 rounded-2xl p-4" style={{ background: '#0F2B52', border: '1px solid rgba(255,255,255,0.06)' }}>
+          <div className="mx-4 mb-4 rounded-2xl p-4" style={{ background: '#F5F0E8', border: '1px solid rgba(7,60,119,0.06)' }}>
             <p style={{ color: '#E9B753', fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '12px' }}>Today's Full Schedule</p>
             {dayActivities.map(a => <ActivityCard key={a.id} activity={a} compact />)}
           </div>
@@ -337,7 +337,7 @@ export default function Home() {
         <FunFactCard fact={fact} dayId={displayDay} onSave={saveFunFact} />
         <QuoteCard quote={quote} />
 
-        {/* Explicit bottom spacer — avoids iOS Safari padding-bottom bug in overflow:auto */}
+        {/* Explicit bottom spacer */}
         <div style={{ height: 'calc(4rem + env(safe-area-inset-bottom) + 16px)' }} />
       </div>
 
