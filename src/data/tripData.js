@@ -277,3 +277,69 @@ export const emergencyContacts = [
 export const announcements = [
   { id: 1, message: 'Welcome to the BYU Europe Trip app! Check the Itinerary tab each morning for the day\'s schedule.', emoji: '👋', active: false, createdAt: '2026-04-27' },
 ];
+
+// ─── Constants ────────────────────────────────────────────────────────────────
+
+export const TRIP_START = '2026-04-27';
+export const TOTAL_DAYS = 23;
+export const PROFESSOR_PASSWORD = 'BYU2026prof';
+
+export const CATEGORY_COLORS = {
+  'Company Visit': '#1E3A5F',
+  'Cultural':      '#C9A84C',
+  'Food':          '#2D6A4F',
+  'Transport':     '#3A3A4A',
+  'Free Time':     '#1A4A6B',
+  'Accommodation': '#4A1A6B',
+};
+
+// ─── Utility functions ────────────────────────────────────────────────────────
+
+export const getTodayDayNumber = () => {
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const start = new Date(TRIP_START);
+  start.setHours(0, 0, 0, 0);
+  const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24)) + 1;
+  if (diff < 1) return null;
+  if (diff > TOTAL_DAYS) return null;
+  return diff;
+};
+
+export const getDayData = (dayId) => days.find(d => d.id === dayId) || days[0];
+
+export const getActivitiesForDay = (dayId, isProf = false) => {
+  const acts = activities.filter(a => a.dayId === dayId);
+  return isProf ? acts : acts.filter(a => a.showStudents !== false);
+};
+
+export const getNextActivity = (dayId, isProf = false) => {
+  const now = new Date();
+  const todayActs = getActivitiesForDay(dayId, isProf);
+  return todayActs.find(a => {
+    const [h, m] = a.time.split(':').map(Number);
+    const actTime = new Date();
+    actTime.setHours(h, m, 0, 0);
+    return actTime > now;
+  }) || todayActs[todayActs.length - 1];
+};
+
+export const getQuoteForDay = (dayId) => {
+  const q = quotes.find(q => q.dayId === dayId);
+  return q ? q.text : '';
+};
+
+export const getFunFactForDay = (dayId) => {
+  const f = funFacts.find(f => f.dayId === dayId);
+  return f ? f.text : '';
+};
+
+export const formatDate = (dateStr) => {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+};
+
+export const formatShortDate = (dateStr) => {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
