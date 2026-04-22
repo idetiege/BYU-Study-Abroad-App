@@ -1,6 +1,6 @@
 import { useState, useRef } from 'react';
 import DayTabBar from './DayTabBar';
-import ActivityCard from './ActivityCard';
+import DayTimeline from './DayTimeline';
 import { getTodayDayNumber, getDayData, getActivitiesForDay, days } from '../data/tripData';
 import { useAppContext } from '../App';
 
@@ -127,38 +127,23 @@ export default function Itinerary() {
       {/* 2. Day tab bar */}
       <DayTabBar selectedDay={selectedDay} onSelect={handleSelectDay} />
 
-      {/* 3. Activity list — swipe here to change day */}
+      {/* 3. Timeline — swipe gesture wrapper keeps day-swipe working */}
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        style={{ flex: 1, overflowY: 'auto', background: '#FFFFFF', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}
+        style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
       >
-        {/* Packed lunch banners */}
-        {dayData?.packedLunch && (
-          <div style={{ margin: '12px 16px 0', borderRadius: '12px', padding: '12px 14px', background: '#E9B753', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-            <span style={{ fontSize: '20px', lineHeight: 1 }}>🥪</span>
-            <p style={{ margin: 0, color: '#1A0E00', fontSize: '14px', fontWeight: 600, lineHeight: 1.4 }}>
-              Bring a packed lunch today — you will be eating on the bus.
-            </p>
-          </div>
-        )}
-        {dayData?.buyLunchTonight && (
-          <div style={{ margin: '12px 16px 0', borderRadius: '12px', padding: '12px 14px', background: '#E9B753', display: 'flex', alignItems: 'flex-start', gap: '10px' }}>
-            <span style={{ fontSize: '20px', lineHeight: 1 }}>🛒</span>
-            <p style={{ margin: 0, color: '#1A0E00', fontSize: '14px', fontWeight: 600, lineHeight: 1.4 }}>
-              Buy tomorrow's packed lunch tonight before bed.
-            </p>
-          </div>
-        )}
-
         {activities.length === 0 ? (
           <p style={{ color: '#A3876F', textAlign: 'center', marginTop: '40px', fontSize: '14px' }}>
             No activities scheduled.
           </p>
         ) : (
-          <div style={{ padding: '12px 16px 0' }}>
-            {activities.map(a => <ActivityCard key={a.id} activity={a} />)}
-          </div>
+          <DayTimeline
+            key={selectedDay}
+            activities={activities}
+            dayData={dayData}
+            isToday={selectedDay === todayDay}
+          />
         )}
       </div>
     </div>
