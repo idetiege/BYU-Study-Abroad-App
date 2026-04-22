@@ -1,217 +1,211 @@
-// BYU Europe Study Abroad 2026 — Trip Data
-// Last updated: April 2026
-
-export const TRIP_START = '2026-04-27';
-export const TRIP_END = '2026-05-19';
-export const TOTAL_DAYS = 23;
+// BYU Europe Study Abroad 2026 — Trip Data v2
+// Updated with full schedule, curfews, transport notes, buy-lunch flags
 
 export const PROFESSOR_EMAILS = ['isaacjdet@gmail.com'];
-export const PROFESSOR_PASSWORD = 'BYUEUROPE26';
-
-export const CATEGORY_COLORS = {
-  'Company Visit': '#1E3A5F',
-  'Cultural':      '#C9A84C',
-  'Food':          '#2D6A4F',
-  'Transport':     '#3A3A4A',
-  'Free Time':     '#1A4A6B',
-  'Accommodation': '#4A1A6B',
-};
 
 export const days = [
-  { id: 1,  date: '2026-04-27', city: 'Provo',          country: 'USA',        phase: 'Workshop', summary: 'Kickoff Dinner at Dr. Mattson\'s house — the adventure begins',                                                                                timezone: 'America/Denver' },
-  { id: 2,  date: '2026-04-28', city: 'Provo',          country: 'USA',        phase: 'Workshop', summary: 'Workshop day — culture briefing with Malcolm Botto and safety briefing',                                                                       timezone: 'America/Denver' },
-  { id: 3,  date: '2026-04-29', city: 'Provo',          country: 'USA',        phase: 'Workshop', summary: 'Workshop + company visits to Hall Labs and Vanderhall',                                                                                        timezone: 'America/Denver', packedLunch: false },
-  { id: 4,  date: '2026-04-30', city: 'Provo',          country: 'USA',        phase: 'Workshop', summary: 'Final workshop day — Rocketship, Amano, and Blendtec visits',                                                                                  timezone: 'America/Denver', packedLunch: true },
-  { id: 5,  date: '2026-05-01', city: 'Salt Lake City', country: 'USA',        phase: 'Travel',   summary: 'Departure day — fly to Amsterdam via Delta DL56. Bring your own lunch for the journey.',                                                       timezone: 'America/Denver', packedLunch: true },
-  { id: 6,  date: '2026-05-02', city: 'Venice',         country: 'Italy',      phase: 'Europe',   summary: 'Arrival in Venice — Da Vinci Museum, gondola ride, Rialto Bridge sunset',                                                                      timezone: 'Europe/Rome' },
-  { id: 7,  date: '2026-05-03', city: 'Venice',         country: 'Italy',      phase: 'Europe',   summary: 'Church in Mestre, Saint Mark\'s Basilica, Bell Tower, Vivaldi concert',                                                                        timezone: 'Europe/Rome' },
-  { id: 8,  date: '2026-05-04', city: 'Venice',         country: 'Italy',      phase: 'Europe',   summary: 'Company visits in Venice, drive to Ljubljana via Trieste and Miramare Castle',                                                                 timezone: 'Europe/Rome' },
-  { id: 9,  date: '2026-05-05', city: 'Ljubljana',      country: 'Slovenia',   phase: 'Europe',   summary: 'ELAN factory visit, Lake Bled hike and island, Ljubljana castle and bridges, dinner at Figovec',                                               timezone: 'Europe/Ljubljana' },
-  { id: 10, date: '2026-05-06', city: 'Zagreb',         country: 'Croatia',    phase: 'Europe',   summary: 'SMM company visit in Maribor, Trakošćan Castle, drive to Zagreb — buy lunch for tomorrow',                                                     timezone: 'Europe/Zagreb',    packedLunch: false, buyLunchTonight: true },
-  { id: 11, date: '2026-05-07', city: 'Zagreb',         country: 'Croatia',    phase: 'Europe',   summary: 'Rimac + Intis Engineering visits, Končar Group tour, Nikola Tesla Museum, group dinner — buy lunch for tomorrow',                              timezone: 'Europe/Zagreb',    packedLunch: true,  buyLunchTonight: true },
-  { id: 12, date: '2026-05-08', city: 'Sarajevo',       country: 'Bosnia',     phase: 'Europe',   summary: 'HSTec visit in Zadar, Split and Diocletian\'s Palace, Kravica Waterfalls, drive to Sarajevo',                                                  timezone: 'Europe/Sarajevo',  packedLunch: true },
-  { id: 13, date: '2026-05-09', city: 'Sarajevo',       country: 'Bosnia',     phase: 'Europe',   summary: 'Cable car, Assassination Site, War Childhood Museum, Baščaršija, Yellow Fortress at sunset',                                                   timezone: 'Europe/Sarajevo' },
-  { id: 14, date: '2026-05-10', city: 'Sarajevo',       country: 'Bosnia',     phase: 'Europe',   summary: 'Church, Sacred Heart Cathedral, War Tunnel Museum, group dinner — buy lunch for tomorrow',                                                     timezone: 'Europe/Sarajevo',  buyLunchTonight: true },
-  { id: 15, date: '2026-05-11', city: 'Sarajevo',       country: 'Bosnia',     phase: 'Europe',   summary: 'Kinetic company visit, AVDIC Violins, third company visit in Sarajevo — early to bed',                                                         timezone: 'Europe/Sarajevo',  packedLunch: true,  buyLunchTonight: true },
-  { id: 16, date: '2026-05-12', city: 'Kotor',          country: 'Montenegro', phase: 'Europe',   summary: 'Aluminij visit in Mostar, cultural stop in Dubrovnik, Adriatic 42 in Bijela, St. John Fortress hike at night in Kotor',                       timezone: 'Europe/Podgorica', packedLunch: true },
-  { id: 17, date: '2026-05-13', city: 'Tirana',         country: 'Albania',    phase: 'Europe',   summary: 'Daido Metal visit, drive to Tirana, Skanderbeg Square, Bunk\'Art 2, Et\'hem Bey Mosque, group dinner',                                         timezone: 'Europe/Tirane' },
-  { id: 18, date: '2026-05-14', city: 'Tirana',         country: 'Albania',    phase: 'Europe',   summary: 'Timak and Everest SHPK company visits, fly to Athens',                                                                                         timezone: 'Europe/Tirane' },
-  { id: 19, date: '2026-05-15', city: 'Athens',         country: 'Greece',     phase: 'Europe',   summary: 'Elefsis Shipyards and Askra Olive Oil company visits',                                                                                         timezone: 'Europe/Athens' },
-  { id: 20, date: '2026-05-16', city: 'Athens',         country: 'Greece',     phase: 'Europe',   summary: 'Acropolis Museum, Acropolis, lunch, Ancient Agora, team presentations, dinner at Hill Athens',                                                 timezone: 'Europe/Athens' },
-  { id: 21, date: '2026-05-17', city: 'Athens',         country: 'Greece',     phase: 'Europe',   summary: 'Church in Halandri, Lycabettus Hill, Monastiraki Flea Market',                                                                                 timezone: 'Europe/Athens' },
-  { id: 22, date: '2026-05-18', city: 'Athens',         country: 'Greece',     phase: 'Europe',   summary: 'Get 3D and Skaramangas Shipyards visits, group final dinner',                                                                                  timezone: 'Europe/Athens' },
-  { id: 23, date: '2026-05-19', city: 'Athens',         country: 'Greece',     phase: 'Europe',   summary: 'Fly home to Utah — safe travels!',                                                                                                             timezone: 'Europe/Athens' },
+  { id: 1, date: '2026-04-27', city: 'Provo', country: 'USA', phase: 'Workshop', summary: 'Kickoff Dinner at Dr. Mattson\'s house — the adventure begins', timezone: 'America/Denver' },
+  { id: 2, date: '2026-04-28', city: 'Provo', country: 'USA', phase: 'Workshop', summary: 'Workshop day — culture briefing with Malcolm Botto and safety briefing with Olivia Toone', timezone: 'America/Denver' },
+  { id: 3, date: '2026-04-29', city: 'Provo', country: 'USA', phase: 'Workshop', summary: 'Workshop + company visits to Hall Labs and Vanderhall', timezone: 'America/Denver' },
+  { id: 4, date: '2026-04-30', city: 'Provo', country: 'USA', phase: 'Workshop', summary: 'Final workshop day — Rocketship, Amano, and Blendtec visits. Bring your own lunch.', timezone: 'America/Denver', packedLunch: true },
+  { id: 5, date: '2026-05-01', city: 'Salt Lake City', country: 'USA', phase: 'Travel', summary: 'Departure day — fly SLC to Amsterdam overnight via Delta DL56. Bring your own lunch.', timezone: 'America/Denver', packedLunch: true },
+  { id: 6, date: '2026-05-02', city: 'Venice', country: 'Italy', phase: 'Europe', summary: 'Arrival in Venice — Da Vinci Museum, gondola ride, Rialto Bridge sunset. Curfew 10:30 PM.', timezone: 'Europe/Rome' },
+  { id: 7, date: '2026-05-03', city: 'Venice', country: 'Italy', phase: 'Europe', summary: 'Church in Mestre, Saint Mark\'s Basilica, Bell Tower, Vivaldi concert. Curfew 10:30 PM.', timezone: 'Europe/Rome' },
+  { id: 8, date: '2026-05-04', city: 'Venice', country: 'Italy', phase: 'Europe', summary: 'Company visits — AAV Barbini Mirrors + Tessitura Bevilacqua, drive to Ljubljana via Miramare Castle. Buy lunch for tomorrow.', timezone: 'Europe/Rome', buyLunchTonight: true },
+  { id: 9, date: '2026-05-05', city: 'Ljubljana', country: 'Slovenia', phase: 'Europe', summary: 'ELAN factory visit, Lake Bled hike and island, Ljubljana castle walk, free time. Curfew 10:30 PM.', timezone: 'Europe/Ljubljana', packedLunch: true },
+  { id: 10, date: '2026-05-06', city: 'Zagreb', country: 'Croatia', phase: 'Europe', summary: 'SMM Maribor visit, Trakošćan Castle, drive to Zagreb, evening cultural walk. Buy lunch for tomorrow.', timezone: 'Europe/Zagreb', buyLunchTonight: true },
+  { id: 11, date: '2026-05-07', city: 'Zagreb', country: 'Croatia', phase: 'Europe', summary: 'Intis Engineering + Končar Group visits, Nikola Tesla Museum, group dinner at La Štruk. Buy lunch for tomorrow.', timezone: 'Europe/Zagreb', packedLunch: true, buyLunchTonight: true },
+  { id: 12, date: '2026-05-08', city: 'Sarajevo', country: 'Bosnia', phase: 'Europe', summary: 'HSTec Zadar, Split beach + Diocletian\'s Palace, Kravica Waterfalls, late drive to Sarajevo. Long day 10+ hours.', timezone: 'Europe/Sarajevo', packedLunch: true },
+  { id: 13, date: '2026-05-09', city: 'Sarajevo', country: 'Bosnia', phase: 'Europe', summary: 'Cable car, Assassination Site, Baščaršija bazaar, free afternoon, Yellow Fortress at sunset.', timezone: 'Europe/Sarajevo' },
+  { id: 14, date: '2026-05-10', city: 'Sarajevo', country: 'Bosnia', phase: 'Europe', summary: 'Church, War Tunnel Museum, free time for museums, group dinner. Buy lunch for tomorrow.', timezone: 'Europe/Sarajevo', buyLunchTonight: true },
+  { id: 15, date: '2026-05-11', city: 'Sarajevo', country: 'Bosnia', phase: 'Europe', summary: 'Kinetic visit, AVDIC Violins, third company visit. Early to bed. Buy lunch for tomorrow.', timezone: 'Europe/Sarajevo', packedLunch: true, buyLunchTonight: true },
+  { id: 16, date: '2026-05-12', city: 'Kotor', country: 'Montenegro', phase: 'Europe', summary: 'Aluminij Mostar, Dubrovnik stop, Adriatic 42 Bijela, St. John Fortress night hike in Kotor. 10+ hour day.', timezone: 'Europe/Podgorica', packedLunch: true },
+  { id: 17, date: '2026-05-13', city: 'Tirana', country: 'Albania', phase: 'Europe', summary: 'Daido Metal visit, drive to Tirana, Albanian Night dinner show, Skanderbeg Square.', timezone: 'Europe/Tirane' },
+  { id: 18, date: '2026-05-14', city: 'Tirana', country: 'Albania', phase: 'Europe', summary: 'Timak + Everest SHPK company visits, fly to Athens.', timezone: 'Europe/Tirane' },
+  { id: 19, date: '2026-05-15', city: 'Athens', country: 'Greece', phase: 'Europe', summary: 'Elefsis Shipyards, Askra Olive Oil, Hill Athens dinner.', timezone: 'Europe/Athens' },
+  { id: 20, date: '2026-05-16', city: 'Athens', country: 'Greece', phase: 'Europe', summary: 'Acropolis Museum, Acropolis, lunch, boat tour, team presentations, free time.', timezone: 'Europe/Athens' },
+  { id: 21, date: '2026-05-17', city: 'Athens', country: 'Greece', phase: 'Europe', summary: 'Church in Halandri, Lycabettus Hill funicular, Monastiraki Flea Market.', timezone: 'Europe/Athens' },
+  { id: 22, date: '2026-05-18', city: 'Athens', country: 'Greece', phase: 'Europe', summary: 'Get 3D + Skaramangas Shipyards visits, group final dinner.', timezone: 'Europe/Athens' },
+  { id: 23, date: '2026-05-19', city: 'Athens', country: 'Greece', phase: 'Europe', summary: 'Fly home to Utah — safe travels!', timezone: 'Europe/Athens' },
 ];
 
-// showStudents: true = visible to all, false = professor/admin only
 export const activities = [
 
-  // ─── DAY 1 — April 27, Provo ───
-  { id: 1,   dayId: 1,  time: '6:00 PM',   title: 'Kickoff Dinner',                          category: 'Food',         location: 'Mattson\'s House',                         mapsUrl: '',                                                                  cost: 0,  notes: 'Dress nicely. The adventure starts here!',                                                                                                         showStudents: true },
+  // ─── DAY 1 — April 27 ───
+  { id: 1, dayId: 1, time: '18:00', title: 'Kickoff Dinner', category: 'Food', location: 'Mattson\'s House, 1101 Elm Ave, Provo', mapsUrl: '', notes: 'Dress nicely. The adventure starts here!', showStudents: true },
 
-  // ─── DAY 2 — April 28, Provo ───
-  { id: 2,   dayId: 2,  time: '8:00 AM',   title: 'Morning Workshop',                        category: 'Company Visit', location: 'EB Event Space',                          mapsUrl: '',                                                                  cost: 0,  notes: 'Dr. Mattson and Dr. Salmon. Runs until noon.',                                                                                                      showStudents: true },
-  { id: 3,   dayId: 2,  time: '12:00 PM',  title: 'Lunch',                                   category: 'Food',         location: 'EB Event Space',                          mapsUrl: '',                                                                  cost: 0,  notes: 'Blue Ribbon Box Lunch provided.',                                                                                                                   showStudents: true },
-  { id: 4,   dayId: 2,  time: '12:00 PM',  title: 'Culture Briefing',                        category: 'Cultural',     location: 'EB Event Space',                          mapsUrl: '',                                                                  cost: 0,  notes: 'Malcolm Botto — what to expect across Europe.',                                                                                                     showStudents: true },
-  { id: 5,   dayId: 2,  time: '1:00 PM',   title: 'Safety Briefing',                         category: 'Cultural',     location: 'EB Event Space',                          mapsUrl: '',                                                                  cost: 0,  notes: 'Olivia Toone — travel safety protocols.',                                                                                                           showStudents: true },
-  { id: 6,   dayId: 2,  time: '2:00 PM',   title: 'Afternoon Workshop',                      category: 'Company Visit', location: 'EB Event Space',                          mapsUrl: '',                                                                  cost: 0,  notes: 'Dr. Mattson and Dr. Salmon. Runs until 5 PM.',                                                                                                      showStudents: true },
+  // ─── DAY 2 — April 28 ───
+  { id: 2, dayId: 2, time: '08:00', title: 'Morning Workshop', category: 'Company Visit', location: 'EB Event Space', mapsUrl: '', notes: 'Dr. Mattson and Dr. Salmon. Runs until noon.', showStudents: true },
+  { id: 3, dayId: 2, time: '12:00', title: 'Lunch', category: 'Food', location: 'EB Event Space', mapsUrl: '', notes: 'Blue Ribbon Box Lunch provided.', showStudents: true },
+  { id: 4, dayId: 2, time: '12:00', title: 'Culture Briefing', category: 'Cultural', location: 'EB Event Space', mapsUrl: '', notes: 'Malcolm Botto — cultural expectations across Europe.', showStudents: true },
+  { id: 5, dayId: 2, time: '13:00', title: 'Safety Briefing', category: 'Cultural', location: 'EB Event Space', mapsUrl: '', notes: 'Olivia Toone — travel safety protocols.', showStudents: true },
+  { id: 6, dayId: 2, time: '14:00', title: 'Afternoon Workshop', category: 'Company Visit', location: 'EB Event Space', mapsUrl: '', notes: 'Dr. Mattson and Dr. Salmon. Runs until 5 PM.', showStudents: true },
 
-  // ─── DAY 3 — April 29, Provo ───
-  { id: 7,   dayId: 3,  time: '8:00 AM',   title: 'Morning Workshop',                        category: 'Company Visit', location: 'EB Event Space',                          mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 8,   dayId: 3,  time: '12:15 PM',  title: 'Lunch at Sportellis',                     category: 'Food',         location: 'Sportellis, Provo',                        mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 9,   dayId: 3,  time: '1:30 PM',   title: 'Hall Labs Visit',                         category: 'Company Visit', location: 'Hall Labs, Provo',                         mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 10,  dayId: 3,  time: '3:30 PM',   title: 'Vanderhall Visit',                        category: 'Company Visit', location: 'Vanderhall',                               mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
+  // ─── DAY 3 — April 29 ───
+  { id: 7, dayId: 3, time: '08:00', title: 'Morning Workshop', category: 'Company Visit', location: 'EB Event Space', mapsUrl: '', notes: '', showStudents: true },
+  { id: 8, dayId: 3, time: '12:15', title: 'Lunch at Sportellis', category: 'Food', location: 'Sportellis, Provo', mapsUrl: '', notes: 'Travelling by BYU vans.', showStudents: true },
+  { id: 9, dayId: 3, time: '13:30', title: 'Hall Labs Visit', category: 'Company Visit', location: 'Hall Labs, Provo', mapsUrl: '', notes: '', showStudents: true },
+  { id: 10, dayId: 3, time: '15:15', title: 'Vanderhall Visit', category: 'Company Visit', location: 'Vanderhall', mapsUrl: '', notes: '', showStudents: true },
+  { id: 11, dayId: 3, time: '17:30', title: 'Return to BYU', category: 'Transport', location: 'EB East Parking Lot', mapsUrl: '', notes: 'BYU vans.', showStudents: false },
 
-  // ─── DAY 4 — April 30, Provo ───
-  { id: 11,  dayId: 4,  time: '8:00 AM',   title: 'Workshop — The Launch',                   category: 'Company Visit', location: 'HBLL 3714',                                mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 12,  dayId: 4,  time: '9:40 AM',   title: 'Rocketship Visit',                        category: 'Company Visit', location: 'Rocketship, Provo',                         mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 13,  dayId: 4,  time: '12:00 PM',  title: 'Lunch in Pioneer Park',                   category: 'Food',         location: 'Pioneer Park, Provo',                      mapsUrl: '',                                                                  cost: 0,  notes: 'Bring your own lunch.',                                                                                                                             showStudents: true },
-  { id: 14,  dayId: 4,  time: '12:45 PM',  title: 'Amano Chocolate Visit',                   category: 'Company Visit', location: 'Amano, Provo',                              mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 15,  dayId: 4,  time: '2:40 PM',   title: 'Blendtec Visit',                          category: 'Company Visit', location: 'Blendtec, Orem',                            mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
+  // ─── DAY 4 — April 30 ───
+  { id: 12, dayId: 4, time: '08:00', title: 'Workshop — The Launch', category: 'Company Visit', location: 'HBLL 3714', mapsUrl: '', notes: '', showStudents: true },
+  { id: 13, dayId: 4, time: '09:40', title: 'Rocketship Visit', category: 'Company Visit', location: 'Rocketship, Provo', mapsUrl: '', notes: '', showStudents: true },
+  { id: 14, dayId: 4, time: '12:00', title: 'Lunch in Pioneer Park', category: 'Food', location: 'Pioneer Park, Provo', mapsUrl: '', notes: '🥪 Bring your own lunch.', showStudents: true },
+  { id: 15, dayId: 4, time: '12:45', title: 'Amano Chocolate Visit', category: 'Company Visit', location: 'Amano, Provo', mapsUrl: '', notes: '', showStudents: true },
+  { id: 16, dayId: 4, time: '14:40', title: 'Blendtec Visit', category: 'Company Visit', location: 'Blendtec, Orem', mapsUrl: '', notes: '', showStudents: true },
 
-  // ─── DAY 5 — May 1, Salt Lake City ───
-  { id: 16,  dayId: 5,  time: '10:00 AM',  title: 'Final Workshop',                          category: 'Company Visit', location: 'EB East Lawn',                              mapsUrl: '',                                                                  cost: 0,  notes: 'Last session before departure.',                                                                                                                    showStudents: true },
-  { id: 17,  dayId: 5,  time: '11:10 AM',  title: 'UVX to FrontRunner',                      category: 'Transport',    location: 'UVX South Campus',                         mapsUrl: '',                                                                  cost: 0,  notes: 'Departs 11:10 AM sharp — do not be late. Bring your own lunch for the journey.',                                                                    showStudents: true },
-  { id: 18,  dayId: 5,  time: '11:46 AM',  title: 'FrontRunner to SLC Airport',              category: 'Transport',    location: 'Provo Central Station',                    mapsUrl: '',                                                                  cost: 0,  notes: 'Allow time for check-in and security.',                                                                                                             showStudents: false },
-  { id: 19,  dayId: 5,  time: '4:20 PM',   title: 'Fly to Amsterdam',                        category: 'Transport',    location: 'SLC Airport',                              mapsUrl: '',                                                                  cost: 0,  notes: 'Delta flight DL56. Overnight flight — arrives Amsterdam 10:15 AM May 2.',                                                                           showStudents: true },
+  // ─── DAY 5 — May 1 ───
+  { id: 17, dayId: 5, time: '10:00', title: 'Final Workshop', category: 'Company Visit', location: 'EB East Lawn', mapsUrl: '', notes: 'Last session before departure.', showStudents: true },
+  { id: 18, dayId: 5, time: '11:10', title: 'UVX to FrontRunner', category: 'Transport', location: 'UVX South Campus', mapsUrl: '', notes: 'Departs 11:10 AM sharp. 🥪 Bring your own lunch or buy at SLC airport.', showStudents: true },
+  { id: 19, dayId: 5, time: '11:46', title: 'FrontRunner to SLC Airport', category: 'Transport', location: 'Provo Central Station', mapsUrl: '', notes: 'Allow plenty of time for check-in and security.', showStudents: false },
+  { id: 20, dayId: 5, time: '16:20', title: 'Fly to Amsterdam', category: 'Transport', location: 'SLC Airport', mapsUrl: '', notes: 'Delta DL56. Overnight flight — arrives Amsterdam 10:15 AM May 2.', showStudents: true },
 
   // ─── DAY 6 — May 2, Venice ───
-  { id: 20,  dayId: 6,  time: '11:25 AM',  title: 'Fly AMS → Venice',                        category: 'Transport',    location: 'Amsterdam Schiphol Airport',               mapsUrl: '',                                                                  cost: 0,  notes: 'KLM/Delta flight 9223. Arrives Venice 1:10 PM.',                                                                                                    showStudents: true },
-  { id: 21,  dayId: 6,  time: '1:50 PM',   title: 'Transfer to Hotel',                       category: 'Transport',    location: 'VCE Airport',                              mapsUrl: '',                                                                  cost: 0,  notes: 'Take 1:50 PM or 2:20 PM water bus. ~48 min journey.',                                                                                               showStudents: false },
-  { id: 22,  dayId: 6,  time: '3:45 PM',   title: 'Da Vinci Museum',                         category: 'Cultural',     location: 'Campo San Rocco, Venice',                  mapsUrl: 'https://maps.app.goo.gl/teRGpKUw6XaWA7ey6',                         cost: 8,  notes: 'Interactive museum with working replicas of Leonardo\'s machines. Last entry 5:15 PM. Book in advance for group.', lat: 45.4340, lng: 12.3275,                                      showStudents: true },
-  { id: 23,  dayId: 6,  time: '6:15 PM',   title: 'Gondola Ride',                            category: 'Cultural',     location: 'Gondola Station S. Tomà, Venice',           mapsUrl: '',                                                                  cost: 18, notes: '4 gondolas for 17 people. Pre-booked. Daytime rate before 7 PM. ~30 minutes.', lat: 45.4337, lng: 12.3236,                                                                       showStudents: true },
-  { id: 24,  dayId: 6,  time: '7:00 PM',   title: 'Rialto Bridge Sunset',                    category: 'Cultural',     location: 'Ponte di Rialto, Venice',                  mapsUrl: 'https://maps.app.goo.gl/5K3UFmxmi9j8Bocw9',                         cost: 0,  notes: 'Free. Sunset ~7:53 PM in May. Golden hour views over the Grand Canal.', lat: 45.4380, lng: 12.3359,                                                                              showStudents: true },
-  { id: 25,  dayId: 6,  time: '7:30 PM',   title: 'Free Time + Dinner',                      category: 'Free Time',    location: 'Venice',                                   mapsUrl: '',                                                                  cost: 0,  notes: 'Explore the city and find dinner on your own.',                                                                                                     showStudents: true },
+  { id: 21, dayId: 6, time: '11:25', title: 'Fly AMS → Venice', category: 'Transport', location: 'Amsterdam Schiphol Airport', mapsUrl: '', notes: 'KLM/Delta flight 9223. Arrives Venice 1:10 PM.', showStudents: true },
+  { id: 22, dayId: 6, time: '13:50', title: 'Alilaguna Blue Line to Hotel', category: 'Transport', location: 'VCE Airport → Hotel', mapsUrl: '', notes: 'Take 1:50 PM or 2:20 PM water bus. ~48 min journey.', showStudents: false },
+  { id: 23, dayId: 6, time: '15:45', title: 'Da Vinci Museum', category: 'Cultural', location: 'Campo S. Rocco 3052, Venice', mapsUrl: 'https://maps.app.goo.gl/JFge2Yfk8RZip1HK9', notes: 'Tickets pre-purchased online (two transactions). Last entry 5:15 PM.', showStudents: true },
+  { id: 24, dayId: 6, time: '18:15', title: 'Gondola Ride', category: 'Cultural', location: 'Gondola Station S. Tomà, Venice', mapsUrl: 'https://maps.app.goo.gl/a5dg5AKaJ1CHYJ2t7', notes: '4 gondolas pre-booked. 30 min ride. Pay on site.', showStudents: true },
+  { id: 25, dayId: 6, time: '19:15', title: 'Rialto Bridge Sunset', category: 'Cultural', location: 'Ponte di Rialto, Venice', mapsUrl: 'https://maps.app.goo.gl/5K3UFmxmi9j8Bocw9', notes: 'Free. Sunset ~7:53 PM in May.', showStudents: true },
+  { id: 26, dayId: 6, time: '20:00', title: 'Free Time + Dinner', category: 'Free Time', location: 'Venice', mapsUrl: '', notes: 'Find dinner on your own. Explore the canals.', showStudents: true },
+  { id: 27, dayId: 6, time: '22:30', title: 'Curfew', category: 'Accommodation', location: 'Casa Cardinal Piazza (Monastery), Cannaregio 3539/a', mapsUrl: '', notes: 'Be back at the hotel by 10:30 PM.', showStudents: true },
 
   // ─── DAY 7 — May 3, Venice ───
-  { id: 26,  dayId: 7,  time: '8:15 AM',   title: 'Church — Mestre Ward',                    category: 'Cultural',     location: 'Via Castellana 124C, Zelarino, Italy',     mapsUrl: 'https://maps.app.goo.gl/z5D8Q4vySCnJM4KC8',                         cost: 0,  notes: 'Italian language services begin 9:30 AM. Allow travel time.',                                                                                        showStudents: true },
-  { id: 27,  dayId: 7,  time: '1:15 PM',   title: 'Lunch + Free Time',                       category: 'Food',         location: 'Bar Rialto da Lollo, Venice',               mapsUrl: 'https://maps.app.goo.gl/tNrxfjEwxhGrXzKE8',                         cost: 15, notes: '',                                                                                                                                                  showStudents: true },
-  { id: 28,  dayId: 7,  time: '3:00 PM',   title: 'Saint Mark\'s Basilica',                  category: 'Cultural',     location: 'Piazza San Marco, Venice',                 mapsUrl: '',                                                                  cost: 0,  notes: 'Book timed entry in advance — lines can be 2+ hours without booking.', lat: 45.4345, lng: 12.3390,                                                                              showStudents: true },
-  { id: 29,  dayId: 7,  time: '4:00 PM',   title: 'Saint Mark\'s Bell Tower',                category: 'Cultural',     location: 'Saint Mark\'s Campanile, Venice',           mapsUrl: '',                                                                  cost: 5,  notes: 'Elevator available. Stunning 360° views over Venice.', lat: 45.4343, lng: 12.3388,                                                                                             showStudents: true },
-  { id: 30,  dayId: 7,  time: '5:00 PM',   title: 'Free Time',                               category: 'Free Time',    location: 'Venice',                                   mapsUrl: '',                                                                  cost: 0,  notes: 'Wander the streets, find gelato, explore hidden canals.',                                                                                          showStudents: true },
-  { id: 31,  dayId: 7,  time: '8:30 PM',   title: 'Vivaldi Concert',                         category: 'Cultural',     location: 'Scuola Grande San Teodoro, Venice',         mapsUrl: 'https://maps.app.goo.gl/e6TCWaiALrYAu7yQ9',                         cost: 30, notes: 'Live Vivaldi in period costume. Book tickets in advance. Smart casual dress.', lat: 45.4356, lng: 12.3364,                                                                        showStudents: true },
+  { id: 28, dayId: 7, time: '08:15', title: 'Church — Mestre Ward', category: 'Cultural', location: 'Via Castellana 124C, Zelarino', mapsUrl: 'https://maps.app.goo.gl/z5D8Q4vySCnJM4KC8', notes: 'Bishop expecting the group. Italian language services at 9:30 AM. Take boat/bus.', showStudents: true },
+  { id: 29, dayId: 7, time: '12:00', title: 'Transit to Rialto Area', category: 'Transport', location: 'Zelarino → Rialto', mapsUrl: 'https://maps.app.goo.gl/R5zn9ELUWDm9serB8', notes: 'Bus/boat back to Venice.', showStudents: false },
+  { id: 30, dayId: 7, time: '13:15', title: 'Free Time + Lunch', category: 'Free Time', location: 'Bar Rialto da Lollo area, Venice', mapsUrl: 'https://maps.app.goo.gl/tNrxfjEwxhGrXzKE8', notes: 'Lunch on your own. Walk toward Saint Mark\'s.', showStudents: true },
+  { id: 31, dayId: 7, time: '15:00', title: 'Saint Mark\'s Basilica', category: 'Cultural', location: 'Piazza San Marco, Venice', mapsUrl: '', notes: 'Tickets pre-purchased.', showStudents: true },
+  { id: 32, dayId: 7, time: '16:00', title: 'Saint Mark\'s Bell Tower', category: 'Cultural', location: 'Saint Mark\'s Campanile, Venice', mapsUrl: '', notes: 'Tickets pre-purchased. Elevator available. Stunning 360° views.', showStudents: true },
+  { id: 33, dayId: 7, time: '17:00', title: 'Free Time + Dinner', category: 'Free Time', location: 'Venice', mapsUrl: '', notes: 'Walk to Vivaldi venue by 8:00 PM.', showStudents: true },
+  { id: 34, dayId: 7, time: '20:30', title: 'Vivaldi Concert', category: 'Cultural', location: 'Scuola Grande San Teodoro, Venice', mapsUrl: 'https://maps.app.goo.gl/e6TCWaiALrYAu7yQ9', notes: 'Tickets pre-purchased. Smart casual dress.', showStudents: true },
+  { id: 35, dayId: 7, time: '22:30', title: 'Curfew', category: 'Accommodation', location: 'Casa Cardinal Piazza (Monastery)', mapsUrl: 'https://maps.app.goo.gl/HgkAgiYbCXgU4h13A', notes: 'Be back at the hotel by 10:30 PM.', showStudents: true },
 
   // ─── DAY 8 — May 4, Venice → Ljubljana ───
-  { id: 32,  dayId: 8,  time: '9:00 AM',   title: 'Company Visit Venice — AM',               category: 'Company Visit', location: 'Venice',                                   mapsUrl: '',                                                                  cost: 0,  notes: 'John coordinating. Details TBC.',                                                                                                                   showStudents: true },
-  { id: 33,  dayId: 8,  time: '2:00 PM',   title: 'Tessitura Bevilacqua',                    category: 'Company Visit', location: 'Tessitura Bevilacqua, Venice',               mapsUrl: '',                                                                  cost: 0,  notes: 'Historic Venetian textile manufacturer — handwoven velvets on looms since 1875. John coordinating.',                                                  showStudents: true },
-  { id: 34,  dayId: 8,  time: '3:00 PM',   title: 'Drive to Ljubljana via Trieste',          category: 'Transport',    location: 'Venice → Trieste → Ljubljana',              mapsUrl: '',                                                                  cost: 0,  notes: 'Stop at Miramare Castle on the Trieste coast. John coordinating route.',                                                                            showStudents: true },
+  { id: 36, dayId: 8, time: '09:00', title: 'AAV Barbini Venetian Mirrors', category: 'Company Visit', location: 'Calle Dietro Gli Orti 7, Venice (Murano)', mapsUrl: 'https://maps.app.goo.gl/pDtKuBZhCc2yEQMFA', notes: 'Walking/Ferry. Historic Venetian mirror makers.', showStudents: true },
+  { id: 37, dayId: 8, time: '12:00', title: 'Return to Venice + Lunch + Groceries', category: 'Food', location: 'Venice', mapsUrl: '', notes: 'Public transport back. Buy groceries/lunch items for tomorrow.', showStudents: true },
+  { id: 38, dayId: 8, time: '13:30', title: 'Tessitura Bevilacqua', category: 'Company Visit', location: 'Santa Croce 1320, Venice', mapsUrl: '', notes: 'Historic handwoven velvet manufacturer since 1875. Pay on site.', showStudents: true },
+  { id: 39, dayId: 8, time: '15:00', title: 'Return to Hotel + Luggage', category: 'Transport', location: 'Hotel → Tronchetto Bus Station', mapsUrl: 'https://maps.app.goo.gl/aNozdHfzHKp9xSrp7', notes: 'Collect bags and transfer to Tronchetto by water ferry.', showStudents: false },
+  { id: 40, dayId: 8, time: '16:00', title: 'Drive to Miramare Castle, Trieste', category: 'Transport', location: 'Tronchetto → Miramare Castle, Trieste', mapsUrl: 'https://maps.app.goo.gl/m1rqf8TDUpAGWtq4A', notes: 'Coach. ~3 hour drive. Sunset stop at the castle.', showStudents: true },
+  { id: 41, dayId: 8, time: '20:30', title: 'Drive to Ljubljana', category: 'Transport', location: 'Trieste → Ljubljana', mapsUrl: 'https://maps.app.goo.gl/EMz3qZQ7ARbN6Tci6', notes: 'Coach. ~1.5 hour drive. Arrive ~10 PM. 🛒 Buy lunch for tomorrow.', showStudents: false },
 
   // ─── DAY 9 — May 5, Ljubljana / Lake Bled ───
-  { id: 35,  dayId: 9,  time: '7:30 AM',   title: 'Depart for ELAN',                         category: 'Transport',    location: 'Hotel, Ljubljana',                         mapsUrl: '',                                                                  cost: 0,  notes: '~34 min drive to Begunje.',                                                                                                                         showStudents: false },
-  { id: 36,  dayId: 9,  time: '9:00 AM',   title: 'ELAN Company Visit',                      category: 'Company Visit', location: 'ELAN, Begunje na Gorenjskem',                mapsUrl: 'https://maps.app.goo.gl/U5qotfvDyMQBf17o7',                         cost: 0,  notes: '2.5 hour visit to the world-famous ski and sports equipment factory. Ends 11:30 AM.', lat: 46.3833, lng: 14.2167,                                                                   showStudents: true },
-  { id: 37,  dayId: 9,  time: '11:45 AM',  title: 'Drive to Lake Bled',                      category: 'Transport',    location: 'Begunje → Velika Zaka, Lake Bled',          mapsUrl: 'https://maps.app.goo.gl/HhPvMTsmmaFBwQRk9',                         cost: 0,  notes: '~14 min drive.',                                                                                                                                    showStudents: false },
-  { id: 38,  dayId: 9,  time: '12:15 PM',  title: 'Ojstrica Hike',                           category: 'Cultural',     location: 'Ojstrica Trailhead, Lake Bled',             mapsUrl: 'https://maps.app.goo.gl/4Q5hCRnvVJFbvR6s7',                         cost: 0,  notes: 'Steep but short hike to the most iconic viewpoint of Lake Bled. ~1 hour roundtrip. Wear proper shoes.', lat: 46.3631, lng: 14.0925,                                                 showStudents: true },
-  { id: 39,  dayId: 9,  time: '1:25 PM',   title: 'Pletna Boat to Bled Island',              category: 'Cultural',     location: 'Velika Zaka Pletna Dock, Lake Bled',        mapsUrl: '',                                                                  cost: 26, notes: '€20 boat + €6 church entry. Pay cash to pletnar. Ring the wishing bell — legend says your wish comes true. ~1 hour total.', lat: 46.3612, lng: 14.0788,                         showStudents: true },
-  { id: 40,  dayId: 9,  time: '2:30 PM',   title: 'Bled Cream Cake',                         category: 'Food',         location: 'Slaščičarna Zima, Bled',                   mapsUrl: 'https://maps.app.goo.gl/dN71gBpPETcAa4XL8',                         cost: 5,  notes: 'The iconic kremšnita — Bled\'s famous cream cake since 1953. Order takeaway, boxed individually. Eat on the bus. Bring napkins!',                       showStudents: true },
-  { id: 41,  dayId: 9,  time: '3:50 PM',   title: 'Drive to Ljubljana',                      category: 'Transport',    location: 'Bled → Ljubljana',                         mapsUrl: 'https://maps.app.goo.gl/YiubxcZQeoGhpmhR8',                         cost: 0,  notes: '~1 hour 20 min drive. Arrive ~5:10 PM.',                                                                                                            showStudents: false },
-  { id: 42,  dayId: 9,  time: '5:25 PM',   title: 'Triple Bridge + Dragon Bridge',           category: 'Cultural',     location: 'Triple Bridge, Ljubljana',                  mapsUrl: 'https://maps.app.goo.gl/jHEKS6cJjmyUFLjy9',                         cost: 0,  notes: 'Walk along the Ljubljanica River to both iconic bridges — 5-10 min apart. Free and open 24/7.', lat: 46.0514, lng: 14.5060,                                                        showStudents: true },
-  { id: 43,  dayId: 9,  time: '5:30 PM',   title: 'Funicular to Ljubljana Castle',           category: 'Cultural',     location: 'Krekov trg, Ljubljana',                    mapsUrl: '',                                                                  cost: 6,  notes: '2-min funicular ride. Buy return ticket. Runs until 7 PM in May.',                                                                                  showStudents: true },
-  { id: 44,  dayId: 9,  time: '5:35 PM',   title: 'Ljubljana Castle',                        category: 'Cultural',     location: 'Ljubljana Castle',                         mapsUrl: '',                                                                  cost: 10, notes: 'Viewing Tower, Slovenian History Exhibition, Museum of Puppetry. Allow ~1 hr. Courtyard is free.', lat: 46.0490, lng: 14.5082,                                                   showStudents: true },
-  { id: 45,  dayId: 9,  time: '6:20 PM',   title: 'Funicular Down',                          category: 'Transport',    location: 'Ljubljana Castle Funicular',                mapsUrl: '',                                                                  cost: 0,  notes: 'Included in return ticket.',                                                                                                                        showStudents: false },
-  { id: 46,  dayId: 9,  time: '6:40 PM',   title: 'Dinner at Figovec',                       category: 'Food',         location: 'Figovec, Gosposvetska cesta 1, Ljubljana',  mapsUrl: 'https://maps.app.goo.gl/NneJiJR2bW9KLbAQ7',                         cost: 25, notes: 'Traditional Slovenian dinner. À la carte menu. Reservation confirmed. Email: info@figovec.si.', lat: 46.0551, lng: 14.5042,                                                        showStudents: true },
+  { id: 42, dayId: 9, time: '07:30', title: 'Depart for ELAN', category: 'Transport', location: 'Hotel, Ljubljana → Begunje', mapsUrl: 'https://maps.app.goo.gl/U5qotfvDyMQBf17o7', notes: '~34 min drive by coach.', showStudents: false },
+  { id: 43, dayId: 9, time: '09:00', title: 'ELAN Company Visit', category: 'Company Visit', location: 'ELAN, Begunje na Gorenjskem', mapsUrl: 'https://maps.app.goo.gl/U5qotfvDyMQBf17o7', notes: '2.5 hour visit to the world-famous ski factory. Ends 11:30 AM.', showStudents: true },
+  { id: 44, dayId: 9, time: '11:45', title: 'Drive to Lake Bled', category: 'Transport', location: 'Begunje → Ojstrica Trailhead, Lake Bled', mapsUrl: 'https://maps.app.goo.gl/aJMJt963m1XmNAFS7', notes: '~14 min drive. 🥪 Lunch on bus/during hike.', showStudents: false },
+  { id: 45, dayId: 9, time: '12:20', title: 'Ojstrica Hike', category: 'Cultural', location: 'Ojstrica Trailhead, Lake Bled', mapsUrl: 'https://maps.app.goo.gl/4Q5hCRnvVJFbvR6s7', notes: 'The iconic postcard viewpoint of Lake Bled. ~1 hour roundtrip. Rocky and steep — wear proper shoes.', showStudents: true },
+  { id: 46, dayId: 9, time: '13:20', title: 'Pletna Boat to Bled Island', category: 'Cultural', location: 'Velika Zaka Pletna Dock, Lake Bled', mapsUrl: '', notes: 'Buy church ticket on site or online. Ring the wishing bell! Must leave on the 3:10 PM boat. Two transactions.', showStudents: true },
+  { id: 47, dayId: 9, time: '15:50', title: 'Drive to Ljubljana', category: 'Transport', location: 'Bled → Ljubljana', mapsUrl: 'https://maps.app.goo.gl/YiubxcZQeoGhpmhR8', notes: 'Coach. ~1 hr 20 min. Arrive ~5:10 PM. Bus done by 5:30 PM.', showStudents: false },
+  { id: 48, dayId: 9, time: '17:25', title: 'Triple Bridge + Dragon Bridge + Castle Walk', category: 'Cultural', location: 'Triple Bridge, Ljubljana', mapsUrl: 'https://maps.app.goo.gl/jHEKS6cJjmyUFLjy9', notes: 'Walking tour. Depart hotel at 5:30 PM. All three free to walk.', showStudents: true },
+  { id: 49, dayId: 9, time: '18:10', title: 'Ljubljana Castle', category: 'Cultural', location: 'Ljubljana Castle', mapsUrl: '', notes: 'Buy tickets online (3 transactions). Tower, History Exhibition, Puppetry Museum.', showStudents: true },
+  { id: 50, dayId: 9, time: '20:10', title: 'Funicular Down', category: 'Transport', location: 'Ljubljana Castle Funicular', mapsUrl: '', notes: 'Included in return ticket.', showStudents: false },
+  { id: 51, dayId: 9, time: '20:30', title: 'Free Time', category: 'Free Time', location: 'Ljubljana Old Town', mapsUrl: '', notes: 'Explore on your own.', showStudents: true },
+  { id: 52, dayId: 9, time: '22:30', title: 'Curfew', category: 'Accommodation', location: 'Ibis Styles Ljubljana', mapsUrl: 'https://maps.app.goo.gl/zzHjv8wmq7kkAhni9', notes: 'Be back by 10:30 PM.', showStudents: true },
 
   // ─── DAY 10 — May 6, Ljubljana → Zagreb ───
-  { id: 47,  dayId: 10, time: '7:30 AM',   title: 'SMM Company Visit',                       category: 'Company Visit', location: 'SMM, Maribor, Slovenia',                    mapsUrl: 'https://maps.app.goo.gl/MAoMU4ZUZWS7mS328',                         cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 48,  dayId: 10, time: '12:00 PM',  title: 'Drive to Trakošćan Castle',               category: 'Transport',    location: 'Maribor → Trakošćan, Croatia',              mapsUrl: 'https://maps.app.goo.gl/gF61pFqrLaK839zHA',                         cost: 0,  notes: '~1 hour drive.',                                                                                                                                    showStudents: false },
-  { id: 49,  dayId: 10, time: '1:00 PM',   title: 'Trakošćan Castle',                        category: 'Cultural',     location: 'Trakošćan 4, Lepoglava, Croatia',           mapsUrl: 'https://maps.app.goo.gl/gF61pFqrLaK839zHA',                         cost: 0,  notes: 'Medieval castle in the Croatian highlands with a beautiful lake walk.',                                                                               showStudents: true },
-  { id: 50,  dayId: 10, time: '3:00 PM',   title: 'Drive to Zagreb',                         category: 'Transport',    location: 'Trakošćan → Zagreb',                       mapsUrl: 'https://maps.app.goo.gl/bQZAaBbf92Wj2Ayx6',                         cost: 0,  notes: '~2.5 hour drive. Arrive ~5:30 PM.',                                                                                                                 showStudents: false },
-  { id: 51,  dayId: 10, time: '5:30 PM',   title: 'Zagreb Cathedral + St. Mark\'s Church',   category: 'Cultural',     location: 'Zagreb Old Town',                           mapsUrl: 'https://maps.app.goo.gl/6WQeCJUbBKNigfDL6',                         cost: 0,  notes: 'Evening walk through Zagreb\'s historic center. Also explore Tkalčićeva Street and the Chocolate Museum.',                                             showStudents: true },
-  { id: 52,  dayId: 10, time: '8:00 PM',   title: 'Free Time',                               category: 'Free Time',    location: 'Zagreb',                                   mapsUrl: '',                                                                  cost: 0,  notes: '⚠️ Buy packed lunch for tomorrow before bed.',                                                                                                      showStudents: true },
+  { id: 53, dayId: 10, time: '07:30', title: 'SMM Company Visit — Maribor', category: 'Company Visit', location: 'Perhavčeva 17, Maribor, Slovenia', mapsUrl: 'https://maps.app.goo.gl/MAoMU4ZUZWS7mS328', notes: '', showStudents: true },
+  { id: 54, dayId: 10, time: '12:30', title: 'Trakošćan Castle', category: 'Cultural', location: 'Trakošćan 4, Lepoglava, Croatia', mapsUrl: 'https://maps.app.goo.gl/gF61pFqrLaK839zHA', notes: 'Buy tickets on site — 5-10 euros. Medieval castle with beautiful lake walk. Some people walk around the lake first.', showStudents: true },
+  { id: 55, dayId: 10, time: '15:00', title: 'Drive to Zagreb', category: 'Transport', location: 'Trakošćan → Hotel Dubrovnik, Zagreb', mapsUrl: 'https://maps.app.goo.gl/bQZAaBbf92Wj2Ayx6', notes: 'Coach. ~1.5 hour drive. 🥪 Lunch on bus.', showStudents: false },
+  { id: 56, dayId: 10, time: '16:30', title: 'Check In — Hotel Dubrovnik', category: 'Accommodation', location: 'Hotel Dubrovnik, Ljudevita Gaja 1, Zagreb', mapsUrl: '', notes: '', showStudents: false },
+  { id: 57, dayId: 10, time: '18:00', title: 'Zagreb Cathedral', category: 'Cultural', location: 'Cathedral of Zagreb, Kaptol 31', mapsUrl: 'https://maps.app.goo.gl/6WQeCJUbBKNigfDL6', notes: 'Possibly inside before 7 PM (may be under repair post-earthquake). Then St. Mark\'s Church.', showStudents: true },
+  { id: 58, dayId: 10, time: '19:00', title: 'Free Time — Tkalčićeva Street', category: 'Free Time', location: 'Tkalčićeva Street + Chocolate Museum, Zagreb', mapsUrl: '', notes: '🛒 Buy lunch for tomorrow before bed.', showStudents: true },
+  { id: 59, dayId: 10, time: '22:30', title: 'Curfew', category: 'Accommodation', location: 'Hotel Dubrovnik, Zagreb', mapsUrl: '', notes: 'Be back by 10:30 PM.', showStudents: true },
 
   // ─── DAY 11 — May 7, Zagreb ───
-  { id: 53,  dayId: 11, time: '8:30 AM',   title: 'Intis Engineering Visit',                 category: 'Company Visit', location: 'Velika Cesta 97, Odra, Zagreb',              mapsUrl: 'https://maps.app.goo.gl/xpwcPphLVKrdCGXVA',                         cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 54,  dayId: 11, time: '8:45 AM',   title: 'Rimac Company Visit',                     category: 'Company Visit', location: 'Kerestinečka cesta 54, Kerestinec',          mapsUrl: 'https://maps.app.goo.gl/ET1urH4b4tocZLq39',                         cost: 0,  notes: 'Croatian electric hypercar manufacturer — one of Europe\'s most exciting companies. Pre-registered.',                                                   showStudents: true },
-  { id: 55,  dayId: 11, time: '12:30 PM',  title: 'Lunch on Bus',                            category: 'Food',         location: 'Bus',                                       mapsUrl: '',                                                                  cost: 0,  notes: 'Packed lunch from last night.',                                                                                                                     showStudents: true },
-  { id: 56,  dayId: 11, time: '1:00 PM',   title: 'Končar Group Visit',                      category: 'Company Visit', location: 'KONČAR Electric Vehicles, Zagreb',           mapsUrl: 'https://maps.app.goo.gl/SSeviwmkDX4HjErN6',                         cost: 0,  notes: '1.5 hour tour of major Croatian electrical engineering company.',                                                                                    showStudents: true },
-  { id: 57,  dayId: 11, time: '3:00 PM',   title: 'Nikola Tesla Technical Museum',           category: 'Cultural',     location: 'Nikola Tesla Technical Museum, Zagreb',     mapsUrl: 'https://maps.app.goo.gl/VD7LDeQigQkekBJr8',                         cost: 0,  notes: 'Closes 5 PM. Contact: marijo.zrna@tmnt.hr. Website: tmnt.hr',                                                                                       showStudents: true },
-  { id: 58,  dayId: 11, time: '7:00 PM',   title: 'Group Dinner',                            category: 'Food',         location: 'Zagreb',                                    mapsUrl: '',                                                                  cost: 25, notes: '⚠️ Buy packed lunch for tomorrow before bed.',                                                                                                      showStudents: true },
+  { id: 60, dayId: 11, time: '08:30', title: 'Intis Engineering Visit', category: 'Company Visit', location: 'Velika Cesta 97, Odra, Zagreb', mapsUrl: 'https://maps.app.goo.gl/xpwcPphLVKrdCGXVA', notes: '', showStudents: true },
+  { id: 61, dayId: 11, time: '12:00', title: 'Grocery Stop — Konzum', category: 'Food', location: 'Konzum, Odranska zavrtnica 19, Odra', mapsUrl: 'https://maps.app.goo.gl/gLHWmdqH3yMymawPA', notes: 'Buy grocery store lunch here.', showStudents: true },
+  { id: 62, dayId: 11, time: '12:40', title: 'Končar Group Visit', category: 'Company Visit', location: 'KONČAR Electric Vehicles, Zagreb', mapsUrl: 'https://maps.app.goo.gl/XSKJuYLLEW3SSkgHA', notes: '1.5 hour tour.', showStudents: true },
+  { id: 63, dayId: 11, time: '15:00', title: 'Nikola Tesla Technical Museum', category: 'Cultural', location: 'Savska cesta 18, Zagreb', mapsUrl: 'https://maps.app.goo.gl/VefxoUWpSvQLh3cJ7', notes: 'Buy tickets at tmnt.hr. ~1 hour visit. Closes 5 PM.', showStudents: true },
+  { id: 64, dayId: 11, time: '17:15', title: 'Group Dinner — La Štruk', category: 'Food', location: 'La Štruk, Skalinska ul. 5, Zagreb', mapsUrl: 'https://maps.app.goo.gl/WdZiSm2sEBT9LRMXA', notes: 'Reservation confirmed.', showStudents: true },
+  { id: 65, dayId: 11, time: '20:00', title: 'Free Time', category: 'Free Time', location: 'Zagreb', mapsUrl: '', notes: '🛒 Buy packed lunch for tomorrow before bed.', showStudents: true },
+  { id: 66, dayId: 11, time: '22:30', title: 'Curfew', category: 'Accommodation', location: 'Hotel Dubrovnik, Zagreb', mapsUrl: '', notes: 'Be back by 10:30 PM.', showStudents: true },
 
   // ─── DAY 12 — May 8, Zagreb → Sarajevo ───
-  { id: 59,  dayId: 12, time: '6:00 AM',   title: 'HSTec Visit — Zadar',                     category: 'Company Visit', location: 'Zagrebačka 100, Zadar, Croatia',             mapsUrl: 'https://maps.app.goo.gl/xR7Rqg1z7uvxRxQn7',                         cost: 0,  notes: 'Early departure from hotel. Pack bags the night before.',                                                                                           showStudents: true },
-  { id: 60,  dayId: 12, time: '12:30 PM',  title: 'Lunch on Bus — Drive to Split',           category: 'Food',         location: 'Bus → Split',                               mapsUrl: 'https://maps.app.goo.gl/PTkJ2dfnTFAUp2Mh9',                         cost: 0,  notes: 'Packed lunch from last night. ~2 hour drive to Split.',                                                                                             showStudents: true },
-  { id: 61,  dayId: 12, time: '2:30 PM',   title: 'Split — Diocletian\'s Palace',            category: 'Cultural',     location: 'Split, Croatia',                            mapsUrl: '',                                                                  cost: 0,  notes: 'One of the best-preserved Roman palaces in the world. Walk the Riva promenade along the waterfront.',                                                 showStudents: true },
-  { id: 62,  dayId: 12, time: '5:00 PM',   title: 'Kravica Waterfalls',                      category: 'Cultural',     location: 'Kravica, Bosnia & Herzegovina',              mapsUrl: 'https://maps.app.goo.gl/r6fEioJixVqENWMT8',                         cost: 0,  notes: 'Stunning natural waterfall in a lush canyon. Bring swimwear if desired — swimming allowed seasonally.',                                                showStudents: true },
-  { id: 63,  dayId: 12, time: '8:00 PM',   title: 'Arrive Sarajevo',                         category: 'Accommodation', location: 'Sarajevo',                                  mapsUrl: '',                                                                  cost: 0,  notes: 'Long travel day — more than 10 hours total. Get good rest.',                                                                                        showStudents: true },
+  { id: 67, dayId: 12, time: '06:00', title: 'HSTec Visit — Zadar', category: 'Company Visit', location: 'Zagrebačka 100, Zadar, Croatia', mapsUrl: 'https://maps.app.goo.gl/xR7Rqg1z7uvxRxQn7', notes: '⚠️ Very early departure. Pack bags the night before.', showStudents: true },
+  { id: 68, dayId: 12, time: '12:30', title: 'Drive to Split', category: 'Transport', location: 'Zadar → Split', mapsUrl: 'https://maps.app.goo.gl/PTkJ2dfnTFAUp2Mh9', notes: '🥪 Lunch on bus. ~2 hour drive.', showStudents: false },
+  { id: 69, dayId: 12, time: '14:30', title: 'Split — Beach + Diocletian\'s Palace + Riva', category: 'Cultural', location: 'Split, Croatia', mapsUrl: '', notes: 'Free time for a few hours — swim, walk, explore.', showStudents: true },
+  { id: 70, dayId: 12, time: '17:00', title: 'Kravica Waterfalls', category: 'Cultural', location: 'Kravica Waterfall, Bosnia', mapsUrl: 'https://maps.app.goo.gl/r6fEioJixVqENWMT8', notes: 'Buy on site — 10 euros per person. Bring swimwear if desired.', showStudents: true },
+  { id: 71, dayId: 12, time: '20:00', title: 'Drive to Sarajevo', category: 'Transport', location: 'Kravica → Hotel Holiday Europa, Sarajevo', mapsUrl: '', notes: 'Coach. ~3 hour drive. Arrive ~11 PM. Very long day — 10+ hours total.', showStudents: false },
 
   // ─── DAY 13 — May 9, Sarajevo ───
-  { id: 64,  dayId: 13, time: '9:00 AM',   title: 'Sarajevo Cable Car',                      category: 'Cultural',     location: 'Sarajevo Cable Car',                        mapsUrl: 'https://maps.app.goo.gl/UuafuJofwhSyurfa8',                         cost: 0,  notes: 'Morning ride up Mount Trebević for views over the city.',                                                                                           showStudents: true },
-  { id: 65,  dayId: 13, time: '11:00 AM',  title: 'Latin Bridge + Assassination Site',       category: 'Cultural',     location: 'Latin Bridge, Sarajevo',                    mapsUrl: 'https://maps.app.goo.gl/dnU44MQnF6f423yr8',                         cost: 0,  notes: 'Site of the 1914 assassination of Archduke Franz Ferdinand — the event that triggered WWI.',                                                         showStudents: true },
-  { id: 66,  dayId: 13, time: '12:00 PM',  title: 'War Childhood Museum + Baščaršija',       category: 'Cultural',     location: 'Sarajevo',                                  mapsUrl: '',                                                                  cost: 5,  notes: 'Deeply moving museum. Contact: visit@warchildhood.org. Then explore Baščaršija old bazaar.',                                                        showStudents: true },
-  { id: 67,  dayId: 13, time: '2:00 PM',   title: 'Free Time',                               category: 'Free Time',    location: 'Sarajevo',                                  mapsUrl: '',                                                                  cost: 0,  notes: 'Half day free — explore on your own.',                                                                                                              showStudents: true },
-  { id: 68,  dayId: 13, time: '7:00 PM',   title: 'Yellow Fortress at Sunset',               category: 'Cultural',     location: 'Yellow Fortress, Sarajevo',                 mapsUrl: '',                                                                  cost: 0,  notes: 'Arrive 30 min before sunset for the best views over the city. One of Sarajevo\'s most beautiful spots.',                                            showStudents: true },
+  { id: 72, dayId: 13, time: '09:00', title: 'Sarajevo Cable Car', category: 'Cultural', location: 'Sarajevska žičara, Sarajevo', mapsUrl: 'https://maps.app.goo.gl/M7kBMhY3wbAhPDCV9', notes: 'Morning cable car up Mount Trebević for city views.', showStudents: true },
+  { id: 73, dayId: 13, time: '11:30', title: 'Latin Bridge — Assassination Site', category: 'Cultural', location: 'Latin Bridge, Sarajevo', mapsUrl: 'https://maps.app.goo.gl/dnU44MQnF6f423yr8', notes: 'Site of the 1914 assassination that triggered WWI.', showStudents: true },
+  { id: 74, dayId: 13, time: '12:30', title: 'Baščaršija Old Bazaar', category: 'Cultural', location: 'Baščaršija, Sarajevo', mapsUrl: 'https://maps.app.goo.gl/UcLcKjoR8brKunsc8', notes: 'Historic Ottoman bazaar — explore and find lunch on your own.', showStudents: true },
+  { id: 75, dayId: 13, time: '13:00', title: 'Free Afternoon', category: 'Free Time', location: 'Sarajevo', mapsUrl: '', notes: 'Half day free. War Childhood Museum is highly recommended if you want to visit.', showStudents: true },
+  { id: 76, dayId: 13, time: '19:00', title: 'Yellow Fortress at Sunset', category: 'Cultural', location: 'Yellow Fortress, Sarajevo', mapsUrl: '', notes: 'Arrive 30 min before sunset for best views over the city.', showStudents: true },
 
   // ─── DAY 14 — May 10, Sarajevo ───
-  { id: 69,  dayId: 14, time: '9:35 AM',   title: 'Church — Sarajevo Branch',                category: 'Cultural',     location: 'Mehmeda Spahe 24, Sarajevo',                mapsUrl: 'https://maps.app.goo.gl/2Fx3ia1P8hC5j3nT7',                         cost: 0,  notes: 'Croatian language services at 10:00 AM.',                                                                                                           showStudents: true },
-  { id: 70,  dayId: 14, time: '1:00 PM',   title: 'Sacred Heart Cathedral + War Tunnel Museum', category: 'Cultural',  location: 'Sarajevo',                                  mapsUrl: '',                                                                  cost: 5,  notes: 'The War Tunnel was used to supply the besieged city during the 1990s siege — a deeply powerful experience.',                                         showStudents: true },
-  { id: 71,  dayId: 14, time: '7:00 PM',   title: 'Group Dinner',                            category: 'Food',         location: 'Sarajevo',                                  mapsUrl: '',                                                                  cost: 20, notes: '⚠️ Buy packed lunch for tomorrow before bed.',                                                                                                      showStudents: true },
+  { id: 77, dayId: 14, time: '09:35', title: 'Church — Sarajevo Branch', category: 'Cultural', location: 'Mehmeda Spahe 24, Sarajevo', mapsUrl: 'https://maps.app.goo.gl/r2L6vKCF53vxEPLD8', notes: 'Croatian language services at 10:00 AM.', showStudents: true },
+  { id: 78, dayId: 14, time: '12:30', title: 'Students Buy Lunch', category: 'Food', location: 'Sarajevo', mapsUrl: '', notes: 'Find lunch on your own.', showStudents: true },
+  { id: 79, dayId: 14, time: '13:30', title: 'War Tunnel Museum', category: 'Cultural', location: 'Sarajevo', mapsUrl: '', notes: 'The tunnel used to supply the besieged city in the 1990s. Deeply powerful.', showStudents: true },
+  { id: 80, dayId: 14, time: '15:00', title: 'Free Time — Museums', category: 'Free Time', location: 'Sarajevo', mapsUrl: '', notes: 'Options: War Childhood Museum, Museum of Crimes Against Humanity, Ars Aevi modern art, Siege of Sarajevo Museum.', showStudents: true },
+  { id: 81, dayId: 14, time: '19:00', title: 'Group Dinner', category: 'Food', location: 'Sarajevo', mapsUrl: '', notes: '🛒 Buy packed lunch for tomorrow before bed.', showStudents: true },
 
   // ─── DAY 15 — May 11, Sarajevo ───
-  { id: 72,  dayId: 15, time: '8:00 AM',   title: 'Kinetic Company Visit',                   category: 'Company Visit', location: 'Tvornička 3, Sarajevo',                     mapsUrl: 'https://maps.app.goo.gl/VMyy7rxGzmkfgLMX6',                         cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 73,  dayId: 15, time: '11:00 AM',  title: 'AVDIC Violins',                           category: 'Company Visit', location: 'Tuzla, Bosnia',                             mapsUrl: 'https://maps.app.goo.gl/3qUZe98G1uyXtBkc7',                         cost: 0,  notes: 'Handcrafted string instrument workshop — a truly unique visit.',                                                                                    showStudents: true },
-  { id: 74,  dayId: 15, time: '11:30 AM',  title: 'Lunch on Bus',                            category: 'Food',         location: 'Bus',                                       mapsUrl: '',                                                                  cost: 0,  notes: 'Packed lunch from last night.',                                                                                                                     showStudents: true },
-  { id: 75,  dayId: 15, time: '4:00 PM',   title: 'Third Company Visit',                     category: 'Company Visit', location: 'Sarajevo',                                  mapsUrl: '',                                                                  cost: 0,  notes: 'Details TBC.',                                                                                                                                      showStudents: true },
-  { id: 76,  dayId: 15, time: '8:00 PM',   title: 'Free Time + Early to Bed',                category: 'Free Time',    location: 'Sarajevo',                                  mapsUrl: '',                                                                  cost: 0,  notes: '⚠️ Buy packed lunch for tomorrow. Early to bed — long travel day tomorrow.',                                                                        showStudents: true },
+  { id: 82, dayId: 15, time: '08:00', title: 'Kinetic Company Visit', category: 'Company Visit', location: 'Tvornička 3, Sarajevo', mapsUrl: 'https://maps.app.goo.gl/VMyy7rxGzmkfgLMX6', notes: '', showStudents: true },
+  { id: 83, dayId: 15, time: '11:00', title: 'AVDIC Violins', category: 'Company Visit', location: 'Tuzla, Bosnia', mapsUrl: 'https://maps.app.goo.gl/3qUZe98G1uyXtBkc7', notes: 'Handcrafted string instrument workshop — a truly unique visit. 🥪 Lunch on bus.', showStudents: true },
+  { id: 84, dayId: 15, time: '16:00', title: 'Third Company Visit', category: 'Company Visit', location: 'Sarajevo', mapsUrl: '', notes: 'Details TBC.', showStudents: true },
+  { id: 85, dayId: 15, time: '20:00', title: 'Free Time + Early to Bed', category: 'Free Time', location: 'Sarajevo', mapsUrl: '', notes: '🛒 Buy packed lunch for tomorrow. Early night — very long travel day tomorrow.', showStudents: true },
 
-  // ─── DAY 16 — May 12, Mostar → Dubrovnik → Montenegro ───
-  { id: 77,  dayId: 16, time: '6:30 AM',   title: 'Aluminij Visit + Mostar Bridge',          category: 'Company Visit', location: 'Bačevići, Mostar, Bosnia',                  mapsUrl: 'https://maps.app.goo.gl/SoGtb9SFsFh8Sdci9',                         cost: 0,  notes: 'See the iconic Stari Most (Old Bridge) while in Mostar — do not skip this.',                                                                        showStudents: true },
-  { id: 78,  dayId: 16, time: '10:30 AM',  title: 'Cultural Stop in Dubrovnik',              category: 'Cultural',     location: 'Dubrovnik, Croatia',                        mapsUrl: '',                                                                  cost: 0,  notes: 'Brief stop in the famous walled city on the Adriatic coast.',                                                                                       showStudents: true },
-  { id: 79,  dayId: 16, time: '12:00 PM',  title: 'Adriatic 42 — Bijela',                    category: 'Company Visit', location: 'Bijela, Montenegro',                        mapsUrl: 'https://maps.app.goo.gl/dWug6YbHkK2JUQ6f8',                         cost: 0,  notes: 'Boat manufacturer visit in Montenegro.',                                                                                                            showStudents: true },
-  { id: 80,  dayId: 16, time: '5:30 PM',   title: 'Drive to Kotor',                          category: 'Transport',    location: 'Bijela → Kotor',                            mapsUrl: 'https://maps.app.goo.gl/qETQig1aAcgJCw5NA',                         cost: 0,  notes: '~1 hour drive along the stunning Bay of Kotor.',                                                                                                    showStudents: false },
-  { id: 81,  dayId: 16, time: '7:15 PM',   title: 'St. John Fortress Night Hike',            category: 'Cultural',     location: 'Kotor Fortress, Montenegro',                mapsUrl: 'https://maps.app.goo.gl/TBRRYCkTPjjZHP6z8',                         cost: 0,  notes: '⚠️ BRING FLASHLIGHTS. Night hike up the fortress walls above Kotor\'s Old Town. Spectacular views. Meet at Rooftop Terrace Hippocampus first.',       showStudents: true },
-  { id: 82,  dayId: 16, time: '9:30 PM',   title: 'Dinner on Your Own',                      category: 'Free Time',    location: 'Kotor Old Town',                            mapsUrl: '',                                                                  cost: 0,  notes: 'Plenty of restaurants in the Old Town. Long day — more than 10 hours of travel.',                                                                   showStudents: true },
+  // ─── DAY 16 — May 12, Mostar → Dubrovnik → Kotor ───
+  { id: 86, dayId: 16, time: '06:30', title: 'Aluminij Visit + Mostar Bridge', category: 'Company Visit', location: 'Bačevići, Mostar, Bosnia', mapsUrl: 'https://maps.app.goo.gl/SoGtb9SFsFh8Sdci9', notes: '🥪 Packed lunch. See the iconic Stari Most (Old Bridge) — do not skip this.', showStudents: true },
+  { id: 87, dayId: 16, time: '10:30', title: 'Cultural Stop — Dubrovnik', category: 'Cultural', location: 'Ul. od Tabakarije 29, Dubrovnik', mapsUrl: '', notes: 'Brief stop in the famous walled city on the Adriatic.', showStudents: true },
+  { id: 88, dayId: 16, time: '12:00', title: 'Adriatic 42 — Bijela', category: 'Company Visit', location: 'Bijela, Montenegro', mapsUrl: 'https://maps.app.goo.gl/dWug6YbHkK2JUQ6f8', notes: 'Boat manufacturer visit.', showStudents: true },
+  { id: 89, dayId: 16, time: '17:30', title: 'Drive to Kotor', category: 'Transport', location: 'Bijela → Kotor', mapsUrl: 'https://maps.app.goo.gl/qETQig1aAcgJCw5NA', notes: '~1 hour along the Bay of Kotor.', showStudents: false },
+  { id: 90, dayId: 16, time: '19:00', title: 'St. John Fortress Night Hike', category: 'Cultural', location: 'Kotor Fortress, Montenegro', mapsUrl: 'https://maps.app.goo.gl/TBRRYCkTPjjZHP6z8', notes: '⚠️ BRING FLASHLIGHTS. Buy tickets on site. Meet first at Rooftop Terrace Hippocampus. Spectacular night views.', showStudents: true },
+  { id: 91, dayId: 16, time: '21:30', title: 'Dinner on Your Own', category: 'Free Time', location: 'Kotor Old Town', mapsUrl: '', notes: 'Plenty of restaurants in the medieval Old Town. Long day — 10+ hours total.', showStudents: true },
 
-  // ─── DAY 17 — May 13, Kotor → Tirana ───
-  { id: 83,  dayId: 17, time: '8:30 AM',   title: 'Daido Metal Visit',                       category: 'Company Visit', location: 'DAIDO METAL KOTOR, Montenegro',              mapsUrl: 'https://maps.app.goo.gl/7XnC3AQE7jyrbKfY6',                         cost: 0,  notes: '⚠️ 7-day warning contact required. Chris coordinating.',                                                                                            showStudents: true },
-  { id: 84,  dayId: 17, time: '11:30 AM',  title: 'Drive to Tirana',                         category: 'Transport',    location: 'Montenegro → Tirana, Albania',              mapsUrl: 'https://maps.app.goo.gl/wU2jd3UNezdDpBmU6',                         cost: 0,  notes: 'Long drive — arrive ~5:00 PM.',                                                                                                                     showStudents: false },
-  { id: 85,  dayId: 17, time: '5:00 PM',   title: 'Check In — Tirana',                       category: 'Accommodation', location: 'Ambasador 1, Tirana, Albania',               mapsUrl: '',                                                                  cost: 0,  notes: '',                                                                                                                                                  showStudents: false },
-  { id: 86,  dayId: 17, time: '6:00 PM',   title: 'Skanderbeg Square + Bunk\'Art 2 + Et\'hem Bey Mosque', category: 'Cultural', location: 'Skanderbeg Square, Tirana',         mapsUrl: '',                                                                  cost: 5,  notes: 'Bunk\'Art 2 is a Cold War-era nuclear bunker turned museum — a must. Et\'hem Bey Mosque is stunning.',                                              showStudents: true },
-  { id: 87,  dayId: 17, time: '8:00 PM',   title: 'Group Dinner',                            category: 'Food',         location: 'Tirana',                                    mapsUrl: '',                                                                  cost: 20, notes: '',                                                                                                                                                  showStudents: true },
+  // ─── DAY 17 — May 13, Tirana ───
+  { id: 92, dayId: 17, time: '08:30', title: 'Daido Metal Visit', category: 'Company Visit', location: 'DAIDO METAL, Kotor, Montenegro', mapsUrl: 'https://maps.app.goo.gl/7XnC3AQE7jyrbKfY6', notes: '⚠️ 7-day contact warning required.', showStudents: true },
+  { id: 93, dayId: 17, time: '11:30', title: 'Drive to Tirana', category: 'Transport', location: 'Montenegro → Tirana, Albania', mapsUrl: 'https://maps.app.goo.gl/wU2jd3UNezdDpBmU6', notes: 'Coach. Long drive — arrive ~5 PM. Fast food for lunch en route.', showStudents: false },
+  { id: 94, dayId: 17, time: '17:00', title: 'Check In + Skanderbeg Square', category: 'Cultural', location: 'Skanderbeg Square + Et\'hem Bey Mosque, Tirana', mapsUrl: '', notes: '', showStudents: true },
+  { id: 95, dayId: 17, time: '18:00', title: 'Albanian Night — Dinner Show', category: 'Food', location: 'Albanian Night, Tirana', mapsUrl: '', notes: 'Traditional Albanian dinner and cultural show. Tickets pre-purchased at albaniannight.com', showStudents: true },
 
   // ─── DAY 18 — May 14, Tirana → Athens ───
-  { id: 88,  dayId: 18, time: '7:30 AM',   title: 'Timak Company Visit',                     category: 'Company Visit', location: 'Tirana Industrial Park, Albania',            mapsUrl: 'https://maps.app.goo.gl/NFG1vvVU98ivojReA',                         cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 89,  dayId: 18, time: '1:00 PM',   title: 'Everest SHPK Visit',                      category: 'Company Visit', location: 'Kamëz, Albania',                             mapsUrl: 'https://maps.app.goo.gl/gkUogpfgSvZ1fwyu7',                         cost: 0,  notes: '⚠️ Shoe sizes needed in advance — confirm with professors.',                                                                                         showStudents: true },
-  { id: 90,  dayId: 18, time: '7:25 PM',   title: 'Fly to Athens',                           category: 'Transport',    location: 'Tirana Airport',                            mapsUrl: '',                                                                  cost: 0,  notes: 'John coordinating airport logistics.',                                                                                                              showStudents: true },
+  { id: 96, dayId: 18, time: '07:30', title: 'Timak Company Visit', category: 'Company Visit', location: 'Tirana Industrial Park, Albania', mapsUrl: 'https://maps.app.goo.gl/NFG1vvVU98ivojReA', notes: '', showStudents: true },
+  { id: 97, dayId: 18, time: '13:00', title: 'Everest SHPK Visit', category: 'Company Visit', location: 'Kamëz, Albania', mapsUrl: 'https://maps.app.goo.gl/gkUogpfgSvZ1fwyu7', notes: '⚠️ Shoe sizes needed in advance.', showStudents: true },
+  { id: 98, dayId: 18, time: '17:30', title: 'Airport Logistics', category: 'Transport', location: 'Tirana Airport', mapsUrl: '', notes: 'Arrive at airport by 5:30 PM.', showStudents: true },
+  { id: 99, dayId: 18, time: '19:25', title: 'Fly to Athens', category: 'Transport', location: 'Tirana Airport', mapsUrl: '', notes: 'Flight at 7:25 PM.', showStudents: true },
 
   // ─── DAY 19 — May 15, Athens ───
-  { id: 91,  dayId: 19, time: '9:30 AM',   title: 'Elefsis Shipyards Visit',                 category: 'Company Visit', location: 'Elefsina, Greece',                          mapsUrl: 'https://maps.app.goo.gl/LRqNDk2dYda7wyxH9',                         cost: 0,  notes: '~1 hour visit.',                                                                                                                                    showStudents: true },
-  { id: 92,  dayId: 19, time: '1:00 PM',   title: 'Askra Olive Oil Visit',                   category: 'Company Visit', location: 'Nea Ionia, Athens',                         mapsUrl: '',                                                                  cost: 0,  notes: '1.5 hour visit.',                                                                                                                                   showStudents: true },
-  { id: 93,  dayId: 19, time: '4:00 PM',   title: 'Cultural Visit Athens',                   category: 'Cultural',     location: 'Athens',                                    mapsUrl: '',                                                                  cost: 0,  notes: 'Details TBC.',                                                                                                                                      showStudents: true },
+  { id: 100, dayId: 19, time: '09:30', title: 'Elefsis Shipyards Visit', category: 'Company Visit', location: 'Elefsina, Greece', mapsUrl: 'https://maps.app.goo.gl/LRqNDk2dYda7wyxH9', notes: '~1 hour visit.', showStudents: true },
+  { id: 101, dayId: 19, time: '13:00', title: 'Askra Olive Oil Visit', category: 'Company Visit', location: 'Nea Ionia, Athens', mapsUrl: '', notes: '1.5 hour visit.', showStudents: true },
+  { id: 102, dayId: 19, time: '18:00', title: 'Dinner at Hill Athens', category: 'Food', location: 'Hill Athens, Athens', mapsUrl: '', notes: 'Reservation at hillathens.gr/en/reservation/', showStudents: true },
 
   // ─── DAY 20 — May 16, Athens ───
-  { id: 94,  dayId: 20, time: '9:40 AM',   title: 'Acropolis Museum',                        category: 'Cultural',     location: 'Acropolis Museum, Athens',                  mapsUrl: 'https://maps.app.goo.gl/QWn84JsXgnxDMhAP9',                         cost: 15, notes: 'World-class museum. Book group tickets in advance at theacropolismuseum.gr', lat: 37.9684, lng: 23.7257,                                                                        showStudents: true },
-  { id: 95,  dayId: 20, time: '11:00 AM',  title: 'Acropolis',                               category: 'Cultural',     location: 'Acropolis, Athens',                         mapsUrl: 'https://maps.app.goo.gl/wFECYrDQRUZ13KS37',                         cost: 20, notes: 'The Parthenon, Erechtheion, and Temple of Athena Nike. Need to register in advance.', lat: 37.9715, lng: 23.7267,                                                                 showStudents: true },
-  { id: 96,  dayId: 20, time: '12:00 PM',  title: 'Lunch — O Gyros Pou Gyrevis',             category: 'Food',         location: 'Athens',                                    mapsUrl: 'https://maps.app.goo.gl/v7wNtLzSpfBv7niz6',                         cost: 10, notes: '',                                                                                                                                                  showStudents: true },
-  { id: 97,  dayId: 20, time: '1:30 PM',   title: 'Temple of Olympian Zeus',                 category: 'Cultural',     location: 'Athens',                                    mapsUrl: 'https://maps.app.goo.gl/4dnv8ZVtBr7z1xQp8',                         cost: 0,  notes: '',                                                                                                                                                  showStudents: true },
-  { id: 98,  dayId: 20, time: '2:30 PM',   title: 'Ancient Agora',                           category: 'Cultural',     location: 'Ancient Agora, Athens',                     mapsUrl: 'https://maps.app.goo.gl/XdccKcopK7eU1dD67',                         cost: 10, notes: 'Where Socrates walked and Athenian democracy was born. Registration pending.', lat: 37.9753, lng: 23.7219,                                                                       showStudents: true },
-  { id: 99,  dayId: 20, time: '4:30 PM',   title: 'Team Presentations',                      category: 'Company Visit', location: 'Athens',                                    mapsUrl: '',                                                                  cost: 0,  notes: 'Share what you learned from the trip.',                                                                                                             showStudents: true },
-  { id: 100, dayId: 20, time: '8:00 PM',   title: 'Dinner at Hill Athens',                   category: 'Food',         location: 'Hill Athens, Athens',                       mapsUrl: '',                                                                  cost: 60, notes: 'Reservation at hillathens.gr/en/reservation/ — special group dinner to celebrate the journey.',                                                    showStudents: true },
+  { id: 103, dayId: 20, time: '09:40', title: 'Acropolis Museum', category: 'Cultural', location: 'Acropolis Museum, Athens', mapsUrl: 'https://maps.app.goo.gl/QWn84JsXgnxDMhAP9', notes: 'Group tickets booked at theacropolismuseum.gr', showStudents: true },
+  { id: 104, dayId: 20, time: '11:00', title: 'Acropolis', category: 'Cultural', location: 'Acropolis, Athens', mapsUrl: 'https://maps.app.goo.gl/wFECYrDQRUZ13KS37', notes: 'Registration required. The Parthenon, Erechtheion, Temple of Athena Nike.', showStudents: true },
+  { id: 105, dayId: 20, time: '12:00', title: 'Lunch — O Gyros Pou Gyrevis', category: 'Food', location: 'Athens', mapsUrl: 'https://maps.app.goo.gl/v7wNtLzSpfBv7niz6', notes: 'Students buy own lunch.', showStudents: true },
+  { id: 106, dayId: 20, time: '13:00', title: 'Temple of Olympian Zeus', category: 'Cultural', location: 'Athens', mapsUrl: 'https://maps.app.goo.gl/4dnv8ZVtBr7z1xQp8', notes: '', showStudents: true },
+  { id: 107, dayId: 20, time: '14:00', title: 'Boat Tour', category: 'Cultural', location: 'Athens', mapsUrl: 'https://maps.app.goo.gl/XdccKcopK7eU1dD67', notes: 'Registration pending.', showStudents: true },
+  { id: 108, dayId: 20, time: '16:30', title: 'Team Presentations', category: 'Company Visit', location: 'Athens', mapsUrl: '', notes: 'Share what you learned from the trip.', showStudents: true },
+  { id: 109, dayId: 20, time: '20:00', title: 'Free Time', category: 'Free Time', location: 'Athens', mapsUrl: 'https://hillathens.gr/en/reservation/', notes: '', showStudents: true },
 
   // ─── DAY 21 — May 17, Athens ───
-  { id: 101, dayId: 21, time: '9:15 AM',   title: 'Church — Halandri Branch',                category: 'Cultural',     location: 'Erifilis 16, Halandri, Athens',              mapsUrl: 'https://maps.app.goo.gl/U93zQUXGe65Bu6iC7',                         cost: 0,  notes: 'Greek language services at 10:00 AM.',                                                                                                              showStudents: true },
-  { id: 102, dayId: 21, time: '12:10 PM',  title: 'Lunch',                                   category: 'Food',         location: 'Athens',                                    mapsUrl: '',                                                                  cost: 15, notes: 'Sky Bar or Mpirmpilo — TBC.',                                                                                                                    showStudents: true },
-  { id: 103, dayId: 21, time: '2:00 PM',   title: 'Lycabettus Hill',                         category: 'Cultural',     location: 'Lycabettus Hill, Athens',                   mapsUrl: 'https://maps.app.goo.gl/dBzEwdzTw7TMo6aB6',                         cost: 5,  notes: 'Highest point in Athens — stunning 360° views of the city and the Acropolis. Funicular or hike.',                                                     showStudents: true },
-  { id: 104, dayId: 21, time: '4:00 PM',   title: 'Monastiraki Flea Market',                 category: 'Free Time',    location: 'Monastiraki, Athens',                       mapsUrl: 'https://maps.app.goo.gl/DWSe23trKFpQpUgC8',                         cost: 0,  notes: 'Famous flea market in the shadow of the Acropolis. Great for last-minute souvenirs.',                                                                showStudents: true },
+  { id: 110, dayId: 21, time: '09:15', title: 'Church — Halandri Branch', category: 'Cultural', location: 'Erifilis 16, Halandri, Athens', mapsUrl: 'https://maps.app.goo.gl/U93zQUXGe65Bu6iC7', notes: 'Greek language services at 10:00 AM.', showStudents: true },
+  { id: 111, dayId: 21, time: '12:10', title: 'Students Buy Lunch', category: 'Food', location: 'Athens', mapsUrl: '', notes: 'Sky Bar or Mpirmpilo — options TBC.', showStudents: true },
+  { id: 112, dayId: 21, time: '12:30', title: 'Lycabettus Hill Funicular', category: 'Cultural', location: 'Lycabettus Hill, Athens', mapsUrl: 'https://maps.app.goo.gl/dBzEwdzTw7TMo6aB6', notes: '360° views over Athens and the Acropolis. Funicular available.', showStudents: true },
+  { id: 113, dayId: 21, time: '14:30', title: 'Monastiraki Flea Market', category: 'Free Time', location: 'Monastiraki, Athens', mapsUrl: 'https://maps.app.goo.gl/DWSe23trKFpQpUgC8', notes: 'Great for last-minute souvenirs. In the shadow of the Acropolis.', showStudents: true },
 
   // ─── DAY 22 — May 18, Athens ───
-  { id: 105, dayId: 22, time: '8:15 AM',   title: 'Get 3D Visit',                            category: 'Company Visit', location: 'Aghioi Anargiroi, Athens',                  mapsUrl: '',                                                                  cost: 0,  notes: '45 min visit.',                                                                                                                                     showStudents: true },
-  { id: 106, dayId: 22, time: '12:00 PM',  title: 'Skaramangas Shipyards Visit',             category: 'Company Visit', location: 'Skaramangas, Athens',                       mapsUrl: '',                                                                  cost: 0,  notes: '30 min visit.',                                                                                                                                     showStudents: true },
-  { id: 107, dayId: 22, time: '7:00 PM',   title: 'Final Group Dinner',                      category: 'Food',         location: 'Athens',                                    mapsUrl: '',                                                                  cost: 30, notes: 'Last dinner together as a group. Celebrate the journey!',                                                                                         showStudents: true },
-  { id: 108, dayId: 22, time: '9:00 PM',   title: 'Free Time — Last Night',                  category: 'Free Time',    location: 'Athens',                                    mapsUrl: '',                                                                  cost: 0,  notes: 'Final evening in Europe. Explore the Plaka neighborhood, sip coffee, watch the city lights.',                                                       showStudents: true },
+  { id: 114, dayId: 22, time: '08:15', title: 'Get 3D Visit', category: 'Company Visit', location: 'Aghioi Anargiroi, Athens', mapsUrl: '', notes: '45 min visit.', showStudents: true },
+  { id: 115, dayId: 22, time: '12:00', title: 'Skaramangas Shipyards Visit', category: 'Company Visit', location: 'Skaramangas, Athens', mapsUrl: '', notes: '30 min visit.', showStudents: true },
+  { id: 116, dayId: 22, time: '19:00', title: 'Final Group Dinner', category: 'Food', location: 'Athens', mapsUrl: '', notes: 'Last dinner together. Celebrate the journey!', showStudents: true },
+  { id: 117, dayId: 22, time: '21:00', title: 'Free Time — Last Night', category: 'Free Time', location: 'Athens', mapsUrl: '', notes: 'Final evening in Europe.', showStudents: true },
 
-  // ─── DAY 23 — May 19, Athens → Home ───
-  { id: 109, dayId: 23, time: '6:00 AM',   title: 'Fly Home to Utah',                        category: 'Transport',    location: 'Athens Airport',                            mapsUrl: '',                                                                  cost: 0,  notes: 'Check flight details with professors. Long travel day home. Safe travels!',                                                                        showStudents: true },
+  // ─── DAY 23 — May 19, Athens ───
+  { id: 118, dayId: 23, time: '06:00', title: 'Fly Home to Utah', category: 'Transport', location: 'Athens Airport', mapsUrl: '', notes: 'Check flight details with professors. Safe travels!', showStudents: true },
 ];
 
 export const quotes = [
-  { dayId: 1,  text: 'Look for what you notice but no one else sees.' },
-  { dayId: 2,  text: 'Zoom in and obsess. Zoom out and observe. We get to choose.' },
-  { dayId: 3,  text: 'All that matters is that you are making something you love, to the best of your ability, here and now.' },
-  { dayId: 4,  text: 'The real work of the artist is a way of being in the world.' },
-  { dayId: 5,  text: 'Creativity is a fundamental aspect of being human. It is our birthright, and it\'s for all of us.' },
-  { dayId: 6,  text: 'We can\'t force greatness to happen. All we can do is invite it in and await it actively.' },
-  { dayId: 7,  text: 'Failure is the information you need to get where you\'re going.' },
-  { dayId: 8,  text: 'To hone your craft is to honor creation.' },
-  { dayId: 9,  text: 'Beware of the assumption that the way you work is the best way simply because it\'s the way you\'ve done it before.' },
+  { dayId: 1, text: 'Look for what you notice but no one else sees.' },
+  { dayId: 2, text: 'Zoom in and obsess. Zoom out and observe. We get to choose.' },
+  { dayId: 3, text: 'All that matters is that you are making something you love, to the best of your ability, here and now.' },
+  { dayId: 4, text: 'The real work of the artist is a way of being in the world.' },
+  { dayId: 5, text: 'Creativity is a fundamental aspect of being human. It is our birthright, and it\'s for all of us.' },
+  { dayId: 6, text: 'We can\'t force greatness to happen. All we can do is invite it in and await it actively.' },
+  { dayId: 7, text: 'Failure is the information you need to get where you\'re going.' },
+  { dayId: 8, text: 'To hone your craft is to honor creation.' },
+  { dayId: 9, text: 'Beware of the assumption that the way you work is the best way simply because it\'s the way you\'ve done it before.' },
   { dayId: 10, text: 'The person who makes something today isn\'t the same person who returns to the work tomorrow.' },
   { dayId: 11, text: 'As artists, we seek to restore our childlike perception: a more innocent state of wonder and appreciation.' },
   { dayId: 12, text: 'We are all translators for messages the universe is broadcasting.' },
@@ -228,150 +222,58 @@ export const quotes = [
   { dayId: 23, text: 'Use what\'s helpful. Let go of the rest.' },
 ];
 
-export const emergencyContacts = [
-  { label: 'European Emergency',              phone: '112',              notes: 'Works in all EU and Balkan countries for police, fire, ambulance' },
-  { label: 'US Embassy Italy (Rome)',         phone: '+39 06 46741',     notes: 'Passport loss or emergency assistance in Italy' },
-  { label: 'US Embassy Slovenia (Ljubljana)', phone: '+386 1 200 5500',  notes: 'Passport loss or emergency assistance in Slovenia' },
-  { label: 'US Embassy Croatia (Zagreb)',     phone: '+385 1 661 2200',  notes: 'Passport loss or emergency assistance in Croatia' },
-  { label: 'US Embassy Bosnia (Sarajevo)',    phone: '+387 33 704 000',  notes: 'Passport loss or emergency assistance in Bosnia' },
-  { label: 'US Embassy Montenegro (Podgorica)', phone: '+382 20 410 500', notes: 'Passport loss or emergency assistance in Montenegro' },
-  { label: 'US Embassy Albania (Tirana)',     phone: '+355 4 224 7285',  notes: 'Passport loss or emergency assistance in Albania' },
-  { label: 'US Embassy Greece (Athens)',      phone: '+30 210 720 2490', notes: 'Passport loss or emergency assistance in Greece' },
-  { label: 'Trip Leader — Isaac',             phone: 'TBD',              notes: 'Add before departure' },
-  { label: 'Bus Driver',                      phone: 'TBD',              notes: 'Add before departure' },
-  { label: 'Dr. Mattson',                     phone: 'TBD',              notes: 'Add before departure' },
-  { label: 'Dr. Salmon',                      phone: 'TBD',              notes: 'Add before departure' },
-  { label: 'Venice Hotel',                    phone: 'TBD',              notes: 'Sestiere Cannaregio 3539/a, Venice' },
-  { label: 'Ljubljana Hotel',                 phone: 'TBD',              notes: 'Miklošičeva cesta 9, Ljubljana' },
-  { label: 'Zagreb Hotel',                    phone: 'TBD',              notes: 'Hotel Dubrovnik, Ljudevita Gaja 1, Zagreb' },
-  { label: 'Sarajevo Hotel',                  phone: 'TBD',              notes: 'Vladislava Skarića 5, Sarajevo' },
-  { label: 'Tirana Hotel',                    phone: 'TBD',              notes: 'Ambasador 1, Tirana' },
-  { label: 'Athens Hotel',                    phone: 'TBD',              notes: 'Add before departure' },
-  { label: 'Hospital Venice',                 phone: '+39 041 529 4111', notes: 'Ospedale Civile SS. Giovanni e Paolo' },
-  { label: 'Hospital Ljubljana',              phone: '+386 1 522 5050',  notes: 'UKC Ljubljana' },
-  { label: 'Hospital Zagreb',                 phone: '+385 1 238 8888',  notes: 'KBC Zagreb' },
-  { label: 'Hospital Sarajevo',               phone: '+387 33 297 000',  notes: 'KCUS Sarajevo' },
-  { label: 'Hospital Athens',                 phone: '+30 210 777 8901', notes: 'Evangelismos Hospital' },
-];
-
-// Fun facts — one per day (kept from original, not in new data)
-export const FUN_FACTS = [
-  "BYU's Marriott School has sent students to Europe for over 20 years of study abroad programs.",
-  "The average European works 258 fewer hours per year than the average American.",
-  "Venice is built on 118 small islands connected by 400+ bridges — there are no cars in the city center.",
-  "Venetian glassblowers have guarded their craft secrets since the 13th century, once exiled to Murano Island by decree.",
-  "Delta's transatlantic flights burn roughly 5 gallons of fuel per mile — at 5,500 miles, that's 27,500 gallons for our flight.",
-  "Venice's ACTV water buses (vaporetti) carry 180,000 passengers daily — more than many city subway systems.",
-  "The Vivaldi concertos you'll hear tonight were composed by a Venetian priest who taught at a girls' orphanage.",
-  "Murano glass artisans can work with molten glass at 1,000°C — the average human can withstand only 48°C air temperature.",
-  "ELAN, based in Begunje, Slovenia, has been making skis since 1945 and supplied equipment to multiple Olympic champions.",
-  "Slovenia has more caves per square kilometer than almost any country on Earth — over 11,000 registered caves.",
-  "Rimac's Nevera hypercar accelerates 0–100 km/h in 1.85 seconds, making it the world's fastest production car.",
-  "Zadar's Sea Organ — organ pipes built into marble steps — plays music using only wave energy from the Adriatic.",
-  "Sarajevo hosted the 1984 Winter Olympics and was the site of the assassination that triggered World War I.",
-  "The War Tunnel (Tunnel of Hope) was built in 4 months in 1993 and was 800m long — keeping Sarajevo alive during the siege.",
-  "Bosnia has the highest ratio of minefields remaining in Europe — de-mining efforts are still ongoing.",
-  "Mostar's Stari Most bridge was destroyed in 1993 and rebuilt in 2004 using the same Ottoman technique from 1566.",
-  "Albania's Bunk'Art museums are built inside actual Cold War nuclear bunkers — Hoxha built 173,000 bunkers total.",
-  "Tirana's streets were named after days of the week under communism — 'Monday Street,' 'Tuesday Street,' etc.",
-  "Greece produces 20% of the world's olive oil — about 130 million olive trees grow across the country.",
-  "The Acropolis has survived Persian invasion, Ottoman occupation, a Venetian cannon explosion, and an earthquake.",
-  "Athens is the oldest capital city in Europe, continuously inhabited for over 5,000 years.",
-  "The Skaramangas Shipyard has built some of the largest tankers in the world — each can carry 2 million barrels of oil.",
-  "You've now visited 9 countries and logged roughly 6,200 miles of travel. Safe skies home.",
-];
-
-// ─── Helper functions ────────────────────────────────────────────────────────
-
-// Convert "6:00 PM" / "11:46 AM" to total minutes since midnight for comparison
-function timeStrToMinutes(timeStr) {
-  const parts = timeStr.trim().split(' ');
-  const [h, m] = parts[0].split(':').map(Number);
-  const ampm = parts[1];
-  let hours = h;
-  if (ampm === 'PM' && h !== 12) hours += 12;
-  if (ampm === 'AM' && h === 12) hours = 0;
-  return hours * 60 + m;
-}
-
-export function getTodayDayNumber() {
-  const today = new Date();
-  const start = new Date(TRIP_START);
-  today.setHours(0, 0, 0, 0);
-  start.setHours(0, 0, 0, 0);
-  const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24));
-  if (diff < 0 || diff >= TOTAL_DAYS) return null;
-  return diff + 1;
-}
-
-export function getDayData(dayId) {
-  return days.find(d => d.id === dayId) || null;
-}
-
-export function getActivitiesForDay(dayId) {
-  return activities
-    .filter(a => a.dayId === dayId)
-    .sort((a, b) => timeStrToMinutes(a.time) - timeStrToMinutes(b.time));
-}
-
-export function getNextActivity(dayId) {
-  const now = new Date();
-  const currentMinutes = now.getHours() * 60 + now.getMinutes();
-  const dayActivities = getActivitiesForDay(dayId);
-  return (
-    dayActivities.find(a => timeStrToMinutes(a.time) >= currentMinutes) ||
-    dayActivities[dayActivities.length - 1] ||
-    null
-  );
-}
-
-export function getQuoteForDay(dayId) {
-  return quotes.find(q => q.dayId === dayId)?.text || quotes[0].text;
-}
-
-// time is already human-readable ("6:00 PM") — kept for any legacy callers
-export function formatTime(time) {
-  return time;
-}
-
-export function formatDate(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
-}
-
-export function formatShortDate(dateStr) {
-  const d = new Date(dateStr + 'T12:00:00');
-  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-}
-
-// ─── Per-day fun facts ────────────────────────────────────────────────────────
 export const funFacts = [
-  { dayId: 1,  fact: 'BYU\'s Marriott School of Business consistently ranks among the top U.S. business schools for return on investment — and this trip is a living example of that experiential learning tradition.' },
-  { dayId: 2,  fact: 'Provo has been nicknamed "Silicon Slopes" and is one of America\'s fastest-growing tech economies, with more tech startups per capita than almost any other U.S. city.' },
-  { dayId: 3,  fact: 'Vanderhall, based right here in Provo, hand-assembles open-cockpit autocycles in Utah — street-legal vehicles that blend the thrill of a motorcycle with the comfort of a sports car.' },
-  { dayId: 4,  fact: 'Blendtec\'s "Will It Blend?" YouTube series, filmed in nearby Orem, went viral in 2006 and is widely credited as one of the first successful viral marketing campaigns in internet history.' },
-  { dayId: 5,  fact: 'Your Delta flight today crosses over 8,000 miles. At cruising altitude of 35,000 feet you\'ll travel at roughly 550 mph — the equivalent of crossing the continental U.S. twice in a single flight.' },
-  { dayId: 6,  fact: 'Venice is built on 118 small islands connected by over 400 bridges. The city has no roads — only canals. Every building rests on millions of wooden piles driven into the lagoon floor.' },
-  { dayId: 7,  fact: 'Venetian composer Antonio Vivaldi wrote "The Four Seasons" while working as a music teacher here. His violin concertos were so revolutionary they directly influenced Johann Sebastian Bach.' },
-  { dayId: 8,  fact: 'The route from Venice to Ljubljana passes through Trieste, once the main seaport of the Austro-Hungarian Empire — an empire that controlled much of central Europe for over 600 years.' },
-  { dayId: 9,  fact: 'ELAN, which you\'re visiting today, pioneered the shaped ski revolution in the 1990s — a design breakthrough so significant it permanently transformed how the entire world skis.' },
-  { dayId: 10, fact: 'Croatia has 1,246 islands along its Adriatic coast — more than any other Mediterranean country. Its coastline is actually longer than Portugal\'s entire Atlantic coast.' },
-  { dayId: 11, fact: 'Rimac Automobili, which you\'re visiting today, built the Nevera — the world\'s fastest production electric car, holding 23 world records and hitting 0–60 mph in just 1.85 seconds.' },
-  { dayId: 12, fact: 'Diocletian\'s Palace in Split, which you\'ll walk through today, is one of the best-preserved Roman palaces on Earth. Over 3,000 people still live and work inside its ancient walls.' },
-  { dayId: 13, fact: 'Sarajevo hosted the 1984 Winter Olympics. Just ten years later it endured the longest siege of a capital city in modern warfare — 1,425 days during the Bosnian War.' },
-  { dayId: 14, fact: 'The Sarajevo Tunnel of Hope was dug by hand in 1993 and stretched 800 meters under the airport runway — the only supply line keeping the besieged city alive for nearly four years.' },
-  { dayId: 15, fact: 'Bosnia and Herzegovina gets its name from two regions — Bosnia from the river Bosna, and Herzegovina from a medieval duke title. The country officially recognizes three languages and two alphabets.' },
-  { dayId: 16, fact: 'Stari Most in Mostar was built in 1566 by Ottoman architect Mimar Hayruddin. Destroyed in 1993 during the war, it was rebuilt using the same 16th-century stone-cutting techniques and reopened in 2004.' },
-  { dayId: 17, fact: 'Albania was one of the world\'s most isolated countries until 1991 — it was once illegal to own a private car or practice religion. Today Tirana is one of Europe\'s fastest-growing capital cities.' },
-  { dayId: 18, fact: 'Albania built over 173,000 concrete bunkers during communist rule — more per square kilometer than any country on Earth. They\'re now being repurposed as cafes, museums, and art installations.' },
-  { dayId: 19, fact: 'Athens is one of the world\'s oldest continuously inhabited cities — over 3,500 years. It gave humanity democracy, philosophy, theater, the Olympic Games, and the foundations of Western civilization.' },
-  { dayId: 20, fact: 'The Parthenon was built without mortar — its 70,000 stone blocks were cut so precisely they locked together by their own weight alone. It has survived wars, earthquakes, and explosions for 2,500 years.' },
-  { dayId: 21, fact: 'Greece has more archaeological museums than any country in the world. Athens alone has over 100 museums — nearly one per square kilometer of the ancient city.' },
-  { dayId: 22, fact: 'The word "economy" comes from ancient Greek "oikonomia," meaning household management. Many business concepts you\'ve studied this semester trace directly to ancient Greek philosophy.' },
-  { dayId: 23, fact: 'The Olympic flame tradition — carried from Olympia to the host city — began at the 1936 Berlin Games, inspired by the ancient Greek practice of keeping a sacred fire burning at the sanctuary of Olympia.' },
+  { dayId: 1, text: 'BYU was founded in 1875 as Brigham Young Academy. It became a university in 1903 and is now one of the largest religious universities in the world with over 33,000 students.' },
+  { dayId: 2, text: 'Provo is nicknamed "Silicon Slopes" — Utah\'s tech industry has grown so fast it now rivals Silicon Valley in startup density per capita.' },
+  { dayId: 3, text: 'The Y on the mountain above Provo is 380 feet tall and 130 feet wide. Students hike up annually to whitewash it — a BYU tradition since 1906.' },
+  { dayId: 4, text: 'Blendtec\'s "Will It Blend?" YouTube series, which started as an internal test, became one of the first viral marketing campaigns in history with over 300 million views.' },
+  { dayId: 5, text: 'The flight from Salt Lake City to Amsterdam crosses Greenland and the Arctic Ocean — you\'ll fly over some of the most remote and spectacular ice landscapes on Earth.' },
+  { dayId: 6, text: 'Venice is built on 118 small islands connected by 400 bridges. The city has no roads — every journey is made by boat or on foot. The whole city is slowly sinking at about 1-2mm per year.' },
+  { dayId: 7, text: 'The Vivaldi concert venue, Scuola Grande di San Teodoro, was built in 1552. Antonio Vivaldi himself performed in Venice churches just like this one in the early 1700s.' },
+  { dayId: 8, text: 'Miramare Castle was built in 1860 for Austrian Archduke Maximilian. He lived there for only 6 years before becoming Emperor of Mexico, where he was executed in 1867.' },
+  { dayId: 9, text: 'Lake Bled\'s turquoise color comes from glacial sediment. The water is so clear you can see the bottom in many places. The island church has been a pilgrimage site for over 1,000 years.' },
+  { dayId: 10, text: 'Trakošćan Castle has been continuously inhabited since the 13th century. It was owned by the same Croatian noble family, the Drašković family, for over 400 years.' },
+  { dayId: 11, text: 'Nikola Tesla was born in Croatia in 1856. His AC electrical system powers virtually every home and building in the world today — his inventions literally light up civilization.' },
+  { dayId: 12, text: 'Diocletian\'s Palace in Split is one of the best-preserved Roman ruins in the world. About 3,000 people actually live and work inside the ancient palace walls today.' },
+  { dayId: 13, text: 'Sarajevo is nicknamed "the Jerusalem of Europe" because a mosque, Catholic cathedral, Orthodox church, and Jewish synagogue all stand within a few hundred meters of each other.' },
+  { dayId: 14, text: 'The Sarajevo War Tunnel, built in 1993, was only 1 meter wide and 1.6 meters tall. Over a million tons of food, weapons, and supplies were carried through it by hand during the siege.' },
+  { dayId: 15, text: 'The AVDIC family has been making violins in Bosnia for three generations. A handcrafted AVDIC violin can take up to 200 hours to make and is played by professional musicians worldwide.' },
+  { dayId: 16, text: 'The Stari Most (Old Bridge) in Mostar was built by the Ottomans in 1566 and stood for 427 years. It was deliberately destroyed in 1993 during the war and painstakingly reconstructed, reopening in 2004.' },
+  { dayId: 17, text: 'Albania was the most isolated country in the world during communism (1944-1991). It built over 170,000 concrete bunkers — one for every 4 citizens — that still dot the landscape today.' },
+  { dayId: 18, text: 'Albania only opened its borders to tourism in 1990. Before that, it was illegal for Albanians to own a car, practice religion, or have contact with foreigners.' },
+  { dayId: 19, text: 'Athens has been continuously inhabited for over 5,000 years, making it one of the world\'s oldest cities. The name "Athens" is older than written history — its origin is unknown.' },
+  { dayId: 20, text: 'The Parthenon was built between 447 and 432 BC without mortar — every stone was precisely cut to fit together using iron clamps. It has survived for nearly 2,500 years.' },
+  { dayId: 21, text: 'The Monastiraki Flea Market has been running since the Ottoman era. On Sundays it expands dramatically — locals joke that if something is stolen in Athens on Saturday, you can buy it back here on Sunday.' },
+  { dayId: 22, text: 'Greece has more archaeological museums than any other country in the world. It is estimated that 70% of all ancient artifacts in existence are Greek.' },
+  { dayId: 23, text: 'You have now traveled through 8 countries, 15+ cities, visited 20+ companies, and covered roughly 6,000 miles across Europe. The world looks different now than it did 23 days ago.' },
 ];
 
-export function getFunFactForDay(dayId) {
-  const entry = funFacts.find(f => f.dayId === dayId);
-  return entry ? entry.fact : funFacts[0].fact;
-}
+export const emergencyContacts = [
+  { label: 'European Emergency', phone: '112', notes: 'Works in all EU and Balkan countries for police, fire, ambulance' },
+  { label: 'US Embassy Italy (Rome)', phone: '+39 06 46741', notes: 'Passport loss or emergency in Italy' },
+  { label: 'US Embassy Slovenia (Ljubljana)', phone: '+386 1 200 5500', notes: 'Passport loss or emergency in Slovenia' },
+  { label: 'US Embassy Croatia (Zagreb)', phone: '+385 1 661 2200', notes: 'Passport loss or emergency in Croatia' },
+  { label: 'US Embassy Bosnia (Sarajevo)', phone: '+387 33 704 000', notes: 'Passport loss or emergency in Bosnia' },
+  { label: 'US Embassy Montenegro (Podgorica)', phone: '+382 20 410 500', notes: 'Passport loss or emergency in Montenegro' },
+  { label: 'US Embassy Albania (Tirana)', phone: '+355 4 224 7285', notes: 'Passport loss or emergency in Albania' },
+  { label: 'US Embassy Greece (Athens)', phone: '+30 210 720 2490', notes: 'Passport loss or emergency in Greece' },
+  { label: 'Trip Leader — Isaac', phone: 'TBD', notes: 'Add before departure' },
+  { label: 'Bus Driver', phone: 'TBD', notes: 'Add before departure' },
+  { label: 'Dr. Mattson', phone: 'TBD', notes: 'Add before departure' },
+  { label: 'Dr. Salmon', phone: 'TBD', notes: 'Add before departure' },
+  { label: 'Venice Hotel — Casa Cardinal Piazza', phone: 'TBD', notes: 'Sestiere Cannaregio 3539/a, Venice' },
+  { label: 'Ljubljana Hotel — Ibis Styles', phone: 'TBD', notes: 'Miklošičeva cesta 9, Ljubljana' },
+  { label: 'Zagreb Hotel — Hotel Dubrovnik', phone: 'TBD', notes: 'Ljudevita Gaja 1, Zagreb' },
+  { label: 'Sarajevo Hotel — Holiday Europa', phone: 'TBD', notes: 'Vladislava Skarića 5, Sarajevo' },
+  { label: 'Tirana Hotel', phone: 'TBD', notes: 'Ambasador 1, Tirana' },
+  { label: 'Athens Hotel', phone: 'TBD', notes: 'Add before departure' },
+  { label: 'Hospital Venice', phone: '+39 041 529 4111', notes: 'Ospedale Civile SS. Giovanni e Paolo' },
+  { label: 'Hospital Ljubljana', phone: '+386 1 522 5050', notes: 'UKC Ljubljana' },
+  { label: 'Hospital Zagreb', phone: '+385 1 238 8888', notes: 'KBC Zagreb' },
+  { label: 'Hospital Sarajevo', phone: '+387 33 297 000', notes: 'KCUS Sarajevo' },
+  { label: 'Hospital Athens', phone: '+30 210 777 8901', notes: 'Evangelismos Hospital' },
+];
+
+export const announcements = [
+  { id: 1, message: 'Welcome to the BYU Europe Trip app! Check the Itinerary tab each morning for the day\'s schedule.', emoji: '👋', active: false, createdAt: '2026-04-27' },
+];
