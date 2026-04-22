@@ -32,22 +32,15 @@ function ItineraryHero({ selectedDay, dayData }) {
         style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }}
       />
 
-      {/* Gradient fades photo into navy tab bar below */}
-      <div style={{
-        position: 'absolute', inset: 0,
-        background: 'linear-gradient(to bottom, rgba(7,60,119,0) 0%, rgba(7,60,119,0.6) 55%, rgba(7,60,119,1) 100%)',
-        zIndex: 2,
-      }} />
-
-      {/* Text overlay */}
+      {/* Text overlay — no gradient; text-shadow keeps labels legible over any photo */}
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 16px 14px', zIndex: 3 }}>
-        <p style={{ color: '#E9B753', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 3px' }}>
+        <p style={{ color: '#E9B753', fontSize: '10px', fontWeight: 700, letterSpacing: '2px', textTransform: 'uppercase', margin: '0 0 3px', textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}>
           {dayOfWeek} · {shortDate}
         </p>
-        <h2 style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 800, lineHeight: 1.1, margin: '0 0 2px' }}>
+        <h2 style={{ color: '#FFFFFF', fontSize: '24px', fontWeight: 800, lineHeight: 1.1, margin: '0 0 2px', textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}>
           {dayData.city}
         </h2>
-        <p style={{ color: 'rgba(255,255,255,0.72)', fontSize: '13px', fontWeight: 400, margin: 0 }}>
+        <p style={{ color: 'rgba(255,255,255,0.9)', fontSize: '13px', fontWeight: 400, margin: 0, textShadow: '0 1px 4px rgba(0,0,0,0.6)' }}>
           {dayData.country}
         </p>
       </div>

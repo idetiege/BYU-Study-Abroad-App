@@ -53,9 +53,20 @@ function withNumCols(withCols) {
   });
 }
 
+// Text color per category (dark only for Cultural which has a gold background)
+const CATEGORY_TEXT = {
+  'Company Visit': '#FFFFFF',
+  'Cultural':      '#1B1B1B',
+  'Food':          '#FFFFFF',
+  'Transport':     '#FFFFFF',
+  'Free Time':     '#FFFFFF',
+  'Accommodation': '#FFFFFF',
+};
+
 // ─── Activity block ───────────────────────────────────────────────────────────
 function ActivityBlock({ activity, onPress }) {
-  const color    = CATEGORY_COLORS[activity.category] || '#3A3A4A';
+  const bg       = CATEGORY_COLORS[activity.category] || '#3A3A4A';
+  const textColor = CATEGORY_TEXT[activity.category] || '#FFFFFF';
   const colW     = 100 / activity.numCols;
   const leftPct  = `${activity.col * colW}%`;
   const widthStr = `calc(${colW}% - 2px)`;
@@ -71,12 +82,11 @@ function ActivityBlock({ activity, onPress }) {
         left: leftPct,
         width: widthStr,
         height: height - 2,
-        background: '#FFFFFF',
+        background: bg,
         border: 'none',
-        borderLeft: `4px solid ${color}`,
-        borderRadius: '0 8px 8px 0',
-        boxShadow: '0 1px 6px rgba(0,0,0,0.09)',
-        padding: '5px 30px 5px 8px',
+        borderRadius: '6px',
+        boxShadow: '0 1px 4px rgba(0,0,0,0.15)',
+        padding: '5px 28px 5px 8px',
         textAlign: 'left',
         cursor: 'pointer',
         overflow: 'hidden',
@@ -88,23 +98,23 @@ function ActivityBlock({ activity, onPress }) {
       }}
     >
       <p style={{
-        color: '#1B1B1B', fontSize: '12px', fontWeight: 700,
+        color: textColor, fontSize: '12px', fontWeight: 700,
         margin: 0, lineHeight: 1.3,
         display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden',
       }}>
         {activity.title}
       </p>
       {showLoc && (
-        <p style={{ color: '#A3876F', fontSize: '10px', margin: '2px 0 0', lineHeight: 1.3, overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
+        <p style={{ color: textColor, opacity: 0.75, fontSize: '10px', margin: '2px 0 0', lineHeight: 1.3, overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>
           {activity.location}
         </p>
       )}
-      {/* Category badge */}
+      {/* Category badge — 20% white overlay so it doesn't clash with block color */}
       <div style={{
         position: 'absolute', top: 4, right: 4,
-        background: color, borderRadius: '4px', padding: '1px 4px', maxWidth: '60px', overflow: 'hidden',
+        background: 'rgba(255,255,255,0.2)', borderRadius: '4px', padding: '1px 4px', maxWidth: '60px', overflow: 'hidden',
       }}>
-        <span style={{ color: '#fff', fontSize: '8px', fontWeight: 700, letterSpacing: '0.2px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
+        <span style={{ color: textColor, fontSize: '8px', fontWeight: 700, letterSpacing: '0.2px', textTransform: 'uppercase', whiteSpace: 'nowrap' }}>
           {activity.category.split(' ')[0]}
         </span>
       </div>
