@@ -49,13 +49,13 @@ export default function BottomNav() {
   return (
     <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50"
          style={{ background: '#073C77', borderTop: '1px solid rgba(255,255,255,0.1)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      <div className="flex">
+      <div style={{ display: 'flex', height: '60px' }}>
         {tabs.map(({ path, label, icon: Icon }) => (
           <NavLink
             key={path}
             to={path}
             end={path === '/'}
-            className="flex-1 flex flex-col items-center justify-center py-2 gap-1 transition-opacity"
+            className="flex-1 flex flex-col items-center justify-center gap-1 transition-opacity"
           >
             {({ isActive }) => (
               <>
