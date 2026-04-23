@@ -47,9 +47,13 @@ function PhoneIcon({ active }) {
 
 export default function BottomNav() {
   return (
-    <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[480px] z-50"
-         style={{ background: '#073C77', borderTop: '1px solid rgba(255,255,255,0.1)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      <div style={{ display: 'flex', height: '60px' }}>
+    <nav style={{
+      position: 'fixed', bottom: 0, left: 0, right: 0, zIndex: 50,
+      background: '#073C77',
+      borderTop: '1px solid rgba(255,255,255,0.1)',
+      paddingBottom: 'env(safe-area-inset-bottom)',
+    }}>
+      <div style={{ display: 'flex', height: '60px', maxWidth: '480px', margin: '0 auto' }}>
         {tabs.map(({ path, label, icon: Icon }) => (
           <NavLink
             key={path}
