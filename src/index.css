@@ -8,21 +8,20 @@
 html {
   margin: 0;
   padding: 0;
-  height: 100dvh;
-  overflow: hidden;
+  height: -webkit-fill-available;
   background: #073C77;
 }
 
 body {
   margin: 0;
   padding: 0;
-  height: 100dvh;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
   background: #FFFFFF;
   font-family: 'Inter', system-ui, sans-serif;
   color: #FFFFFF;
   -webkit-font-smoothing: antialiased;
-  overscroll-behavior-y: contain;
-  overflow: hidden;
+  overscroll-behavior: none;
 }
 
 #root {
@@ -31,9 +30,10 @@ body {
   max-width: 480px;
   margin: 0 auto;
   position: relative;
-  height: 100dvh;
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
   overflow: hidden;
-  overscroll-behavior-y: contain;
+  overscroll-behavior: none;
 }
 
 /* Leaflet map fix */
