@@ -435,7 +435,7 @@ export default function TimelineView({
     <>
       <div
         ref={scrollRef}
-        style={{ flex: 1, overflowY: 'auto', background: '#FFFFFF', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))' }}
+        style={{ flex: 1, overflowY: 'auto', background: '#FFFFFF', paddingBottom: 'calc(4rem + env(safe-area-inset-bottom))', touchAction: 'pan-y', WebkitOverflowScrolling: 'touch' }}
       >
         {/* Packed lunch banner */}
         {dayData?.packedLunch && (

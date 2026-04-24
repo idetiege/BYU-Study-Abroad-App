@@ -36,13 +36,13 @@ function ItineraryHero({ selectedDay, dayData }) {
   const shortDate = date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' }).toUpperCase();
 
   return (
-    <div style={{ position: 'relative', height: '200px', flexShrink: 0, overflow: 'hidden', paddingTop: 'env(safe-area-inset-top)' }}>
+    <div style={{ position: 'relative', height: '220px', flexShrink: 0, overflow: 'hidden', paddingTop: 'env(safe-area-inset-top)' }}>
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(160deg, #073C77 0%, #0F2B52 60%, #073C77 100%)', zIndex: 0 }} />
       <img
         src={`/images/day-${selectedDay}.jpg`}
         alt={dayData.city}
         onError={e => { e.currentTarget.style.display = 'none'; }}
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', zIndex: 1 }}
+        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', zIndex: 1 }}
       />
       <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top right, rgba(0,0,0,0.65) 0%, transparent 50%)', zIndex: 2 }} />
       <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '0 16px 14px', zIndex: 3 }}>
@@ -221,7 +221,7 @@ export default function Itinerary() {
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative' }}
+        style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative', touchAction: 'pan-y' }}
       >
         <TimelineView
           activities={activities}

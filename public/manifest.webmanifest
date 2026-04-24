@@ -1,0 +1,16 @@
+{
+  "name": "BYU Europe Trip",
+  "short_name": "BYU Trip",
+  "description": "BYU Study Abroad Europe 2026 Trip Companion",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone"],
+  "background_color": "#FFFFFF",
+  "theme_color": "#073C77",
+  "orientation": "portrait",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icon-192.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
