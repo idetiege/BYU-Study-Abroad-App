@@ -9,11 +9,12 @@ export const PROFESSOR_PASSWORD = 'BYU2026prof';
 export const getTodayDayNumber = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const start = new Date(TRIP_START);
-  start.setHours(0, 0, 0, 0);
+  // Use year/month/day constructor so it's parsed as local midnight, not UTC
+  const [y, m, d] = TRIP_START.split('-').map(Number);
+  const start = new Date(y, m - 1, d);
   const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24)) + 1;
-  if (diff < 1) return 1;
-  if (diff > TOTAL_DAYS) return TOTAL_DAYS;
+  if (diff < 1) return null;
+  if (diff > TOTAL_DAYS) return null;
   return diff;
 };
 
@@ -308,7 +309,6 @@ export const funFacts = [
 ];
 
 export const emergencyContacts = [
-  { label: 'European Emergency', phone: '112', notes: 'Works in all EU and Balkan countries for police, fire, and ambulance' },
   { label: 'US Embassy Italy (Rome)', phone: '+39 06 46741', notes: 'Passport loss or emergency in Italy' },
   { label: 'US Embassy Slovenia (Ljubljana)', phone: '+386 1 200 5500', notes: 'Passport loss or emergency in Slovenia' },
   { label: 'US Embassy Croatia (Zagreb)', phone: '+385 1 661 2200', notes: 'Passport loss or emergency in Croatia' },

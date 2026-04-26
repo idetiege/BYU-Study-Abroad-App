@@ -63,22 +63,36 @@ export default function MapView() {
   const zoom = mode === 'today' ? 13 : 5;
 
   return (
-    <div className="flex flex-col h-full overflow-hidden">
+    <div style={{
+      display: 'flex', flexDirection: 'column',
+      height: '100dvh',
+      paddingTop: 'env(safe-area-inset-top)',
+      paddingBottom: 'calc(60px + env(safe-area-inset-bottom))',
+      overflow: 'hidden',
+      background: '#FFFFFF',
+    }}>
       {/* Toggle */}
-      <div className="flex justify-center gap-2 p-3"
-           style={{ background: '#FFFFFF', borderBottom: '1px solid rgba(7,60,119,0.1)', paddingTop: 'calc(env(safe-area-inset-top) + 12px)' }}>
+      <div style={{
+        display: 'flex', justifyContent: 'center', gap: '8px',
+        padding: '12px 16px',
+        background: '#FFFFFF', borderBottom: '1px solid rgba(7,60,119,0.1)',
+        flexShrink: 0,
+      }}>
         {['today', 'full'].map(m => (
-          <button key={m} onClick={() => setMode(m)}
-                  className="px-5 py-2 rounded-full transition-all"
-                  style={{ background: mode === m ? '#E9B753' : 'rgba(7,60,119,0.08)', color: mode === m ? '#073C77' : '#A3876F', fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+          <button key={m} onClick={() => setMode(m)} style={{
+            padding: '8px 20px', borderRadius: '999px', border: 'none', cursor: 'pointer',
+            background: mode === m ? '#E9B753' : 'rgba(7,60,119,0.08)',
+            color: mode === m ? '#073C77' : '#A3876F',
+            fontSize: '11px', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase',
+          }}>
             {m === 'today' ? 'Today' : 'Full Trip'}
           </button>
         ))}
       </div>
 
       {(!todayDay && mode === 'today') && (
-        <div className="flex-1 flex items-center justify-center" style={{ color: '#A3876F' }}>
-          <div className="text-center px-8">
+        <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#A3876F' }}>
+          <div style={{ textAlign: 'center', padding: '0 32px' }}>
             <p style={{ fontSize: '40px', marginBottom: '8px' }}>🗺️</p>
             <p>Trip hasn't started yet. Switch to Full Trip to see all locations.</p>
           </div>
@@ -86,7 +100,7 @@ export default function MapView() {
       )}
 
       {(mode !== 'today' || todayDay) && (
-        <div className="flex-1 relative">
+        <div style={{ flex: 1, position: 'relative', minHeight: 0 }}>
           <MapContainer
             key={`${mode}-${center.join(',')}`}
             center={center}
@@ -139,10 +153,14 @@ export default function MapView() {
           </MapContainer>
 
           {/* Legend */}
-          <div className="absolute bottom-4 left-4 z-[1000] rounded-xl p-3 flex flex-col gap-1"
-               style={{ background: 'rgba(7,60,119,0.92)', backdropFilter: 'blur(8px)' }}>
+          <div style={{
+            position: 'absolute', bottom: '16px', left: '16px', zIndex: 1000,
+            background: 'rgba(7,60,119,0.92)', backdropFilter: 'blur(8px)',
+            borderRadius: '12px', padding: '10px 12px',
+            display: 'flex', flexDirection: 'column', gap: '5px',
+          }}>
             {Object.entries(CATEGORY_COLORS).map(([cat, color]) => (
-              <div key={cat} className="flex items-center gap-2">
+              <div key={cat} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: color, flexShrink: 0 }} />
                 <span style={{ color: '#fff', fontSize: '10px', fontWeight: 600 }}>{cat}</span>
               </div>
