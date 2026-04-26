@@ -34,16 +34,23 @@ if (navigator.storage?.persist) {
   navigator.storage.persist();
 }
 
-// ── §13 Service worker registration + hourly update check ────────────────────
+// ── §13 Service worker registration + update on every open + hourly poll ─────
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(reg => {
-        // Poll for SW updates once per hour so users get fresh content
-        // without needing to close all tabs
+        // Check for a new SW immediately on every app open
+        reg.update();
+        // Also poll hourly so long-running sessions get updates
         setInterval(() => reg.update(), 60 * 60 * 1000);
       })
       .catch(() => {});
+
+    // When a new SW takes over (skipWaiting + clients.claim), reload so the
+    // page gets fresh JS/CSS instead of running old bundles with a new SW
+    navigator.serviceWorker.addEventListener('controllerchange', () => {
+      window.location.reload();
+    });
   });
 }
 

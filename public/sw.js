@@ -1,4 +1,4 @@
-const CACHE = 'byu-trip-v2';
+const CACHE = 'byu-trip-v3';
 const WEATHER_HOST = 'wttr.in';
 
 const PRECACHE = [
