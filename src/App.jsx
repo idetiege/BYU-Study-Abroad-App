@@ -7,6 +7,8 @@ import MapView from './components/MapView';
 import Emergency from './components/Emergency';
 import BottomNav from './components/BottomNav';
 import Login from './components/Login';
+import OfflineBanner from './components/OfflineBanner';
+import AnnouncementBanner from './components/AnnouncementBanner';
 
 export const AppContext = createContext({
   professorMode: false,
@@ -23,6 +25,8 @@ function AppShell() {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', background: '#FFFFFF', position: 'relative' }}>
+      <OfflineBanner />
+      <AnnouncementBanner />
       <Routes>
         <Route path="/"             element={<Home />} />
         <Route path="/itinerary"    element={<Itinerary />} />

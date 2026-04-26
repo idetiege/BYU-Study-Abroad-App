@@ -1,9 +1,37 @@
-const CACHE = 'byu-trip-v1';
+const CACHE = 'byu-trip-v2';
 const WEATHER_HOST = 'wttr.in';
+
+const PRECACHE = [
+  '/',
+  '/index.html',
+  '/images/day-1.jpg',
+  '/images/day-2.jpg',
+  '/images/day-3.jpg',
+  '/images/day-4.jpg',
+  '/images/day-5.jpg',
+  '/images/day-6.jpg',
+  '/images/day-7.jpg',
+  '/images/day-8.jpg',
+  '/images/day-9.jpg',
+  '/images/day-10.jpg',
+  '/images/day-11.jpg',
+  '/images/day-12.jpg',
+  '/images/day-13.jpg',
+  '/images/day-14.jpg',
+  '/images/day-15.jpg',
+  '/images/day-16.jpg',
+  '/images/day-17.jpg',
+  '/images/day-18.jpg',
+  '/images/day-19.jpg',
+  '/images/day-20.jpg',
+  '/images/day-21.jpg',
+  '/images/day-22.jpg',
+  '/images/day-23.jpg',
+];
 
 self.addEventListener('install', e => {
   e.waitUntil(
-    caches.open(CACHE).then(c => c.addAll(['/', '/index.html']))
+    caches.open(CACHE).then(c => c.addAll(PRECACHE))
   );
   self.skipWaiting();
 });
@@ -47,7 +75,6 @@ self.addEventListener('fetch', e => {
         }
         return res;
       }).catch(() => {
-        // SPA fallback: return index.html for navigation requests
         if (e.request.mode === 'navigate') return caches.match('/index.html');
       });
     })

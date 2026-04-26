@@ -4,6 +4,62 @@ import TimelineView from './TimelineView';
 import { getTodayDayNumber, getDayData, getActivitiesForDay, days } from '../data/tripData';
 import { useAppContext } from '../App';
 
+// ─── Check-in card ────────────────────────────────────────────────────────────
+const CHECKINS_KEY = 'byu_checkins';
+
+function loadCheckins() {
+  try { return JSON.parse(localStorage.getItem(CHECKINS_KEY) || '{}'); }
+  catch { return {}; }
+}
+
+function CheckInCard({ dayId }) {
+  const [checkins, setCheckins] = useState(loadCheckins);
+  const checked = checkins[String(dayId)];
+
+  const handleCheckIn = () => {
+    const next = { ...checkins, [String(dayId)]: { time: new Date().toISOString() } };
+    localStorage.setItem(CHECKINS_KEY, JSON.stringify(next));
+    setCheckins(next);
+  };
+
+  const timeStr = checked
+    ? new Date(checked.time).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' })
+    : null;
+
+  return (
+    <div style={{
+      margin: '10px 16px 0',
+      background: checked ? '#F0FDF4' : '#F5F0E8',
+      border: `1px solid ${checked ? 'rgba(22,101,52,0.2)' : 'rgba(7,60,119,0.12)'}`,
+      borderRadius: '14px',
+      padding: '12px 14px',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      gap: '10px', flexShrink: 0,
+    }}>
+      <div>
+        <p style={{ color: checked ? '#166534' : '#073C77', fontSize: '14px', fontWeight: 700, margin: '0 0 1px' }}>
+          {checked ? '✓ Checked in' : 'Mark your attendance'}
+        </p>
+        <p style={{ color: '#A3876F', fontSize: '11px', margin: 0 }}>
+          {checked ? `Recorded at ${timeStr}` : "Let the professor know you're here today"}
+        </p>
+      </div>
+      {!checked && (
+        <button
+          onClick={handleCheckIn}
+          style={{
+            background: '#073C77', border: 'none', borderRadius: '10px',
+            color: '#FFFFFF', fontSize: '13px', fontWeight: 700,
+            padding: '8px 14px', cursor: 'pointer', flexShrink: 0,
+          }}
+        >
+          I'm Here
+        </button>
+      )}
+    </div>
+  );
+}
+
 // ─── Professor edits helpers ──────────────────────────────────────────────────
 function loadEdits() {
   try { return JSON.parse(localStorage.getItem('professorEdits') || '{}'); }
@@ -216,6 +272,11 @@ export default function Itinerary() {
 
       {/* Day tab bar */}
       <DayTabBar selectedDay={selectedDay} onSelect={handleSelectDay} />
+
+      {/* Check-in card — today only, not in edit mode */}
+      {selectedDay === todayDay && !activeEditMode && (
+        <CheckInCard dayId={selectedDay} />
+      )}
 
       {/* Timeline + FAB */}
       <div
