@@ -340,3 +340,17 @@ export const emergencyContacts = [
 export const announcements = [
   { id: 1, message: 'Welcome to the BYU Europe Study Abroad 2026 app! Check the Itinerary tab each morning for today\'s schedule.', emoji: '👋', active: false, createdAt: '2026-04-27' },
 ];
+
+export const CATEGORY_COLORS = {
+  'Company Visit': '#073C77',
+  'Cultural': '#E9B753',
+  'Food': '#2D6A4F',
+  'Transport': '#8B8B8B',
+  'Free Time': '#4F84B4',
+  'Accommodation': '#6B4FA3',
+};
+
+export const formatShortDate = (dateStr) => {
+  const d = new Date(dateStr + 'T12:00:00');
+  return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+};
