@@ -215,7 +215,7 @@ export default function Itinerary() {
     const dx = e.changedTouches[0].clientX - touchStart.current.x;
     const dy = e.changedTouches[0].clientY - touchStart.current.y;
     touchStart.current = null;
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 2) {
       const idx = days.findIndex(d => d.id === selectedDay);
       if (dx < 0 && idx < days.length - 1) handleSelectDay(days[idx + 1].id);
       if (dx > 0 && idx > 0) handleSelectDay(days[idx - 1].id);
@@ -225,7 +225,7 @@ export default function Itinerary() {
   const activeEditMode = professorMode && editMode;
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', overflow: 'hidden' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100dvh', overflow: 'hidden' }}>
 
       {/* Hero + Edit Day button */}
       <div style={{ position: 'relative', flexShrink: 0 }}>
@@ -282,7 +282,7 @@ export default function Itinerary() {
       <div
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
-        style={{ flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column', position: 'relative', touchAction: 'pan-y' }}
+        style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column', position: 'relative', touchAction: 'pan-y' }}
       >
         <TimelineView
           activities={activities}
