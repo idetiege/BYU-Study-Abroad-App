@@ -32,7 +32,7 @@ function AppShell() {
   const hideNav = location.pathname.startsWith('/activity/');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#FFFFFF', position: 'relative', touchAction: 'pan-y' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100dvh', overflow: 'hidden', background: '#FFFFFF', position: 'relative', touchAction: 'pan-y' }}>
       <OfflineBanner />
       <AnnouncementBanner />
       <div style={{ flex: 1, minHeight: 0, position: 'relative', overflow: 'hidden' }}>

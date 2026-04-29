@@ -49,11 +49,10 @@ body {
   max-width: 480px;
   margin: 0 auto;
   position: relative;
-  height: 100vh;                   /* baseline fallback */
-  height: 100dvh;                  /* dynamic — adjusts as browser chrome shows/hides */
-  height: -webkit-fill-available;  /* Safari: exact visual viewport, no white-bar */
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+  overflow: hidden;
   overscroll-behavior-y: contain;
-  /* overflow:hidden deliberately removed — it traps position:fixed children on iOS Safari */
 }
 
 /* ── §10 Media defaults ──────────────────────────────────────────────────────── */
