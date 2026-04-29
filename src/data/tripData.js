@@ -9,7 +9,8 @@ export const PROFESSOR_PASSWORD = 'BYU2026prof';
 export const getTodayDayNumber = () => {
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-  const start = new Date(TRIP_START);
+  // 'T00:00:00' forces local-time parsing; date-only strings parse as UTC midnight
+  const start = new Date(TRIP_START + 'T00:00:00');
   start.setHours(0, 0, 0, 0);
   const diff = Math.floor((today - start) / (1000 * 60 * 60 * 24)) + 1;
   if (diff < 1) return 1;

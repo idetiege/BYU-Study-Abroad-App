@@ -18,6 +18,7 @@ function toMinsSort(timeStr) {
 function mergeEdits(dayId, baseActivities, edits) {
   const { overrides = {}, additions = [], deletions = [] } = edits[String(dayId)] || {};
   const del = new Set(deletions.map(String));
+  const baseIds = new Set(baseActivities.map(a => String(a.id)));
   return [
     ...baseActivities
       .filter(a => !del.has(String(a.id)))
@@ -25,7 +26,8 @@ function mergeEdits(dayId, baseActivities, edits) {
         const ov = overrides[String(a.id)];
         return ov ? { ...a, ...ov } : a;
       }),
-    ...additions,
+    // Skip additions already present in supabaseActivities (optimistic update dedup)
+    ...additions.filter(a => !baseIds.has(String(a.id))),
   ].sort((a, b) => toMinsSort(a.time) - toMinsSort(b.time));
 }
 
