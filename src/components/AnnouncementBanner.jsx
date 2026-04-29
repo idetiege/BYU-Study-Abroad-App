@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { announcements } from '../data/tripData';
+import { useAppContext } from '../App';
 
 const DISMISSED_KEY = 'byu_dismissed_announcements';
 
@@ -8,28 +8,27 @@ function getDismissed() {
   catch { return []; }
 }
 
-function findActive() {
-  const dismissed = getDismissed();
-  return announcements.find(a => a.active && !dismissed.includes(a.id)) || null;
-}
-
 export default function AnnouncementBanner() {
-  const [visible, setVisible] = useState(findActive);
+  const { announcements } = useAppContext();
+  const [dismissed, setDismissed] = useState(getDismissed);
 
+  // Re-read dismissed list whenever announcements update or tab regains focus
   useEffect(() => {
     const onVisible = () => {
-      if (document.visibilityState === 'visible') setVisible(findActive());
+      if (document.visibilityState === 'visible') setDismissed(getDismissed());
     };
     document.addEventListener('visibilitychange', onVisible);
     return () => document.removeEventListener('visibilitychange', onVisible);
   }, []);
 
+  const visible = announcements.find(a => a.active && !dismissed.includes(a.id)) || null;
+
   if (!visible) return null;
 
   const dismiss = () => {
-    const dismissed = [...getDismissed(), visible.id];
-    localStorage.setItem(DISMISSED_KEY, JSON.stringify(dismissed));
-    setVisible(null);
+    const next = [...dismissed, visible.id];
+    localStorage.setItem(DISMISSED_KEY, JSON.stringify(next));
+    setDismissed(next);
   };
 
   return (

@@ -1,7 +1,7 @@
-import { useState, useRef, useMemo, useCallback } from 'react';
+import { useState, useRef, useMemo, useCallback, useEffect } from 'react';
 import DayTabBar from './DayTabBar';
 import TimelineView from './TimelineView';
-import { getTodayDayNumber, getDayData, getActivitiesForDay, days } from '../data/tripData';
+import { getTodayDayNumber, getDayData, days } from '../data/tripData';
 import { useAppContext } from '../App';
 
 // ─── Check-in card ────────────────────────────────────────────────────────────
@@ -85,6 +85,32 @@ function mergeEdits(dayId, baseActivities, edits) {
   ].sort((a, b) => toMinsSort(a.time) - toMinsSort(b.time));
 }
 
+// ─── Save toast ───────────────────────────────────────────────────────────────
+function SaveToast({ visible }) {
+  if (!visible) return null;
+  return (
+    <div style={{
+      position: 'fixed',
+      bottom: 'calc(env(safe-area-inset-bottom) + 80px)',
+      left: '50%', transform: 'translateX(-50%)',
+      zIndex: 400,
+      background: '#073C77',
+      color: '#FFFFFF',
+      fontSize: '13px', fontWeight: 700,
+      padding: '8px 18px',
+      borderRadius: '20px',
+      boxShadow: '0 4px 16px rgba(0,0,0,0.25)',
+      display: 'flex', alignItems: 'center', gap: '7px',
+      pointerEvents: 'none',
+    }}>
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#E9B753" strokeWidth="3">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+      Saved
+    </div>
+  );
+}
+
 // ─── Hero ─────────────────────────────────────────────────────────────────────
 function ItineraryHero({ selectedDay, dayData }) {
   const date      = new Date(dayData.date + 'T12:00:00');
@@ -119,7 +145,7 @@ function ItineraryHero({ selectedDay, dayData }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 export default function Itinerary() {
   const todayDay = getTodayDayNumber();
-  const { professorMode, isActivityVisible } = useAppContext();
+  const { professorMode, isActivityVisible, activities: supabaseActivities, upsertActivityOverride } = useAppContext();
 
   const [selectedDay, setSelectedDay] = useState(() => {
     const saved = sessionStorage.getItem('itinerary_selected_day');
@@ -128,12 +154,16 @@ export default function Itinerary() {
   const [editMode, setEditMode]         = useState(false);
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [professorEdits, setProfEdits]  = useState(loadEdits);
+  const [saveToast, setSaveToast]       = useState(false);
+  const toastTimer = useRef(null);
   const touchStart = useRef(null);
 
-  const saveEdits = useCallback((next) => {
-    localStorage.setItem('professorEdits', JSON.stringify(next));
-    setProfEdits(next);
-  }, []);
+  const showToast = () => {
+    setSaveToast(true);
+    clearTimeout(toastTimer.current);
+    toastTimer.current = setTimeout(() => setSaveToast(false), 2000);
+  };
+  useEffect(() => () => clearTimeout(toastTimer.current), []);
 
   const handleSelectDay = (day) => {
     sessionStorage.setItem('itinerary_selected_day', String(day));
@@ -142,6 +172,7 @@ export default function Itinerary() {
   };
 
   const handleUpdateActivity = useCallback((actId, changes) => {
+    // 1. Apply to local professor edits (instant UI response)
     setProfEdits(prev => {
       const key = String(selectedDay);
       const dayEdits = prev[key] || {};
@@ -156,9 +187,22 @@ export default function Itinerary() {
       localStorage.setItem('professorEdits', JSON.stringify(next));
       return next;
     });
-  }, [selectedDay]);
+
+    // 2. Upsert to Supabase
+    upsertActivityOverride(actId, selectedDay, {
+      title:    changes.title    ?? null,
+      time:     changes.time     ?? null,
+      location: changes.location ?? null,
+      notes:    changes.notes    ?? null,
+      category: changes.category ?? null,
+    }).then(result => {
+      if (result?.ok) showToast();
+      else if (result?.offline) showToast(); // saved to offline queue
+    }).catch(() => {});
+  }, [selectedDay, upsertActivityOverride]);
 
   const handleDeleteActivity = useCallback((actId) => {
+    // 1. Local delete
     setProfEdits(prev => {
       const key = String(selectedDay);
       const dayEdits = prev[key] || {};
@@ -172,19 +216,37 @@ export default function Itinerary() {
       localStorage.setItem('professorEdits', JSON.stringify(next));
       return next;
     });
-  }, [selectedDay]);
+
+    // 2. Mark deleted in Supabase
+    upsertActivityOverride(actId, selectedDay, { deleted: true }).catch(() => {});
+  }, [selectedDay, upsertActivityOverride]);
 
   const handleAddActivity = useCallback((newAct) => {
+    const actId = `add-${Date.now()}`;
+
+    // 1. Add to local professor edits
     setProfEdits(prev => {
       const key = String(selectedDay);
       const dayEdits = prev[key] || {};
-      const addition = { ...newAct, id: `add-${Date.now()}`, dayId: selectedDay, showStudents: true };
+      const addition = { ...newAct, id: actId, dayId: selectedDay, showStudents: true };
       const next = { ...prev, [key]: { ...dayEdits, additions: [...(dayEdits.additions || []), addition] } };
       localStorage.setItem('professorEdits', JSON.stringify(next));
       return next;
     });
     setAddModalOpen(false);
-  }, [selectedDay]);
+
+    // 2. Upsert to Supabase as a new override row
+    upsertActivityOverride(actId, selectedDay, {
+      title:        newAct.title,
+      time:         newAct.time,
+      location:     newAct.location || null,
+      notes:        newAct.notes    || null,
+      category:     newAct.category,
+      show_students: true,
+    }).then(result => {
+      if (result?.ok || result?.offline) showToast();
+    }).catch(() => {});
+  }, [selectedDay, upsertActivityOverride]);
 
   const handleResetDay = () => {
     setProfEdits(prev => {
@@ -194,7 +256,11 @@ export default function Itinerary() {
     });
   };
 
-  const baseActivities = useMemo(() => getActivitiesForDay(selectedDay), [selectedDay]);
+  // Use Supabase-merged activities as the base, then apply local professor edits on top
+  const baseActivities = useMemo(
+    () => supabaseActivities.filter(a => a.dayId === selectedDay),
+    [supabaseActivities, selectedDay]
+  );
   const mergedActivities = useMemo(
     () => mergeEdits(selectedDay, baseActivities, professorEdits),
     [selectedDay, baseActivities, professorEdits]
@@ -319,6 +385,8 @@ export default function Itinerary() {
           </button>
         )}
       </div>
+
+      <SaveToast visible={saveToast} />
     </div>
   );
 }

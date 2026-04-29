@@ -10,6 +10,7 @@ import BottomNav from './components/BottomNav';
 import Login from './components/Login';
 import OfflineBanner from './components/OfflineBanner';
 import AnnouncementBanner from './components/AnnouncementBanner';
+import useTripData from './hooks/useTripData';
 
 export const AppContext = createContext({
   professorMode: false,
@@ -17,6 +18,12 @@ export const AppContext = createContext({
   visibilityOverrides: {},
   setVisibilityOverride: () => {},
   isActivityVisible: () => true,
+  activities: [],
+  announcements: [],
+  lastSynced: null,
+  isOnline: true,
+  upsertActivityOverride: async () => {},
+  upsertAnnouncement: async () => {},
 });
 export const useAppContext = () => useContext(AppContext);
 
@@ -57,6 +64,8 @@ export default function App() {
     catch { return {}; }
   });
 
+  const tripData = useTripData();
+
   const setProfessorMode = (val) => {
     localStorage.setItem('byu_professor', val ? 'true' : 'false');
     setProfessorModeState(val);
@@ -85,7 +94,11 @@ export default function App() {
   if (!user) return <Login onLogin={handleLogin} />;
 
   return (
-    <AppContext.Provider value={{ professorMode, setProfessorMode, visibilityOverrides, setVisibilityOverride, isActivityVisible }}>
+    <AppContext.Provider value={{
+      professorMode, setProfessorMode,
+      visibilityOverrides, setVisibilityOverride, isActivityVisible,
+      ...tripData,
+    }}>
       <BrowserRouter>
         <AppShell />
       </BrowserRouter>

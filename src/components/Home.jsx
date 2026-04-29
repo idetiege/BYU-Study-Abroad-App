@@ -5,15 +5,17 @@ import ActivityCard from './ActivityCard';
 import { useAppContext } from '../App';
 import {
   TRIP_START, TOTAL_DAYS, PROFESSOR_PASSWORD,
-  getTodayDayNumber, getDayData, getActivitiesForDay, getNextActivity, getQuoteForDay,
-  getFunFactForDay, formatDate,
+  getTodayDayNumber, getDayData, getQuoteForDay, getFunFactForDay, formatDate,
 } from '../data/tripData';
 
-// ─── Professor mode modal ─────────────────────────────────────────────────────
+// ─── Professor mode modal (with announcement management) ──────────────────────
 function ProfessorModal({ onClose }) {
-  const { professorMode, setProfessorMode } = useAppContext();
+  const { professorMode, setProfessorMode, announcements, upsertAnnouncement } = useAppContext();
   const [pw, setPw] = useState('');
   const [error, setError] = useState('');
+  const [composing, setComposing] = useState(false);
+  const [draft, setDraft] = useState({ emoji: '📢', message: '', active: true });
+  const [saving, setSaving] = useState(false);
 
   const handleEnable = () => {
     if (pw === PROFESSOR_PASSWORD) {
@@ -30,6 +32,22 @@ function ProfessorModal({ onClose }) {
     onClose();
   };
 
+  const handleToggle = async (ann) => {
+    try { await upsertAnnouncement({ ...ann, active: !ann.active }); }
+    catch { /* silent */ }
+  };
+
+  const handleSaveNew = async () => {
+    if (!draft.message.trim()) return;
+    setSaving(true);
+    try {
+      await upsertAnnouncement({ emoji: draft.emoji, message: draft.message.trim(), active: draft.active });
+      setComposing(false);
+      setDraft({ emoji: '📢', message: '', active: true });
+    } catch { /* silent */ }
+    setSaving(false);
+  };
+
   return (
     <div
       onClick={onClose}
@@ -37,8 +55,9 @@ function ProfessorModal({ onClose }) {
     >
       <div
         onClick={e => e.stopPropagation()}
-        style={{ background: '#FFFFFF', width: '100%', borderRadius: '20px 20px 0 0', padding: '24px 20px', paddingBottom: 'calc(24px + env(safe-area-inset-bottom))', border: '1px solid rgba(7,60,119,0.1)' }}
+        style={{ background: '#FFFFFF', width: '100%', borderRadius: '20px 20px 0 0', padding: '24px 20px', paddingBottom: 'calc(24px + env(safe-area-inset-bottom))', border: '1px solid rgba(7,60,119,0.1)', maxHeight: '85vh', overflowY: 'auto' }}
       >
+        {/* Header */}
         <div className="flex items-center gap-3 mb-5">
           <div style={{ width: '36px', height: '36px', borderRadius: '10px', background: professorMode ? 'rgba(233,183,83,0.15)' : 'rgba(7,60,119,0.06)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={professorMode ? '#E9B753' : '#A3876F'} strokeWidth="2">
@@ -58,6 +77,81 @@ function ProfessorModal({ onClose }) {
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#E9B753" strokeWidth="2"><polyline points="20 6 9 17 4 12"/></svg>
               <span style={{ color: '#E9B753', fontSize: '13px', fontWeight: 600 }}>Professor mode is active</span>
             </div>
+
+            {/* ── Announcements ── */}
+            <div style={{ marginBottom: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '10px' }}>
+                <p style={{ color: '#073C77', fontSize: '14px', fontWeight: 700, margin: 0 }}>Announcements</p>
+                {!composing && (
+                  <button
+                    onClick={() => setComposing(true)}
+                    style={{ background: '#E9B753', border: 'none', borderRadius: '10px', color: '#073C77', fontSize: '12px', fontWeight: 700, padding: '5px 12px', cursor: 'pointer' }}
+                  >
+                    + New
+                  </button>
+                )}
+              </div>
+
+              {composing && (
+                <div style={{ background: '#F5F0E8', borderRadius: '14px', padding: '14px', marginBottom: '10px' }}>
+                  <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
+                    <input
+                      value={draft.emoji}
+                      onChange={e => setDraft(d => ({ ...d, emoji: e.target.value }))}
+                      style={{ width: '52px', textAlign: 'center', fontSize: '22px', padding: '6px', borderRadius: '8px', border: '1px solid rgba(7,60,119,0.15)', background: '#FFFFFF', outline: 'none' }}
+                    />
+                    <textarea
+                      value={draft.message}
+                      onChange={e => setDraft(d => ({ ...d, message: e.target.value }))}
+                      placeholder="Announcement message…"
+                      rows={2}
+                      style={{ flex: 1, padding: '8px 10px', borderRadius: '8px', border: '1px solid rgba(7,60,119,0.15)', background: '#FFFFFF', fontSize: '14px', resize: 'none', outline: 'none', fontFamily: 'inherit', lineHeight: 1.45 }}
+                    />
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '7px', cursor: 'pointer' }}>
+                      <input type="checkbox" checked={draft.active} onChange={e => setDraft(d => ({ ...d, active: e.target.checked }))} />
+                      <span style={{ color: '#073C77', fontSize: '13px', fontWeight: 600 }}>Post immediately</span>
+                    </label>
+                    <div style={{ display: 'flex', gap: '8px' }}>
+                      <button onClick={() => setComposing(false)} style={{ padding: '6px 12px', borderRadius: '8px', background: 'rgba(7,60,119,0.08)', border: 'none', color: '#A3876F', fontSize: '13px', cursor: 'pointer' }}>Cancel</button>
+                      <button
+                        onClick={handleSaveNew}
+                        disabled={saving || !draft.message.trim()}
+                        style={{ padding: '6px 14px', borderRadius: '8px', background: draft.message.trim() ? '#073C77' : '#D0C4B0', border: 'none', color: '#FFFFFF', fontSize: '13px', fontWeight: 700, cursor: draft.message.trim() ? 'pointer' : 'default' }}
+                      >
+                        {saving ? 'Saving…' : 'Post'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {announcements.length === 0 && !composing && (
+                <p style={{ color: '#A3876F', fontSize: '13px', margin: 0 }}>No announcements yet.</p>
+              )}
+
+              {announcements.map(ann => (
+                <div key={ann.id} style={{ display: 'flex', alignItems: 'flex-start', gap: '10px', padding: '10px 12px', borderRadius: '12px', background: ann.active ? 'rgba(7,60,119,0.04)' : '#F5F0E8', border: `1px solid ${ann.active ? 'rgba(7,60,119,0.12)' : 'transparent'}`, marginBottom: '6px' }}>
+                  <span style={{ fontSize: '18px', flexShrink: 0, lineHeight: 1.3 }}>{ann.emoji}</span>
+                  <p style={{ flex: 1, margin: 0, color: '#073C77', fontSize: '13px', lineHeight: 1.45 }}>{ann.message}</p>
+                  <button
+                    onClick={() => handleToggle(ann)}
+                    style={{
+                      flexShrink: 0,
+                      padding: '4px 10px', borderRadius: '8px', border: 'none',
+                      background: ann.active ? '#E9B753' : 'rgba(7,60,119,0.08)',
+                      color: ann.active ? '#073C77' : '#A3876F',
+                      fontSize: '11px', fontWeight: 700, cursor: 'pointer',
+                      whiteSpace: 'nowrap',
+                    }}
+                  >
+                    {ann.active ? 'Live' : 'Off'}
+                  </button>
+                </div>
+              ))}
+            </div>
+
             <button
               onClick={handleDisable}
               className="w-full py-3 rounded-xl font-bold"
@@ -93,6 +187,34 @@ function ProfessorModal({ onClose }) {
         )}
       </div>
     </div>
+  );
+}
+
+// ─── Sync status ──────────────────────────────────────────────────────────────
+function SyncStatus({ lastSynced, isOnline }) {
+  const [, setTick] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setTick(t => t + 1), 30_000);
+    return () => clearInterval(id);
+  }, []);
+
+  if (!isOnline) {
+    return (
+      <p style={{ color: '#A3876F', fontSize: '11px', textAlign: 'center', margin: '0 0 8px' }}>
+        Offline — showing cached data
+      </p>
+    );
+  }
+  if (!lastSynced) return null;
+
+  const diffMs  = Date.now() - lastSynced.getTime();
+  const diffMin = Math.floor(diffMs / 60_000);
+  const label   = diffMin < 1 ? 'just now' : `${diffMin} min ago`;
+
+  return (
+    <p style={{ color: '#A3876F', fontSize: '11px', textAlign: 'center', margin: '0 0 8px' }}>
+      Last synced: {label}
+    </p>
   );
 }
 
@@ -229,21 +351,12 @@ function FunFactCard({ fact, dayId, onSave }) {
 
 // ─── Main screen ──────────────────────────────────────────────────────────────
 export default function Home() {
-  const { professorMode, isActivityVisible } = useAppContext();
+  const { professorMode, isActivityVisible, activities: allActivities, lastSynced, isOnline } = useAppContext();
   const [profModalOpen, setProfModalOpen] = useState(false);
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
   const [funFactOverrides, setFunFactOverridesState] = useState(() => {
     try { return JSON.parse(localStorage.getItem('byu_funfact_overrides') || '{}'); }
     catch { return {}; }
   });
-
-  useEffect(() => {
-    const on = () => setIsOnline(true);
-    const off = () => setIsOnline(false);
-    window.addEventListener('online', on);
-    window.addEventListener('offline', off);
-    return () => { window.removeEventListener('online', on); window.removeEventListener('offline', off); };
-  }, []);
 
   const saveFunFact = (dayId, text) => {
     const next = { ...funFactOverrides, [dayId]: text };
@@ -255,23 +368,32 @@ export default function Home() {
   const preTrip = dayNumber === null && new Date() < new Date(TRIP_START);
   const displayDay = dayNumber || (preTrip ? 1 : TOTAL_DAYS);
   const dayData = getDayData(displayDay);
-  const allDayActivities = getActivitiesForDay(displayDay);
+
+  // Use Supabase-merged activities from context
+  const allDayActivities = allActivities.filter(a => a.dayId === displayDay);
   const dayActivities = professorMode ? allDayActivities : allDayActivities.filter(isActivityVisible);
-  const nextActivity = dayNumber ? getNextActivity(dayNumber) : null;
+
+  // Next upcoming activity from context data
+  const nextActivity = (() => {
+    if (!dayNumber) return null;
+    const now = new Date();
+    const sorted = allDayActivities
+      .filter(a => a.showStudents !== false || professorMode)
+      .slice()
+      .sort((a, b) => a.time.localeCompare(b.time));
+    return sorted.find(a => {
+      const [h, m] = a.time.split(':').map(Number);
+      const t = new Date(); t.setHours(h, m, 0, 0);
+      return t > now;
+    }) || sorted[sorted.length - 1] || null;
+  })();
+
   const quote = getQuoteForDay(displayDay);
   const fact = funFactOverrides[displayDay] || getFunFactForDay(displayDay);
   const daysUntil = Math.ceil((new Date(TRIP_START) - new Date()) / (1000 * 60 * 60 * 24));
 
   return (
     <>
-      {/* Offline indicator — fixed pill, visible on all screens */}
-      {!isOnline && (
-        <div style={{ position: 'fixed', top: 'calc(env(safe-area-inset-top) + 8px)', left: '50%', transform: 'translateX(-50%)', zIndex: 200, background: 'rgba(40,40,40,0.96)', borderRadius: '20px', padding: '5px 14px', display: 'flex', alignItems: 'center', gap: '7px', backdropFilter: 'blur(8px)', border: '1px solid rgba(255,255,255,0.12)' }}>
-          <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#DC2626', flexShrink: 0 }} />
-          <span style={{ color: '#FFFFFF', fontSize: '11px', fontWeight: 600, whiteSpace: 'nowrap' }}>Offline mode</span>
-        </div>
-      )}
-
       {/* Scroll container */}
       <div className="overflow-y-auto h-full" style={{ background: '#FFFFFF' }}>
 
@@ -337,11 +459,14 @@ export default function Home() {
         <FunFactCard fact={fact} dayId={displayDay} onSave={saveFunFact} />
         <QuoteCard quote={quote} />
 
-        {/* Explicit bottom spacer */}
+        {/* Sync status */}
+        <SyncStatus lastSynced={lastSynced} isOnline={isOnline} />
+
+        {/* Bottom spacer */}
         <div style={{ height: 'calc(4rem + env(safe-area-inset-bottom) + 16px)' }} />
       </div>
 
-      {/* Professor mode modal — rendered outside scroll container */}
+      {/* Professor mode modal */}
       {profModalOpen && <ProfessorModal onClose={() => setProfModalOpen(false)} />}
     </>
   );
