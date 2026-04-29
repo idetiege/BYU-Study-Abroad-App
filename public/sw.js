@@ -1,4 +1,5 @@
-const CACHE = 'byu-trip-v4';
+const CACHE = 'byu-trip-v5';
+const AUDIO_CACHE = 'byu-audio-v1';
 const WEATHER_HOST = 'wttr.in';
 
 const PRECACHE = [
@@ -39,7 +40,8 @@ self.addEventListener('install', e => {
 self.addEventListener('activate', e => {
   e.waitUntil(
     caches.keys().then(keys =>
-      Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k)))
+      // Preserve audio cache across app updates
+      Promise.all(keys.filter(k => k !== CACHE && k !== AUDIO_CACHE).map(k => caches.delete(k)))
     )
   );
   self.clients.claim();
@@ -49,6 +51,19 @@ self.addEventListener('fetch', e => {
   if (e.request.method !== 'GET') return;
 
   const url = new URL(e.request.url);
+
+  // Network-first for navigation so new deployments are always picked up
+  if (e.request.mode === 'navigate') {
+    e.respondWith(
+      fetch(e.request)
+        .then(res => {
+          if (res.ok) caches.open(CACHE).then(c => c.put(e.request, res.clone()));
+          return res;
+        })
+        .catch(() => caches.match('/index.html'))
+    );
+    return;
+  }
 
   // Network-first for weather API
   if (url.hostname.includes(WEATHER_HOST)) {
@@ -64,7 +79,23 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // Cache-first for everything else
+  // Audio files: cache-first in a separate persistent cache so they survive app updates
+  if (url.pathname.startsWith('/audio/')) {
+    e.respondWith(
+      caches.open(AUDIO_CACHE).then(audioCache =>
+        audioCache.match(e.request).then(cached => {
+          if (cached) return cached;
+          return fetch(e.request).then(res => {
+            if (res.ok) audioCache.put(e.request, res.clone());
+            return res;
+          });
+        })
+      )
+    );
+    return;
+  }
+
+  // Cache-first for everything else (hashed JS/CSS, images)
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;

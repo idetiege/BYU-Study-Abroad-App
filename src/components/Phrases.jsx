@@ -18,7 +18,7 @@ function SpeakerIcon() {
   );
 }
 
-function PhraseCard({ phrase, langCode, speakingId, onSpeak }) {
+function PhraseCard({ phrase, langCode, localAudioSrc, speakingId, onSpeak }) {
   const id = `${langCode}-${phrase.phrase}`;
   const isSpeaking = speakingId === id;
 
@@ -44,7 +44,7 @@ function PhraseCard({ phrase, langCode, speakingId, onSpeak }) {
       </div>
 
       <button
-        onClick={() => onSpeak(phrase.phrase, id)}
+        onClick={() => onSpeak(phrase.phrase, id, localAudioSrc)}
         className={isSpeaking ? 'speaking-pulse' : ''}
         aria-label={`Speak: ${phrase.phrase}`}
         style={{
@@ -113,31 +113,37 @@ export default function Phrases() {
     window.speechSynthesis.speak(utt);
   };
 
-  const speak = (text, id) => {
+  const playAudio = (src, onError) => {
+    const audio = new Audio(src);
+    audioRef.current = audio;
+    audio.onended = () => setSpeakingId(null);
+    audio.onerror = () => { audioRef.current = null; onError(); };
+    const p = audio.play();
+    if (p) p.catch(() => { audioRef.current = null; onError(); });
+  };
+
+  const speak = (text, id, localSrc) => {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
     if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     if (speakingId === id) { setSpeakingId(null); return; }
 
     setSpeakingId(id);
 
-    const tl  = GOOGLE_TTS_CODES[lang.langCode] || lang.langCode.split('-')[0];
-    const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${tl}&client=tw-ob`;
-    const audio = new Audio(url);
-    audioRef.current = audio;
-
-    audio.onended = () => setSpeakingId(null);
-    audio.onerror = () => {
-      // Google TTS blocked/failed — fall back to Web Speech
-      audioRef.current = null;
-      speakWebSpeech(text);
+    const tryGoogleTTS = () => {
+      const tl  = GOOGLE_TTS_CODES[lang.langCode] || lang.langCode.split('-')[0];
+      const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${tl}&client=tw-ob`;
+      playAudio(url, () => speakWebSpeech(text));
     };
 
-    const p = audio.play();
-    if (p) p.catch(() => {
-      audioRef.current = null;
-      speakWebSpeech(text);
-    });
+    if (localSrc) {
+      playAudio(localSrc, tryGoogleTTS);
+    } else {
+      tryGoogleTTS();
+    }
   };
+
+  const audioSrc = (p) =>
+    `/audio/${lang.lang.toLowerCase()}/${lang.phrases.indexOf(p)}.mp3`;
 
   // Build display: grouped when "All", flat when filtered
   const renderCards = () => {
@@ -146,6 +152,7 @@ export default function Phrases() {
         .filter(p => p.category === selectedCategory)
         .map(p => (
           <PhraseCard key={p.phrase} phrase={p} langCode={lang.langCode}
+                      localAudioSrc={audioSrc(p)}
                       speakingId={speakingId} onSpeak={speak} />
         ));
     }
@@ -164,6 +171,7 @@ export default function Phrases() {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {catPhrases.map(p => (
               <PhraseCard key={p.phrase} phrase={p} langCode={lang.langCode}
+                          localAudioSrc={audioSrc(p)}
                           speakingId={speakingId} onSpeak={speak} />
             ))}
           </div>
