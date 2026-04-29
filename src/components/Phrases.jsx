@@ -87,6 +87,7 @@ export default function Phrases() {
 
   const stopAudio = () => {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     setSpeakingId(null);
   };
 
@@ -101,17 +102,41 @@ export default function Phrases() {
   // Stop audio on unmount
   useEffect(() => () => stopAudio(), []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const speakWebSpeech = (text) => {
+    if (!('speechSynthesis' in window)) { setSpeakingId(null); return; }
+    window.speechSynthesis.cancel();
+    const utt = new SpeechSynthesisUtterance(text);
+    utt.lang  = lang.langCode;
+    utt.rate  = 0.85;
+    utt.onend   = () => setSpeakingId(null);
+    utt.onerror = () => setSpeakingId(null);
+    window.speechSynthesis.speak(utt);
+  };
+
   const speak = (text, id) => {
     if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    if ('speechSynthesis' in window) window.speechSynthesis.cancel();
     if (speakingId === id) { setSpeakingId(null); return; }
-    const tl = GOOGLE_TTS_CODES[lang.langCode] || lang.langCode.split('-')[0];
+
+    setSpeakingId(id);
+
+    const tl  = GOOGLE_TTS_CODES[lang.langCode] || lang.langCode.split('-')[0];
     const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${tl}&client=tw-ob`;
     const audio = new Audio(url);
-    audio.onended = () => setSpeakingId(null);
-    audio.onerror = () => setSpeakingId(null);
     audioRef.current = audio;
-    setSpeakingId(id);
-    audio.play();
+
+    audio.onended = () => setSpeakingId(null);
+    audio.onerror = () => {
+      // Google TTS blocked/failed — fall back to Web Speech
+      audioRef.current = null;
+      speakWebSpeech(text);
+    };
+
+    const p = audio.play();
+    if (p) p.catch(() => {
+      audioRef.current = null;
+      speakWebSpeech(text);
+    });
   };
 
   // Build display: grouped when "All", flat when filtered
