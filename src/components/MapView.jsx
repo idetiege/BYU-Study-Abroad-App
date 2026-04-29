@@ -65,7 +65,7 @@ export default function MapView() {
   return (
     <div style={{
       display: 'flex', flexDirection: 'column',
-      height: '100dvh',
+      height: '100%',
       paddingTop: 'env(safe-area-inset-top)',
       paddingBottom: 'calc(60px + env(safe-area-inset-bottom))',
       overflow: 'hidden',

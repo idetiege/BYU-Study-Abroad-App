@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { emergencyContacts, getTodayDayNumber, getDayData } from '../data/tripData';
 
-const SMS_BODY = encodeURIComponent(
-  "I need help. I'm a BYU Europe 2026 student. Please find me or call me back immediately."
-);
-
 function PhoneIcon({ size = 22, color = 'currentColor' }) {
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" fill="none"
@@ -167,27 +163,14 @@ export default function Emergency() {
           </div>
         </a>
 
-        {/* Professor + SMS row */}
-        <div style={{ display: 'flex', gap: '10px', marginBottom: '10px' }}>
+        {/* Call professor — full width */}
+        <div style={{ marginBottom: '10px' }}>
           <BigActionButton
             href={callableTel ? `tel:${callableTel}` : '#'}
             bg="#073C77"
-            style={{ flex: 1 }}
           >
             <PhoneIcon size={20} color="#FFFFFF" />
             Call {callableLabel}
-          </BigActionButton>
-
-          <BigActionButton
-            href={`sms:?body=${SMS_BODY}`}
-            bg="#1A4A2A"
-            style={{ flex: 1 }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                 stroke="#FFFFFF" strokeWidth="2.5" strokeLinecap="round">
-              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-            </svg>
-            Text SOS
           </BigActionButton>
         </div>
 
@@ -218,26 +201,6 @@ export default function Emergency() {
           </a>
         )}
 
-        {/* State Dept international hotline */}
-        <div style={{
-          background: 'rgba(7,60,119,0.05)', borderRadius: '12px', padding: '12px 14px',
-          border: '1px solid rgba(7,60,119,0.1)', marginTop: '10px',
-          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        }}>
-          <div>
-            <p style={{ color: '#073C77', fontSize: '13px', fontWeight: 700, margin: '0 0 1px' }}>
-              US State Dept — 24 hr Overseas
-            </p>
-            <p style={{ color: '#A3876F', fontSize: '11px', margin: 0 }}>Lost passport, arrest, medical emergency</p>
-          </div>
-          <a href="tel:+12025014444" style={{
-            color: '#073C77', fontSize: '13px', fontWeight: 700,
-            fontVariantNumeric: 'tabular-nums', textDecoration: 'none',
-            background: 'rgba(7,60,119,0.1)', borderRadius: '8px', padding: '6px 10px',
-          }}>
-            +1-202-501-4444
-          </a>
-        </div>
       </div>
 
       {/* ── Trip Staff ─────────────────────────────────────────────────────── */}

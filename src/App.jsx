@@ -32,17 +32,19 @@ function AppShell() {
   const hideNav = location.pathname.startsWith('/activity/');
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100dvh', background: '#FFFFFF', position: 'relative', touchAction: 'pan-y' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100dvh', overflow: 'hidden', background: '#FFFFFF', position: 'relative', touchAction: 'pan-y' }}>
       <OfflineBanner />
       <AnnouncementBanner />
-      <Routes>
-        <Route path="/"             element={<Home />} />
-        <Route path="/itinerary"    element={<Itinerary />} />
-        <Route path="/activity/:id" element={<ActivityDetail />} />
-        <Route path="/map"          element={<MapView />} />
-        <Route path="/phrases"      element={<Phrases />} />
-        <Route path="/emergency"    element={<Emergency />} />
-      </Routes>
+      <div style={{ flex: 1, minHeight: 0, position: 'relative', overflow: 'hidden' }}>
+        <Routes>
+          <Route path="/"             element={<Home />} />
+          <Route path="/itinerary"    element={<Itinerary />} />
+          <Route path="/activity/:id" element={<ActivityDetail />} />
+          <Route path="/map"          element={<MapView />} />
+          <Route path="/phrases"      element={<Phrases />} />
+          <Route path="/emergency"    element={<Emergency />} />
+        </Routes>
+      </div>
       {!hideNav && <BottomNav />}
     </div>
   );

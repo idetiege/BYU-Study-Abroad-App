@@ -173,7 +173,7 @@ export default function Phrases() {
   };
 
   return (
-    <div style={{ height: '100dvh', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#F8F5F0' }}>
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column', overflow: 'hidden', background: '#F8F5F0' }}>
 
       {/* ── Header ─────────────────────────────────────────────────────────── */}
       <div style={{
