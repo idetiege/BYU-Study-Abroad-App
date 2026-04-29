@@ -5,6 +5,7 @@ import Itinerary from './components/Itinerary';
 import ActivityDetail from './components/ActivityDetail';
 import MapView from './components/MapView';
 import Emergency from './components/Emergency';
+import Phrases from './components/Phrases';
 import BottomNav from './components/BottomNav';
 import Login from './components/Login';
 import OfflineBanner from './components/OfflineBanner';
@@ -32,6 +33,7 @@ function AppShell() {
         <Route path="/itinerary"    element={<Itinerary />} />
         <Route path="/activity/:id" element={<ActivityDetail />} />
         <Route path="/map"          element={<MapView />} />
+        <Route path="/phrases"      element={<Phrases />} />
         <Route path="/emergency"    element={<Emergency />} />
       </Routes>
       {!hideNav && <BottomNav />}

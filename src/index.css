@@ -90,6 +90,14 @@ input, select, textarea {
 .hide-scrollbar::-webkit-scrollbar { display: none; }
 .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
+/* ── Speaking pulse ring (Phrases TTS button) ────────────────────────────────── */
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0    rgba(233,183,83,0.7); }
+  70%  { box-shadow: 0 0 0 10px rgba(233,183,83,0);   }
+  100% { box-shadow: 0 0 0 0    rgba(233,183,83,0);   }
+}
+.speaking-pulse { animation: pulse-ring 1.2s ease-out infinite; }
+
 /* ── Gold shimmer animation ──────────────────────────────────────────────────── */
 @keyframes shimmer {
   0%   { background-position: -200% center; }

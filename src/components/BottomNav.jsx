@@ -4,6 +4,7 @@ const tabs = [
   { path: '/', label: 'Home', icon: HomeIcon },
   { path: '/itinerary', label: 'Itinerary', icon: CalendarIcon },
   { path: '/map', label: 'Map', icon: MapIcon },
+  { path: '/phrases', label: 'Phrases', icon: PhrasesIcon },
   { path: '/emergency', label: 'Emergency', icon: PhoneIcon },
 ];
 
@@ -33,6 +34,18 @@ function MapIcon({ active }) {
       <polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/>
       <line x1="8" y1="2" x2="8" y2="18"/>
       <line x1="16" y1="6" x2="16" y2="22"/>
+    </svg>
+  );
+}
+
+function PhrasesIcon({ active }) {
+  const c = active ? '#E9B753' : 'rgba(255,255,255,0.5)';
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+         stroke={c} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+      <line x1="8" y1="10" x2="16" y2="10"/>
+      <line x1="8" y1="14" x2="13" y2="14"/>
     </svg>
   );
 }

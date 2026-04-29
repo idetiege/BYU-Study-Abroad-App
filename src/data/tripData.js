@@ -337,6 +337,108 @@ export const emergencyContacts = [
   { label: 'Hospital Athens', phone: '+30 210 777 8901', notes: 'Evangelismos Hospital' },
 ];
 
+export const phrasebook = [
+  {
+    lang: 'Italian', langCode: 'it-IT', flag: '🇮🇹', country: 'Italy', days: [6, 7, 8],
+    phrases: [
+      { phrase: 'Buongiorno',          english: 'Good morning',             phonetic: 'bwon-JOR-no',              category: 'Greetings'   },
+      { phrase: 'Grazie',              english: 'Thank you',                phonetic: 'GRAT-zee-eh',              category: 'Greetings'   },
+      { phrase: 'Per favore',          english: 'Please',                   phonetic: 'pehr fah-VO-reh',          category: 'Greetings'   },
+      { phrase: 'Mi scusi',            english: 'Excuse me',                phonetic: 'mee SKOO-zee',             category: 'Greetings'   },
+      { phrase: 'Dov\'è il bagno?',    english: 'Where is the bathroom?',   phonetic: 'doh-VEH eel BAN-yo',       category: 'Navigation'  },
+      { phrase: 'Il conto, per favore',english: 'The bill, please',         phonetic: 'eel KON-toh pehr fah-VO-reh', category: 'Dining'   },
+      { phrase: 'Quanto costa?',       english: 'How much does it cost?',   phonetic: 'KWAN-toh KOS-tah',         category: 'Shopping'    },
+      { phrase: 'Non capisco',         english: "I don't understand",       phonetic: 'non kah-PEES-koh',         category: 'Emergency'   },
+      { phrase: 'Parla inglese?',      english: 'Do you speak English?',    phonetic: 'PAR-lah een-GLEH-zeh',     category: 'Emergency'   },
+      { phrase: 'Bellissimo!',         english: 'Beautiful!',               phonetic: 'bel-LEES-see-moh',         category: 'Compliments' },
+    ],
+  },
+  {
+    lang: 'Slovenian', langCode: 'sl-SI', flag: '🇸🇮', country: 'Slovenia', days: [9],
+    phrases: [
+      { phrase: 'Zdravo',              english: 'Hello',                    phonetic: 'ZDRAH-voh',                category: 'Greetings'   },
+      { phrase: 'Dober dan',           english: 'Good day',                 phonetic: 'DOH-behr dahn',            category: 'Greetings'   },
+      { phrase: 'Hvala',               english: 'Thank you',                phonetic: 'HVAH-lah',                 category: 'Greetings'   },
+      { phrase: 'Prosim',              english: "Please / You're welcome",  phonetic: 'PROH-seem',                category: 'Greetings'   },
+      { phrase: 'Oprostite',           english: 'Excuse me',                phonetic: 'oh-proh-STEE-teh',         category: 'Greetings'   },
+      { phrase: 'Kje je stranišče?',   english: 'Where is the bathroom?',   phonetic: 'kyeh yeh STRAH-neesh-cheh',category: 'Navigation'  },
+      { phrase: 'Koliko stane?',       english: 'How much does it cost?',   phonetic: 'KOH-lee-koh STAH-neh',     category: 'Shopping'    },
+      { phrase: 'Ne razumem',          english: "I don't understand",       phonetic: 'neh rah-ZOO-mehm',         category: 'Emergency'   },
+      { phrase: 'Lepo!',               english: 'Beautiful!',               phonetic: 'LEH-poh',                  category: 'Compliments' },
+    ],
+  },
+  {
+    lang: 'Croatian', langCode: 'hr-HR', flag: '🇭🇷', country: 'Croatia', days: [10, 11],
+    phrases: [
+      { phrase: 'Dobar dan',           english: 'Good day',                 phonetic: 'DOH-bar dahn',             category: 'Greetings'   },
+      { phrase: 'Hvala',               english: 'Thank you',                phonetic: 'HVAH-lah',                 category: 'Greetings'   },
+      { phrase: 'Molim',               english: 'Please',                   phonetic: 'MOH-leem',                 category: 'Greetings'   },
+      { phrase: 'Oprostite',           english: 'Excuse me',                phonetic: 'oh-proh-STEE-teh',         category: 'Greetings'   },
+      { phrase: 'Gdje je toalet?',     english: 'Where is the bathroom?',   phonetic: 'GDYEH yeh toh-ah-LET',     category: 'Navigation'  },
+      { phrase: 'Koliko košta?',       english: 'How much?',                phonetic: 'KOH-lee-koh KOSH-tah',     category: 'Shopping'    },
+      { phrase: 'Ne razumijem',        english: "I don't understand",       phonetic: 'neh rah-ZOO-mee-yem',      category: 'Emergency'   },
+      { phrase: 'Predivno!',           english: 'Beautiful!',               phonetic: 'preh-DEEV-noh',            category: 'Compliments' },
+    ],
+  },
+  {
+    lang: 'Bosnian', langCode: 'bs-BA', flag: '🇧🇦', country: 'Bosnia', days: [12, 13, 14, 15],
+    phrases: [
+      { phrase: 'Merhaba',             english: 'Hello (informal)',          phonetic: 'mehr-HAH-bah',             category: 'Greetings'   },
+      { phrase: 'Dobar dan',           english: 'Good day',                 phonetic: 'DOH-bar dahn',             category: 'Greetings'   },
+      { phrase: 'Hvala',               english: 'Thank you',                phonetic: 'HVAH-lah',                 category: 'Greetings'   },
+      { phrase: 'Molim',               english: 'Please',                   phonetic: 'MOH-leem',                 category: 'Greetings'   },
+      { phrase: 'Izvinite',            english: 'Excuse me',                phonetic: 'eez-VEE-nee-teh',          category: 'Greetings'   },
+      { phrase: 'Gdje je toalet?',     english: 'Where is the bathroom?',   phonetic: 'GDYEH yeh toh-ah-LET',     category: 'Navigation'  },
+      { phrase: 'Koliko košta?',       english: 'How much?',                phonetic: 'KOH-lee-koh KOSH-tah',     category: 'Shopping'    },
+      { phrase: 'Ne razumijem',        english: "I don't understand",       phonetic: 'neh rah-ZOO-mee-yem',      category: 'Emergency'   },
+      { phrase: 'Predivno!',           english: 'Beautiful!',               phonetic: 'preh-DEEV-noh',            category: 'Compliments' },
+    ],
+  },
+  {
+    lang: 'Montenegrin', langCode: 'hr-HR', flag: '🇲🇪', country: 'Montenegro', days: [16],
+    phrases: [
+      { phrase: 'Dobar dan',           english: 'Good day',                 phonetic: 'DOH-bar dahn',             category: 'Greetings'   },
+      { phrase: 'Hvala lijepa',        english: 'Thank you very much',      phonetic: 'HVAH-lah lee-EH-pah',      category: 'Greetings'   },
+      { phrase: 'Hvala',               english: 'Thank you',                phonetic: 'HVAH-lah',                 category: 'Greetings'   },
+      { phrase: 'Molim',               english: 'Please',                   phonetic: 'MOH-leem',                 category: 'Greetings'   },
+      { phrase: 'Izvinite',            english: 'Excuse me',                phonetic: 'eez-VEE-nee-teh',          category: 'Greetings'   },
+      { phrase: 'Gdje je toalet?',     english: 'Where is the bathroom?',   phonetic: 'GDYEH yeh toh-ah-LET',     category: 'Navigation'  },
+      { phrase: 'Koliko košta?',       english: 'How much?',                phonetic: 'KOH-lee-koh KOSH-tah',     category: 'Shopping'    },
+      { phrase: 'Ne razumijem',        english: "I don't understand",       phonetic: 'neh rah-ZOO-mee-yem',      category: 'Emergency'   },
+      { phrase: 'Predivno!',           english: 'Beautiful!',               phonetic: 'preh-DEEV-noh',            category: 'Compliments' },
+    ],
+  },
+  {
+    lang: 'Albanian', langCode: 'sq-AL', flag: '🇦🇱', country: 'Albania', days: [17, 18],
+    phrases: [
+      { phrase: 'Mirëdita',            english: 'Good day',                 phonetic: 'meer-eh-DEE-tah',          category: 'Greetings'   },
+      { phrase: 'Mirë',                english: 'Good',                     phonetic: 'MEE-ruh',                  category: 'Greetings'   },
+      { phrase: 'Faleminderit',        english: 'Thank you',                phonetic: 'fah-leh-meen-deh-REET',    category: 'Greetings'   },
+      { phrase: 'Ju lutem',            english: 'Please',                   phonetic: 'yoo LOO-tem',              category: 'Greetings'   },
+      { phrase: 'Më falni',            english: 'Excuse me',                phonetic: 'muh FAHL-nee',             category: 'Greetings'   },
+      { phrase: 'Ku është banja?',     english: 'Where is the bathroom?',   phonetic: 'koo EHS-ht BAHN-yah',      category: 'Navigation'  },
+      { phrase: 'Sa kushton?',         english: 'How much?',                phonetic: 'sah KOOSH-ton',            category: 'Shopping'    },
+      { phrase: 'Nuk kuptoj',          english: "I don't understand",       phonetic: 'nook koop-TOY',            category: 'Emergency'   },
+      { phrase: 'Bukur!',              english: 'Beautiful!',               phonetic: 'BOO-koor',                 category: 'Compliments' },
+    ],
+  },
+  {
+    lang: 'Greek', langCode: 'el-GR', flag: '🇬🇷', country: 'Greece', days: [19, 20, 21, 22, 23],
+    phrases: [
+      { phrase: 'Kalimera',            english: 'Good morning',             phonetic: 'kah-lee-MEH-rah',          category: 'Greetings'   },
+      { phrase: 'Yiassas',             english: 'Hello / Cheers',           phonetic: 'YAH-sahs',                 category: 'Greetings'   },
+      { phrase: 'Efcharistó',          english: 'Thank you',                phonetic: 'ef-khah-ree-STOH',         category: 'Greetings'   },
+      { phrase: 'Parakaló',            english: "Please / You're welcome",  phonetic: 'pah-rah-kah-LOH',          category: 'Greetings'   },
+      { phrase: 'Signómi',             english: 'Excuse me',                phonetic: 'see-NYOH-mee',             category: 'Greetings'   },
+      { phrase: 'Pou íne i toualéta?', english: 'Where is the bathroom?',   phonetic: 'poo EE-neh ee twah-LEH-tah', category: 'Navigation' },
+      { phrase: 'Póso káni?',          english: 'How much?',                phonetic: 'POH-soh KAH-nee',          category: 'Shopping'    },
+      { phrase: 'Den katalavaíno',     english: "I don't understand",       phonetic: 'den kah-tah-lah-VEH-noh',  category: 'Emergency'   },
+      { phrase: 'Ómorfo!',             english: 'Beautiful!',               phonetic: 'OH-mor-foh',               category: 'Compliments' },
+      { phrase: 'Opa!',                english: 'Expression of joy',        phonetic: 'OH-pah',                   category: 'Compliments' },
+    ],
+  },
+];
+
 export const announcements = [
   { id: 1, message: 'Welcome to the BYU Europe Study Abroad 2026 app! Check the Itinerary tab each morning for today\'s schedule.', emoji: '👋', active: false, createdAt: '2026-04-27' },
 ];
