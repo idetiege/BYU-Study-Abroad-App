@@ -1,4 +1,4 @@
-const CACHE = 'byu-trip-v5';
+const CACHE = 'byu-trip-v6';
 const AUDIO_CACHE = 'byu-audio-v1';
 const WEATHER_HOST = 'wttr.in';
 
