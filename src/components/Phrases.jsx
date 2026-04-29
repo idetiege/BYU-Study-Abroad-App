@@ -1,8 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { phrasebook, getTodayDayNumber } from '../data/tripData';
 
 const CATEGORY_ORDER = ['Greetings', 'Dining', 'Navigation', 'Emergency', 'Shopping', 'Compliments'];
-const speechSupported = typeof window !== 'undefined' && 'speechSynthesis' in window;
+const GOOGLE_TTS_CODES = {
+  'it-IT': 'it', 'sl-SI': 'sl', 'hr-HR': 'hr',
+  'bs-BA': 'bs', 'sq-AL': 'sq', 'el-GR': 'el',
+};
 
 function SpeakerIcon() {
   return (
@@ -40,23 +43,21 @@ function PhraseCard({ phrase, langCode, speakingId, onSpeak }) {
         </p>
       </div>
 
-      {speechSupported && (
-        <button
-          onClick={() => onSpeak(phrase.phrase, id)}
-          className={isSpeaking ? 'speaking-pulse' : ''}
-          aria-label={`Speak: ${phrase.phrase}`}
-          style={{
-            width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
-            border: 'none', cursor: 'pointer',
-            background: isSpeaking ? '#E9B753' : 'rgba(7,60,119,0.08)',
-            color: isSpeaking ? '#073C77' : '#073C77',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            transition: 'background 0.2s',
-          }}
-        >
-          <SpeakerIcon />
-        </button>
-      )}
+      <button
+        onClick={() => onSpeak(phrase.phrase, id)}
+        className={isSpeaking ? 'speaking-pulse' : ''}
+        aria-label={`Speak: ${phrase.phrase}`}
+        style={{
+          width: 44, height: 44, borderRadius: '50%', flexShrink: 0,
+          border: 'none', cursor: 'pointer',
+          background: isSpeaking ? '#E9B753' : 'rgba(7,60,119,0.08)',
+          color: '#073C77',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          transition: 'background 0.2s',
+        }}
+      >
+        <SpeakerIcon />
+      </button>
     </div>
   );
 }
@@ -73,6 +74,7 @@ export default function Phrases() {
   const [selectedLangIdx, setSelectedLangIdx] = useState(defaultIdx);
   const [selectedCategory, setSelectedCategory]  = useState('All');
   const [speakingId, setSpeakingId]              = useState(null);
+  const audioRef = useRef(null);
 
   const lang = phrasebook[selectedLangIdx];
 
@@ -83,30 +85,33 @@ export default function Phrases() {
 
   const isToday = todayDay && lang.days.includes(todayDay);
 
-  // Cancel speech and reset category when language changes
+  const stopAudio = () => {
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+    setSpeakingId(null);
+  };
+
+  // Stop audio and reset category when language changes
   useEffect(() => {
     if (selectedCategory !== 'All' && !lang.phrases.some(p => p.category === selectedCategory)) {
       setSelectedCategory('All');
     }
-    setSpeakingId(null);
-    window.speechSynthesis?.cancel();
+    stopAudio();
   }, [selectedLangIdx]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Cancel speech on unmount
-  useEffect(() => () => { window.speechSynthesis?.cancel(); }, []);
+  // Stop audio on unmount
+  useEffect(() => () => stopAudio(), []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const speak = (text, id) => {
-    if (!speechSupported) return;
-    window.speechSynthesis.cancel();
+    if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
     if (speakingId === id) { setSpeakingId(null); return; }
-    const utt = new SpeechSynthesisUtterance(text);
-    utt.lang  = lang.langCode;
-    utt.rate  = 0.8;
-    utt.pitch = 1;
-    utt.onend   = () => setSpeakingId(null);
-    utt.onerror = () => setSpeakingId(null);
+    const tl = GOOGLE_TTS_CODES[lang.langCode] || lang.langCode.split('-')[0];
+    const url = `https://translate.googleapis.com/translate_tts?ie=UTF-8&q=${encodeURIComponent(text)}&tl=${tl}&client=tw-ob`;
+    const audio = new Audio(url);
+    audio.onended = () => setSpeakingId(null);
+    audio.onerror = () => setSpeakingId(null);
+    audioRef.current = audio;
     setSpeakingId(id);
-    window.speechSynthesis.speak(utt);
+    audio.play();
   };
 
   // Build display: grouped when "All", flat when filtered
@@ -241,12 +246,6 @@ export default function Phrases() {
         }}
       >
         {renderCards()}
-
-        {!speechSupported && (
-          <p style={{ color: '#A3876F', fontSize: '12px', textAlign: 'center', fontStyle: 'italic', marginTop: '12px' }}>
-            Tap to hear pronunciation — not supported on this device
-          </p>
-        )}
 
         <div style={{ height: '8px' }} />
       </div>
