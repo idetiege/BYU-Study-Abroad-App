@@ -43,15 +43,15 @@ export default function MapView() {
     <div style={{
       display: 'flex', flexDirection: 'column',
       height: '100%',
-      paddingTop: 'env(safe-area-inset-top)',
       paddingBottom: 'calc(60px + env(safe-area-inset-bottom))',
       overflow: 'hidden',
       background: '#FFFFFF',
     }}>
-      {/* Toggle */}
+      {/* Toggle — paddingTop pushes below status bar, same pattern as other page headers */}
       <div style={{
         display: 'flex', justifyContent: 'center', gap: '8px',
-        padding: '12px 16px',
+        paddingTop: 'calc(env(safe-area-inset-top) + 12px)',
+        paddingBottom: '12px', paddingLeft: '16px', paddingRight: '16px',
         background: '#FFFFFF', borderBottom: '1px solid rgba(7,60,119,0.1)',
         flexShrink: 0,
       }}>
