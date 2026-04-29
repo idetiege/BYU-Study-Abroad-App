@@ -1,65 +1,42 @@
 import { useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, Polyline } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
-import { activities, days, CATEGORY_COLORS, getTodayDayNumber } from '../data/tripData';
+import { activities, days, CITY_COORDS, CATEGORY_COLORS, getTodayDayNumber } from '../data/tripData';
 
-const CITY_COORDS = {
-  'Provo':          [40.2338, -111.6585],
-  'Salt Lake City': [40.7608, -111.8910],
-  'Venice':         [45.4408,  12.3155],
-  'Ljubljana':      [46.0511,  14.5051],
-  'Zagreb':         [45.8150,  15.9819],
-  'Sarajevo':       [43.8563,  18.4131],
-  'Mostar':         [43.3438,  17.8078],
-  'Kotor':          [42.4247,  18.7712],
-  'Tirana':         [41.3275,  19.8187],
-  'Athens':         [37.9838,  23.7275],
-};
+const ROUTE_POSITIONS = CITY_COORDS.map(c => [c.lat, c.lng]);
 
-// Ordered journey for the full-trip route line
-const ROUTE_COORDS = [
-  'Provo', 'Salt Lake City', 'Venice', 'Ljubljana', 'Zagreb',
-  'Sarajevo', 'Mostar', 'Kotor', 'Tirana', 'Athens',
-].map(c => CITY_COORDS[c]);
-
-function getActivityCoords(activity) {
-  if (activity.lat != null && activity.lng != null) {
-    return [activity.lat, activity.lng];
-  }
-  const day = days.find(d => d.id === activity.dayId);
-  return day ? (CITY_COORDS[day.city] || null) : null;
+function mapsUrl(lat, lng) {
+  const isIOS = /iPhone|iPad|iPod/.test(navigator.userAgent);
+  return isIOS
+    ? `https://maps.apple.com/?q=${lat},${lng}`
+    : `https://maps.google.com/?q=${lat},${lng}`;
 }
 
-function addJitter(coord, i) {
-  const j = 0.003;
-  return [coord[0] + Math.sin(i * 7.3) * j, coord[1] + Math.cos(i * 5.1) * j];
+function sortByTime(acts) {
+  return [...acts].sort((a, b) => {
+    const [ah, am] = a.time.split(':').map(Number);
+    const [bh, bm] = b.time.split(':').map(Number);
+    return (ah * 60 + am) - (bh * 60 + bm);
+  });
 }
 
 export default function MapView() {
   const [mode, setMode] = useState('today');
   const todayDay = getTodayDayNumber();
 
-  const rawActivities = mode === 'today' && todayDay
-    ? activities.filter(a => a.dayId === todayDay)
-    : activities;
+  const todayActivities = todayDay
+    ? sortByTime(activities.filter(a => a.dayId === todayDay && a.lat != null && a.lng != null))
+    : [];
 
-  const mappable = rawActivities
-    .map((a, i) => {
-      const baseCoords = getActivityCoords(a);
-      if (!baseCoords) return null;
-      const coords = (a.lat != null) ? baseCoords : addJitter(baseCoords, i);
-      return { ...a, coords };
-    })
-    .filter(Boolean);
-
-  const todayPath = (mode === 'today' && todayDay && mappable.length > 1)
-    ? mappable.map(a => a.coords)
+  const todayPath = todayActivities.length > 1
+    ? todayActivities.map(a => [a.lat, a.lng])
     : null;
 
-  const centerDay = todayDay
-    ? days.find(d => d.id === todayDay)
-    : days.find(d => d.city === 'Venice');
-  const center = centerDay ? (CITY_COORDS[centerDay.city] || [45.4408, 12.3155]) : [45.4408, 12.3155];
+  const todayDayObj = todayDay ? days.find(d => d.id === todayDay) : null;
+  const centerCity = todayDayObj
+    ? CITY_COORDS.find(c => c.city === todayDayObj.city)
+    : CITY_COORDS.find(c => c.city === 'Venice');
+  const center = centerCity ? [centerCity.lat, centerCity.lng] : [45.4408, 12.3155];
   const zoom = mode === 'today' ? 13 : 5;
 
   return (
@@ -116,10 +93,31 @@ export default function MapView() {
             {/* Full trip: gold route polyline */}
             {mode === 'full' && (
               <Polyline
-                positions={ROUTE_COORDS}
+                positions={ROUTE_POSITIONS}
                 pathOptions={{ color: '#E9B753', weight: 3, opacity: 0.75 }}
               />
             )}
+
+            {/* Full trip: one city pin per destination */}
+            {mode === 'full' && CITY_COORDS.map(c => (
+              <CircleMarker
+                key={c.city}
+                center={[c.lat, c.lng]}
+                radius={7}
+                pathOptions={{
+                  fillColor: '#073C77',
+                  color: '#E9B753',
+                  weight: 2,
+                  fillOpacity: 0.9,
+                }}
+              >
+                <Popup>
+                  <div style={{ color: '#073C77', fontWeight: 700, fontSize: '13px', padding: '4px 8px' }}>
+                    {c.city}
+                  </div>
+                </Popup>
+              </CircleMarker>
+            ))}
 
             {/* Today: dashed gold path connecting activities in time order */}
             {mode === 'today' && todayPath && (
@@ -129,10 +127,11 @@ export default function MapView() {
               />
             )}
 
-            {mappable.map(activity => (
+            {/* Today: activity markers colored by category */}
+            {mode === 'today' && todayActivities.map(activity => (
               <CircleMarker
                 key={activity.id}
-                center={activity.coords}
+                center={[activity.lat, activity.lng]}
                 radius={8}
                 pathOptions={{
                   fillColor: CATEGORY_COLORS[activity.category] || '#3A3A4A',
@@ -144,28 +143,46 @@ export default function MapView() {
                 <Popup>
                   <div style={{ background: '#FFFFFF', color: '#073C77', borderRadius: '8px', padding: '8px 12px', minWidth: '160px', fontSize: '13px', boxShadow: '0 2px 8px rgba(7,60,119,0.12)' }}>
                     <p style={{ fontWeight: 700, margin: '0 0 4px', color: '#E9B753' }}>{activity.time}</p>
-                    <p style={{ fontWeight: 600, margin: '0 0 2px' }}>{activity.title}</p>
-                    {activity.location && <p style={{ color: '#A3876F', margin: 0, fontSize: '11px' }}>{activity.location}</p>}
+                    <p style={{ fontWeight: 600, margin: '0 0 6px' }}>{activity.title}</p>
+                    {activity.location && (
+                      <p style={{ color: '#A3876F', margin: '0 0 8px', fontSize: '11px' }}>{activity.location}</p>
+                    )}
+                    <a
+                      href={mapsUrl(activity.lat, activity.lng)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: 'block', textAlign: 'center',
+                        background: '#073C77', color: '#FFFFFF',
+                        borderRadius: '8px', padding: '5px 10px',
+                        fontSize: '11px', fontWeight: 700,
+                        textDecoration: 'none',
+                      }}
+                    >
+                      Open in Maps
+                    </a>
                   </div>
                 </Popup>
               </CircleMarker>
             ))}
           </MapContainer>
 
-          {/* Legend */}
-          <div style={{
-            position: 'absolute', bottom: '16px', left: '16px', zIndex: 1000,
-            background: 'rgba(7,60,119,0.92)', backdropFilter: 'blur(8px)',
-            borderRadius: '12px', padding: '10px 12px',
-            display: 'flex', flexDirection: 'column', gap: '5px',
-          }}>
-            {Object.entries(CATEGORY_COLORS).map(([cat, color]) => (
-              <div key={cat} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: color, flexShrink: 0 }} />
-                <span style={{ color: '#fff', fontSize: '10px', fontWeight: 600 }}>{cat}</span>
-              </div>
-            ))}
-          </div>
+          {/* Category legend — today mode only */}
+          {mode === 'today' && (
+            <div style={{
+              position: 'absolute', bottom: '16px', left: '16px', zIndex: 1000,
+              background: 'rgba(7,60,119,0.92)', backdropFilter: 'blur(8px)',
+              borderRadius: '12px', padding: '10px 12px',
+              display: 'flex', flexDirection: 'column', gap: '5px',
+            }}>
+              {Object.entries(CATEGORY_COLORS).map(([cat, color]) => (
+                <div key={cat} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ width: '10px', height: '10px', borderRadius: '50%', background: color, flexShrink: 0 }} />
+                  <span style={{ color: '#fff', fontSize: '10px', fontWeight: 600 }}>{cat}</span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
       )}
     </div>
